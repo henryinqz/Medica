@@ -22,4 +22,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         setContentView(R.layout.activity_login);
     }
+
+    public void navigateToRegister(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+        setContentView(R.layout.activity_register);
+    }
 }
