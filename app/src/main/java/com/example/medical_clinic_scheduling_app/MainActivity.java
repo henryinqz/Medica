@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     // Test
     // Test (Justin)
     // Test (Brian)
+    // Test (Zhao Ji)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
