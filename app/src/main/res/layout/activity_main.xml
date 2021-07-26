@@ -19,6 +19,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="navigateToLogin"
         android:text="Login"
         app:backgroundTint="#B33C3C"
         tools:layout_editor_absoluteX="158dp"
