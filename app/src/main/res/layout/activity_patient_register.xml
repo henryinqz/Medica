@@ -70,7 +70,7 @@
         android:layout_width="220dp"
         android:layout_height="36dp"
         android:layout_marginTop="12dp"
-        android:text="Select birthdate"
+        android:text="@string/select_birthday"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.467"
