@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Medical-Clinic-Scheduling-App</string>
+    <string name="app_name">Medica</string>
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
     <string name="doctor_option">Doctor</string>
@@ -33,4 +33,5 @@
     <string name="gender">Gender</string>
     <string name="register_button">REGISTER</string>
     <string name="patient_birthday">Your Birthday</string>
+    <string name="select_birthday">SELECT BIRTHDATE</string>
 </resources>
