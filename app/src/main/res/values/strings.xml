@@ -6,7 +6,7 @@
     <string name="patient_option">Patient</string>
     <string name="password_field">Password</string>
     <string name="username_field">Username</string>
-    
+
     <string-array name="SelectGender">
         <item>Male</item>
         <item>Female</item>
