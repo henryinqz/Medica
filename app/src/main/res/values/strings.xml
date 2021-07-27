@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Medical-Clinic-Scheduling-App</string>
-    <string name="eric_string">EricZhou</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Register</string>
+    <string name="doctor_option">Doctor</string>
+    <string name="patient_option">Patient</string>
+    <string name="password_field">Password</string>
+    <string name="username_field">Username</string>
 </resources>
