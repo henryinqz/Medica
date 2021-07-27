@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    //Register button (Incomplete)
-//    public void to_register(View view) {
-//        Intent intent = new Intent(this, DisplayMessageActivity.class);
-//        startActivity(intent);
-//    }
+    //Register button
+    public void to_register(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
 
 }

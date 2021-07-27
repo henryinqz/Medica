@@ -11,6 +11,7 @@
         android:id="@+id/button2"
         android:layout_width="300dp"
         android:layout_height="75dp"
+        android:onClick="to_register"
         android:text="@string/button_register"
         android:textSize="26sp"
         app:backgroundTint="#2EB9EC"
