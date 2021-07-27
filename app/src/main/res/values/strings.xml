@@ -6,4 +6,22 @@
     <string name="patient_option">Patient</string>
     <string name="password_field">Password</string>
     <string name="username_field">Username</string>
+    
+    <string-array name="SelectGender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="SelectSpecialist">
+        <item>Anatomical Pathology</item>
+        <item>Anesthesiology</item>
+        <item>Cardiology</item>
+        <item>Cardiovascular/Thoracic Surgery</item>
+        <item>Clinical Immunology/Allergy</item>
+        <item>Critical Care Medicine</item>
+        <item>Dermatology</item>
+        <item>Diagnostic Radiology</item>
+        <item>Emergency Medicine</item>
+        <item>Endocrinology and Metabolism</item>
+    </string-array>
 </resources>

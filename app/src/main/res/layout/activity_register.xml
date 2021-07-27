@@ -19,37 +19,46 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
+        android:layout_width="270dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="88dp"
         android:text="Are you a patient or doctor?"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="117dp"
-        android:layout_height="0dp"
+        android:id="@+id/Button_Regjster_Patient"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
         android:layout_marginTop="68dp"
         android:text="@string/patient_option"
+        android:textSize="26sp"
+        app:backgroundTint="#2EB9EC"
+        app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="117dp"
-        android:layout_height="57dp"
+        android:id="@+id/Button_Register_Doctor"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
         android:layout_marginTop="20dp"
         android:onClick="navigateToDoctorRegister"
         android:text="@string/doctor_option"
+        android:textSize="26sp"
+        app:backgroundTint="#2EB9EC"
+        app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/Button_Regjster_Patient"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
