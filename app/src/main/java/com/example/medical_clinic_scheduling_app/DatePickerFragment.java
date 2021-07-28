@@ -5,13 +5,11 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment {
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -21,7 +19,8 @@ public class DatePickerFragment extends DialogFragment {
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)getActivity(), year, month, day);
-        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()); // Prevents user from choosing date in the future
+//        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()); // Prevents user from choosing date in the future (ie. setting birthday)
+//        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()); // Prevents user from choosing date in the past (ie. booking appointments
 
         return datePickerDialog;
     }

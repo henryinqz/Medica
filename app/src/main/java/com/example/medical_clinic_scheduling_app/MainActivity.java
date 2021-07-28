@@ -10,9 +10,6 @@ import android.view.View;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
-    // Test
-    // Test (Justin)
-    // Test (Brian)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
