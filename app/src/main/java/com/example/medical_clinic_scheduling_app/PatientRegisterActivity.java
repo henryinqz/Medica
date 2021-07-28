@@ -23,14 +23,14 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         setContentView(R.layout.activity_patient_register);
 
         //Setting up the Gender Dropdown List
-        Spinner genderSpinner = (Spinner)findViewById(R.id.patientGenderSpinner);
+        Spinner genderSpinner = (Spinner)findViewById(R.id.spinnerRegisterPatientGender);
         ArrayAdapter<String> genderSpinnerAdapter = new ArrayAdapter<String>(PatientRegisterActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.SelectGender));
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderSpinnerAdapter);
 
         //Setting up user birthDateButton Listener
-        Button birthDate = (Button) findViewById(R.id.birthDatePickerButton);
+        Button birthDate = (Button) findViewById(R.id.buttonRegisterPatientBirthdaySelect);
         birthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -48,7 +48,7 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
         String currentDateStr = DateFormat.getDateInstance().format(c.getTime());
-        TextView textView = (TextView) findViewById(R.id.patientBirthDate);
+        TextView textView = (TextView) findViewById(R.id.textViewRegisterPatientBirthdayDate);
         textView.setText(currentDateStr);
     }
 
