@@ -7,7 +7,7 @@
     tools:context=".LoginPageActivity">
 
     <Button
-        android:id="@+id/Button_Regjster_Patient"
+        android:id="@+id/buttonLogin"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:onClick="loginButtonClick"
@@ -20,10 +20,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userTypeRadioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPassword" />
 
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/editTextLoginUsername"
         android:layout_width="262dp"
         android:layout_height="58dp"
         android:layout_marginTop="88dp"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextLoginPassword"
         android:layout_width="262dp"
         android:layout_height="58dp"
         android:layout_marginTop="24dp"
@@ -44,52 +44,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginUsername" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewLoginUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/username_field"
-        app:layout_constraintBottom_toTopOf="@+id/editTextUsername"
-        app:layout_constraintStart_toStartOf="@+id/editTextUsername" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextLoginUsername"
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginUsername" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewLoginPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/password_field"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextPassword" />
-
-    <RadioGroup
-        android:id="@+id/userTypeRadioGroup"
-        android:layout_width="265dp"
-        android:layout_height="116dp"
-        android:layout_marginTop="21dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword">
-
-        <RadioButton
-            android:id="@+id/userTypePatientRadioButton"
-            android:layout_width="138dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:checked="true"
-            android:text="@string/patient_option"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/userTypeDoctorRadioButton"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:checked="false"
-            android:text="@string/doctor_option"
-            android:textSize="16sp" />
-
-    </RadioGroup>
+        app:layout_constraintBottom_toTopOf="@+id/editTextLoginPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
