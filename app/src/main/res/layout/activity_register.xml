@@ -7,7 +7,7 @@
     tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/textViewRegisterUsertype"
+        android:id="@+id/txtRegisterUsertype"
         android:layout_width="270dp"
         android:layout_height="95dp"
         android:layout_marginTop="108dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonRegisterPatient"
+        android:id="@+id/btnRegisterPatient"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:layout_marginTop="68dp"
@@ -32,10 +32,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterUsertype" />
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterUsertype" />
 
     <Button
-        android:id="@+id/buttonRegisterDoctor"
+        android:id="@+id/btnRegisterDoctor"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:layout_marginTop="20dp"
@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterPatient"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegisterPatient"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

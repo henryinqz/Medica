@@ -30,7 +30,7 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         genderSpinner.setAdapter(genderSpinnerAdapter);
 
         //Setting up user birthDateButton Listener
-        Button birthDate = (Button) findViewById(R.id.buttonRegisterPatientBirthdaySelect);
+        Button birthDate = (Button) findViewById(R.id.btnRegisterPatientBirthdaySelect);
         birthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -48,7 +48,7 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
         String currentDateStr = DateFormat.getDateInstance().format(c.getTime());
-        TextView textView = (TextView) findViewById(R.id.textViewRegisterPatientBirthdayDate);
+        TextView textView = (TextView) findViewById(R.id.txtRegisterPatientBirthdayDate);
         textView.setText(currentDateStr);
     }
 

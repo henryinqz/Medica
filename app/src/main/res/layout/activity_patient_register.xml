@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewRegisterPatientTitle"
+        android:id="@+id/txtRegisterPatientTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewRegisterPatientFirstName"
+        android:id="@+id/txtRegisterPatientFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -38,11 +38,11 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toEndOf="@+id/textViewRegisterPatientFirstName"
+        app:layout_constraintStart_toEndOf="@+id/txtRegisterPatientFirstName"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewRegisterPatientLastName"
+        android:id="@+id/txtRegisterPatientLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -50,7 +50,7 @@
         android:layout_marginTop="36dp"
         android:text="@string/last_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterPatientFirstName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPatientFirstName" />
 
     <EditText
         android:id="@+id/editTextRegisterPatientLastName"
@@ -62,11 +62,11 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toEndOf="@+id/textViewRegisterPatientLastName"
+        app:layout_constraintStart_toEndOf="@+id/txtRegisterPatientLastName"
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPatientFirstName" />
 
     <TextView
-        android:id="@+id/textViewRegisterPatientBirthday"
+        android:id="@+id/txtRegisterPatientBirthday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -74,10 +74,10 @@
         android:layout_marginTop="36dp"
         android:text="@string/date_of_birth"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterPatientLastName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPatientLastName" />
 
     <TextView
-        android:id="@+id/textViewRegisterPatientBirthdayDate"
+        android:id="@+id/txtRegisterPatientBirthdayDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -86,11 +86,11 @@
         android:text="@string/patient_birthday"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.255"
-        app:layout_constraintStart_toEndOf="@+id/textViewRegisterPatientBirthday"
+        app:layout_constraintStart_toEndOf="@+id/txtRegisterPatientBirthday"
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPatientLastName" />
 
     <Button
-        android:id="@+id/buttonRegisterPatientBirthdaySelect"
+        android:id="@+id/btnRegisterPatientBirthdaySelect"
         android:layout_width="220dp"
         android:layout_height="36dp"
         android:layout_marginTop="12dp"
@@ -98,11 +98,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.467"
-        app:layout_constraintStart_toEndOf="@+id/textViewRegisterPatientBirthday"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterPatientBirthdayDate" />
+        app:layout_constraintStart_toEndOf="@+id/txtRegisterPatientBirthday"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPatientBirthdayDate" />
 
     <TextView
-        android:id="@+id/textViewRegisterPatientGender"
+        android:id="@+id/txtRegisterPatientGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
@@ -110,7 +110,7 @@
         android:layout_marginTop="88dp"
         android:text="@string/gender"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterPatientBirthday" />
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPatientBirthday" />
 
     <Spinner
         android:id="@+id/spinnerRegisterPatientGender"
@@ -119,11 +119,11 @@
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
-        app:layout_constraintStart_toEndOf="@+id/textViewRegisterPatientGender"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterPatientBirthdaySelect" />
+        app:layout_constraintStart_toEndOf="@+id/txtRegisterPatientGender"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegisterPatientBirthdaySelect" />
 
     <TextView
-        android:id="@+id/textViewRegisterPatientUsername"
+        android:id="@+id/txtRegisterPatientUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -131,7 +131,7 @@
         android:layout_marginTop="48dp"
         android:text="@string/username_field"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterPatientGender" />
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPatientGender" />
 
     <EditText
         android:id="@+id/editTextRegisterPatientUsername"
@@ -143,11 +143,11 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toEndOf="@+id/textViewRegisterPatientUsername"
+        app:layout_constraintStart_toEndOf="@+id/txtRegisterPatientUsername"
         app:layout_constraintTop_toBottomOf="@+id/spinnerRegisterPatientGender" />
 
     <TextView
-        android:id="@+id/textViewRegisterPatientPassword"
+        android:id="@+id/txtRegisterPatientPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
@@ -155,7 +155,7 @@
         android:layout_marginTop="56dp"
         android:text="@string/password_field"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterPatientUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPatientUsername" />
 
     <EditText
         android:id="@+id/editTextRegisterPatientPassword"
@@ -167,11 +167,11 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.467"
-        app:layout_constraintStart_toEndOf="@+id/textViewRegisterPatientPassword"
+        app:layout_constraintStart_toEndOf="@+id/txtRegisterPatientPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPatientUsername" />
 
     <Button
-        android:id="@+id/buttonRegisterPatientSubmit"
+        android:id="@+id/btnRegisterPatientSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"

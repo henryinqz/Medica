@@ -7,7 +7,7 @@
     tools:context=".LoginPageActivity">
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/btnLoginSubmit"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:onClick="loginButtonClick"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextLoginUsername" />
 
     <TextView
-        android:id="@+id/textViewLoginUsername"
+        android:id="@+id/txtLoginUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/username_field"
@@ -55,7 +55,7 @@
         app:layout_constraintStart_toStartOf="@+id/editTextLoginUsername" />
 
     <TextView
-        android:id="@+id/textViewLoginPassword"
+        android:id="@+id/txtLoginPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/password_field"
