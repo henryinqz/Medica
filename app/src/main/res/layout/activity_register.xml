@@ -7,31 +7,20 @@
     tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/textViewLoginUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewLoginPassword"
+        android:id="@+id/textViewRegisterUsertype"
         android:layout_width="270dp"
         android:layout_height="95dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="108dp"
         android:text="Are you a patient or doctor?"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLoginUsername" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonRegisterPatient"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:layout_marginTop="68dp"
@@ -43,10 +32,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLoginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterUsertype" />
 
     <Button
-        android:id="@+id/Button_Register_Doctor"
+        android:id="@+id/buttonRegisterDoctor"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:layout_marginTop="20dp"
@@ -59,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterPatient"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

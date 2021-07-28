@@ -7,7 +7,7 @@
     tools:context=".DoctorRegisterActivity">
 
     <TextView
-        android:id="@+id/Firstname"
+        android:id="@+id/textViewRegisterDoctorFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -17,8 +17,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/editTextRegisterDoctorFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewRegisterDoctorFirstName"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
-        android:id="@+id/Lastname"
+        android:id="@+id/textViewRegisterDoctorLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -26,32 +37,21 @@
         android:layout_marginTop="60dp"
         android:text="Lastname:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Firstname" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterDoctorFirstName" />
 
     <EditText
-        android:id="@+id/EnterFirstname"
+        android:id="@+id/editTextRegisterDoctorLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/Firstname"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/EnterLastname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/Lastname"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewRegisterDoctorLastName"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/Gender"
+        android:id="@+id/textViewRegisterDoctorGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -59,30 +59,20 @@
         android:layout_marginTop="60dp"
         android:text="Gender"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Lastname" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterDoctorLastName" />
 
     <Spinner
-        android:id="@+id/Genderspinner"
+        android:id="@+id/spinnerRegisterDoctorGender"
         android:layout_width="199dp"
         android:layout_height="18dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Lastname" />
-
-    <Spinner
-        android:id="@+id/SpecialistSpinner"
-        android:layout_width="199dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Gender" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterDoctorLastName" />
 
     <TextView
-        android:id="@+id/Specialist"
+        android:id="@+id/textViewRegisterDoctorSpecialist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -90,10 +80,64 @@
         android:layout_marginTop="60dp"
         android:text="Specialist"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Gender" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterDoctorGender" />
+
+    <Spinner
+        android:id="@+id/spinnerRegisterDoctorSpecialist"
+        android:layout_width="199dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterDoctorGender" />
+
+    <TextView
+        android:id="@+id/textViewRegisterDoctorUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/username_field"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterDoctorSpecialist" />
+
+    <EditText
+        android:id="@+id/editTextRegisterDoctorUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewRegisterDoctorUsername"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRegisterDoctorPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/password_field"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterDoctorUsername" />
+
+    <EditText
+        android:id="@+id/editTextRegisterDoctorPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewRegisterDoctorPassword"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/Register"
+        android:id="@+id/buttonRegisterDoctorSubmit"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:layout_marginBottom="80dp"
@@ -104,49 +148,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/EnterUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/Username"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/Username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/username_field"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Specialist" />
-
-    <TextView
-        android:id="@+id/Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/password_field"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Username" />
-
-    <EditText
-        android:id="@+id/EnterPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBaseline_toBaselineOf="@+id/Password"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

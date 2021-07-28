@@ -14,14 +14,14 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_register);
 
         //Setting up the Gender Dropdown List
-        Spinner genderSpinner = (Spinner)findViewById(R.id.Genderspinner);
+        Spinner genderSpinner = (Spinner)findViewById(R.id.spinnerRegisterDoctorGender);
         ArrayAdapter<String> genderSpinnerAdapter = new ArrayAdapter<String>(DoctorRegisterActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.SelectGender));
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderSpinnerAdapter);
 
         //Setting up the Specialist Dropdown List
-        Spinner specialistSpinner = (Spinner)findViewById(R.id.SpecialistSpinner);
+        Spinner specialistSpinner = (Spinner)findViewById(R.id.spinnerRegisterDoctorSpecialist);
         ArrayAdapter<String> specialistSpinnerAdapter = new ArrayAdapter<String>(DoctorRegisterActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.SelectSpecialist));
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
