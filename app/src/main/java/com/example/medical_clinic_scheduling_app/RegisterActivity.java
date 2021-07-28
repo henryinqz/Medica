@@ -18,12 +18,10 @@ public class RegisterActivity extends AppCompatActivity {
     public void navigateToDoctorRegister(View view) {
         Intent intent = new Intent(this, DoctorRegisterActivity.class);
         startActivity(intent);
-        setContentView(R.layout.activity_doctor_register);
     }
 
     public void navigateToPatientRegister(View view){
         Intent intent = new Intent(this, PatientRegisterActivity.class);
         startActivity(intent);
-        setContentView(R.layout.activity_patient_register);
     }
 }
