@@ -1,10 +1,24 @@
 package com.example.medical_clinic_scheduling_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginPageActivity extends AppCompatActivity {
 
@@ -14,28 +28,46 @@ public class LoginPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_page);
     }
 
-    public void on_login(View view) {
 
+    public void onClick(View view) { // Run when login button is pressed
+        loginUser();
     }
 
-    public void loginButtonClick(View view) { // Run when login button is pressed
+    private void loginUser() {
         // Username
         EditText usernameEditText = (EditText) findViewById(R.id.editTextLoginUsername);
-        String username = usernameEditText.getText().toString();
+        String username = usernameEditText.getText().toString().trim();
 
         // Password
         EditText passwordEditText = (EditText) findViewById(R.id.editTextLoginPassword);
-        String password = passwordEditText.getText().toString();
+        String password = passwordEditText.getText().toString().trim();
 
-        if (username.isEmpty() || password.isEmpty()) { // Login failed: empty username/password
-            if (username.isEmpty())
-                usernameEditText.setError("Empty username");
-            if (password.isEmpty())
-                passwordEditText.setError("Empty password");
-//        } else if () { // Login failed: invalid characters (TODO: Regex to check if username & passwords have correct format (ie. no whitespace, dealing w/ special characters, length of 32 char or smth))
-//        } else if () { // Login failed: incorrect username/combo (TODO: Check w/ Firebase)
-        } else { // Login successful
-            // TODO: Login (auth token?then go to patient/doctor screen of upcoming appointments)
+        // Errors
+        if (username.isEmpty()) {
+            usernameEditText.setError("Empty username");
+            return;
         }
+        if (password.isEmpty()) {
+            passwordEditText.setError("Empty password");
+            return;
+        }
+
+        String emailUsername = username + "@example.com";
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.signInWithEmailAndPassword(emailUsername, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_LONG).show();
+                    // TODO: Start next activity
+                } else {
+                    // Failed to login
+                    Toast.makeText(getApplicationContext(), "Failed to login", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+
     }
 }

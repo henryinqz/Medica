@@ -10,7 +10,7 @@
         android:id="@+id/btnLoginSubmit"
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:onClick="loginButtonClick"
+        android:onClick="onClick"
         android:text="@string/button_login"
         android:textSize="26sp"
         app:backgroundTint="#2EB9EC"

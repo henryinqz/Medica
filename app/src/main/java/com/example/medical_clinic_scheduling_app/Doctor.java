@@ -10,11 +10,14 @@ public class Doctor extends Person implements Observer {
     private Set<String> specializations;
     private Set<Patient> seenPatients;
 
-    Doctor(String username, String password, String firstname, String lastname, String gender, Date dateOfBirth, HashSet<String> specializations) {
-        super(username, password, firstname, lastname, gender, dateOfBirth);
-        upcomingAppointments = new TreeSet<Appointment>();
-        this.specializations = specializations;
-        seenPatients = new HashSet<Patient>();
+//    Doctor(String username, String password, String firstname, String lastname, String gender, Date dateOfBirth, HashSet<String> specializations) {
+//        super(username, password, firstname, lastname, gender, dateOfBirth);
+//        upcomingAppointments = new TreeSet<Appointment>();
+//        this.specializations = specializations;
+//        seenPatients = new HashSet<Patient>();
+//    }
+    Doctor(String username, String firstname, String lastname) {
+        super(username, firstname, lastname);
     }
 
     public void addSpecialization(String specialization) {
