@@ -1,6 +1,8 @@
 package com.example.medical_clinic_scheduling_app;
 
-public class Appointment {
+import java.util.Date;
+
+public class Appointment implements Comparable<Appointment> {
     Date date;
     Doctor doctor;
     Patient patient;
@@ -9,5 +11,10 @@ public class Appointment {
         this.date = date;
         this.doctor = doctor;
         this.patient = patient;
+    }
+
+    @Override
+    public int compareTo(Appointment o) {
+        return this.date.compareTo(o.date);
     }
 }
