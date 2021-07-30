@@ -1,6 +1,5 @@
 package com.example.medical_clinic_scheduling_app;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -10,20 +9,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class PatientRegisterActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -60,79 +50,6 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         String currentDateStr = DateFormat.getDateInstance().format(c.getTime());
         TextView textView = (TextView) findViewById(R.id.txtRegisterPatientBirthdayDate);
         textView.setText(currentDateStr);
-    }
-
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnRegisterPatientSubmit: // Submit button
-                registerPatient();
-                break;
-        }
-    }
-
-    private void registerPatient() {
-        // Name
-        EditText firstNameEditText = (EditText) findViewById(R.id.editTextRegisterPatientFirstName);
-        EditText lastNameEditText = (EditText) findViewById(R.id.editTextRegisterPatientLastName);
-        String firstName = firstNameEditText.getText().toString().trim();
-        String lastName = lastNameEditText.getText().toString().trim();
-
-        // Username
-        EditText usernameEditText = (EditText) findViewById(R.id.editTextRegisterPatientUsername);
-        String username = usernameEditText.getText().toString().trim();
-
-        // Password
-        EditText passwordEditText = (EditText) findViewById(R.id.editTextRegisterPatientPassword);
-        String password = passwordEditText.getText().toString().trim();
-
-        // TODO: Date
-
-        // TODO: Gender
-
-        // Errors
-        if(firstName.isEmpty()) {
-            firstNameEditText.setError("Empty first name");
-            return;
-        }
-        if(lastName.isEmpty()) {
-            firstNameEditText.setError("Empty last name");
-            return;
-        }
-        if (username.isEmpty()) {
-            usernameEditText.setError("Empty username");
-            return;
-        }
-        if (password.isEmpty()) {
-            passwordEditText.setError("Empty password");
-            return;
-        }
-
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(username + "@example.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Person user = new Patient(username, firstName, lastName);
-
-                    FirebaseDatabase.getInstance().getReference("Users")
-                            .child("Patients")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) { // Created user
-                                Toast.makeText(getApplicationContext(), "Created patient user", Toast.LENGTH_LONG).show();
-                                // TODO: Login & go to next intent
-                            } else { // Failed to create user
-                                Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                } else { // Failed to create user
-                    Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
     }
 
 }
