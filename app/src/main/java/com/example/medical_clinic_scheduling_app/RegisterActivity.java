@@ -15,7 +15,18 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
     }
 
-    public void navigateToDoctorRegister(View view) {
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnRegisterPatient: // Login button
+                startActivity(new Intent(this, PatientRegisterActivity.class));
+                break;
+            case R.id.btnRegisterDoctor: // Register button
+                startActivity(new Intent(this, DoctorRegisterActivity.class));
+                break;
+        }
+    }
+
+    /* public void navigateToDoctorRegister(View view) {
         Intent intent = new Intent(this, DoctorRegisterActivity.class);
         startActivity(intent);
     }
@@ -23,5 +34,5 @@ public class RegisterActivity extends AppCompatActivity {
     public void navigateToPatientRegister(View view){
         Intent intent = new Intent(this, PatientRegisterActivity.class);
         startActivity(intent);
-    }
+    } */
 }

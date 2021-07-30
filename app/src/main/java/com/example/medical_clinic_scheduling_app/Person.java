@@ -4,19 +4,20 @@ import java.util.Date;
 
 public class Person {
     private String username;
-    private String password;
     private String firstname;
     private String lastname;
     private String gender;
-    private Date dateOfBirth;
 
-    Person(String username, String password, String firstname, String lastname, String gender, Date dateOfBirth) {
+//    Person(String username, String firstname, String lastname, String gender) {
+//        this.username = username;
+//        this.firstname = firstname;
+//        this.lastname = lastname;
+//        this.gender = gender;
+//    }
+    Person(String username, String firstname, String lastname) { // TEMPORARY
         this.username = username;
-        this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getFirstname() {
@@ -27,14 +28,6 @@ public class Person {
         return this.lastname;
     }
 
-    public String getGender() {
-        return this.gender;
-    }
-
-    public Date getDateOfBirth() {
-        return this.dateOfBirth;
-    }
-
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
@@ -43,11 +36,4 @@ public class Person {
         this.lastname = lastname;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 }
