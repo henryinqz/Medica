@@ -41,7 +41,11 @@ public class DoctorRegisterActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        registerDoctor();
+        switch (view.getId()) {
+            case R.id.btnRegisterDoctorSubmit: // Submit button
+                registerDoctor();
+                break;
+        }
     }
 
     private void registerDoctor() {
@@ -94,16 +98,15 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
+                            if (task.isSuccessful()) { // Created user
                                 Toast.makeText(getApplicationContext(), "Created doctor user", Toast.LENGTH_LONG).show();
                                 // TODO: Login & go to next intent
-                            } else {
+                            } else { // Failed to create user
                                 Toast.makeText(getApplicationContext(), "Failed to create doctor", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
-                } else {
-                    // Failed to login
+                } else { // Failed to create user
                     Toast.makeText(getApplicationContext(), "Failed to create doctor", Toast.LENGTH_LONG).show();
                 }
             }

@@ -63,7 +63,11 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
     }
 
     public void onClick(View view) {
-        registerPatient();
+        switch (view.getId()) {
+            case R.id.btnRegisterPatientSubmit: // Submit button
+                registerPatient();
+                break;
+        }
     }
 
     private void registerPatient() {
@@ -116,16 +120,15 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
+                            if (task.isSuccessful()) { // Created user
                                 Toast.makeText(getApplicationContext(), "Created patient user", Toast.LENGTH_LONG).show();
                                 // TODO: Login & go to next intent
-                            } else {
+                            } else { // Failed to create user
                                 Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
-                } else {
-                    // Failed to login
+                } else { // Failed to create user
                     Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
                 }
             }

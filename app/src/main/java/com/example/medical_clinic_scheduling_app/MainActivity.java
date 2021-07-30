@@ -18,32 +18,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /*// Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d("tag123", "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("tag123", "Failed to read value.", error.toException());
-            }
-        });*/
     }
 
-    //Login button
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnMainLogin: // Login button
+                startActivity(new Intent(this, LoginPageActivity.class));
+                break;
+            case R.id.btnMainRegister: // Register button
+                startActivity(new Intent(this, RegisterActivity.class));
+                break;
+        }
+    }
+    /* // Login button
     public void to_login(View view) {
         Intent intent = new Intent(this, LoginPageActivity.class);
         startActivity(intent);
@@ -53,6 +40,5 @@ public class MainActivity extends AppCompatActivity {
     public void to_register(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-    }
-
+    } */
 }
