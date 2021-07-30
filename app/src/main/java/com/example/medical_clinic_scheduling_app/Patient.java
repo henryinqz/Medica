@@ -8,25 +8,26 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Patient extends Person implements Subject {
+    private Date dateOfBirth;
+
     private Set<Appointment> previousAppointments;
     private Set<Appointment> upcomingAppointments;
     private Set<Doctor> seenDoctors;
     private List<Observer> observers;
 
-//    Patient(String username, String password, String firstname, String lastname, String gender, Date dateOfBirth) {
-//        super(username, password, firstname, lastname, gender, dateOfBirth);
-//        previousAppointments = new TreeSet<>();
-//        upcomingAppointments = new TreeSet<>();
-//        seenDoctors = new HashSet<Doctor>();
-//        observers = new ArrayList<Observer>();
+//    Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth) {
+//        super(username, firstname, lastname, gender);
+//        this.dateOfBirth = dateOfBirth;
+//        this.previousAppointments = new TreeSet<>();
+//        this.upcomingAppointments = new TreeSet<>();
+//        this.seenDoctors = new HashSet<Doctor>();
+//        this.observers = new ArrayList<Observer>();
 //    }
-    Patient(String username, String firstname, String lastname) {
+
+    Patient(String username, String firstname, String lastname) { // TEMPORARY
         super(username, firstname, lastname);
-        previousAppointments = new TreeSet<>();
-        upcomingAppointments = new TreeSet<>();
-        seenDoctors = new HashSet<Doctor>();
-        observers = new ArrayList<Observer>();
     }
+
     public void addSeenDoctor(Doctor doctor) {
         seenDoctors.add(doctor);
     }
