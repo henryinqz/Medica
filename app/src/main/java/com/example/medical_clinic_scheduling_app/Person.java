@@ -8,6 +8,7 @@ public abstract class Person {
         this.firstName = firstname;
         this.lastName = lastname;
         this.gender = gender;
+        // Testing
     }
 
     public String getUsername() {
@@ -37,5 +38,4 @@ public abstract class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 }
