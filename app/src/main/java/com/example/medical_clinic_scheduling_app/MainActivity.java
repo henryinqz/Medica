@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
     /* // Login button
     public void to_login(View view) {
         Intent intent = new Intent(this, LoginPageActivity.class);
