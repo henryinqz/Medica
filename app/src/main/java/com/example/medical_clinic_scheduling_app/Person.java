@@ -1,39 +1,41 @@
 package com.example.medical_clinic_scheduling_app;
 
-import java.util.Date;
+public abstract class Person {
+    private String username, firstName, lastName, gender;
 
-public class Person {
-    private String username;
-    private String firstname;
-    private String lastname;
-    private String gender;
-
-//    Person(String username, String firstname, String lastname, String gender) {
-//        this.username = username;
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//        this.gender = gender;
-//    }
-    Person(String username, String firstname, String lastname) { // TEMPORARY
+    Person(String username, String firstname, String lastname, String gender) {
         this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.gender = gender;
     }
 
-    public String getFirstname() {
-        return this.firstname;
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLastname() {
-        return this.lastname;
+    public String getGender() {
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public String getFirstName() {
+        return this.firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public String getLastName() {
+        return this.lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
 }
