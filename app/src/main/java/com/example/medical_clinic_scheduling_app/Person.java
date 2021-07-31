@@ -1,46 +1,41 @@
 package com.example.medical_clinic_scheduling_app;
 
-import java.util.Date;
+public abstract class Person {
+    private String username, firstName, lastName, gender;
 
-public class Person {
-    private String username;
-    private String password;
-    private String firstname;
-    private String lastname;
-    private String gender;
-    private Date dateOfBirth;
-
-    Person(String username, String password, String firstname, String lastname, String gender, Date dateOfBirth) {
+    Person(String username, String firstname, String lastname, String gender) {
         this.username = username;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstname;
+        this.lastName = lastname;
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getFirstname() {
-        return this.firstname;
+    public String getUsername() {
+        return username;
     }
-
-    public String getLastname() {
-        return this.lastname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getGender() {
-        return this.gender;
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public Date getDateOfBirth() {
-        return this.dateOfBirth;
+    public String getFirstName() {
+        return this.firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public String getLastName() {
+        return this.lastName;
     }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setGender(String gender) {
