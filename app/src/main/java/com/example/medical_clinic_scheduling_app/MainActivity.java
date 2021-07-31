@@ -4,14 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.EditText;
 import android.view.View;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -30,10 +26,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
     /* // Login button
     public void to_login(View view) {
         Intent intent = new Intent(this, LoginPageActivity.class);
         startActivity(intent);
+
     }
 
     //Register button
@@ -41,4 +39,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     } */
+
 }

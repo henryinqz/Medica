@@ -8,8 +8,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Patient extends Person implements Subject {
-    private Date dateOfBirth;
-
     private Set<Appointment> previousAppointments;
     private Set<Appointment> upcomingAppointments;
     private Set<Doctor> seenDoctors;
