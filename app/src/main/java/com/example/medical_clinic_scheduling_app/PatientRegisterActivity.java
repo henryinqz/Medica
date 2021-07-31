@@ -1,6 +1,5 @@
 package com.example.medical_clinic_scheduling_app;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -10,20 +9,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class PatientRegisterActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     @Override
@@ -136,5 +126,4 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
             }
         });
     }
-
 }

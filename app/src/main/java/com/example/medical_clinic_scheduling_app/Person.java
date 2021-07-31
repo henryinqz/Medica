@@ -38,4 +38,11 @@ public abstract class Person {
         this.lastName = lastName;
     }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }
