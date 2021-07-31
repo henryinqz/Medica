@@ -10,6 +10,16 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment {
+    private DatePickerDialog datePickerDialog;
+    private long minDate = -1, maxDate = -1;
+
+    public DatePickerFragment() {
+    }
+    public DatePickerFragment(long minDate, long maxDate) {
+        this.minDate = minDate;
+        this.maxDate = maxDate;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -18,10 +28,21 @@ public class DatePickerFragment extends DialogFragment {
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)getActivity(), year, month, day);
-//        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()); // Prevents user from choosing date in the future (ie. setting birthday)
-//        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()); // Prevents user from choosing date in the past (ie. booking appointments
+        this.datePickerDialog = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)getActivity(), year, month, day);
 
-        return datePickerDialog;
+        // If the respective parameter is -1, there no minDate/maxDate will be set
+        if (minDate >= 0)
+            setMinDate(minDate);
+        else if (maxDate >= 0)
+            setMaxDate(maxDate);
+
+        return this.datePickerDialog;
+    }
+
+    private void setMinDate(long minDate) {
+        this.datePickerDialog.getDatePicker().setMinDate(minDate); // Prevents user from choosing date in the future (ie. booking appointments)
+    }
+    private void setMaxDate(long maxDate) {
+        this.datePickerDialog.getDatePicker().setMaxDate(maxDate); // Prevents user from choosing date in the future (ie. setting birthday)
     }
 }

@@ -43,7 +43,7 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         birthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                DialogFragment datePicker = new DatePickerFragment();
+                DialogFragment datePicker = new DatePickerFragment(-1, System.currentTimeMillis()); // Disables selecting birthday in the future
                 datePicker.show(getSupportFragmentManager(), "Birth Date Picker");
             }
         });
