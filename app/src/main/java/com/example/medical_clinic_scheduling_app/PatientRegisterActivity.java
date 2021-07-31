@@ -26,7 +26,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class PatientRegisterActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +56,7 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
+
         String currentDateStr = DateFormat.getDateInstance().format(c.getTime());
         TextView textView = (TextView) findViewById(R.id.txtRegisterPatientBirthdayDate);
         textView.setText(currentDateStr);
@@ -87,9 +87,11 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
 
         // TODO: Date
 
-        // TODO: Gender
+        Spinner genderSpinner = (Spinner) findViewById(R.id.spinnerRegisterPatientGender);
+        String gender = genderSpinner.getSelectedItem().toString();
 
         // Errors
+        // TODO: Gender, date error checks (?)
         if(firstName.isEmpty()) {
             firstNameEditText.setError("Empty first name");
             return;
@@ -112,7 +114,7 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Person user = new Patient(username, firstName, lastName);
+                    Person user = new Patient(username, firstName, lastName, gender);
 
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child("Patients")

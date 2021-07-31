@@ -63,11 +63,14 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         EditText passwordEditText = (EditText) findViewById(R.id.editTextRegisterDoctorPassword);
         String password = passwordEditText.getText().toString().trim();
 
-        // TODO: Date
+        Spinner specializationSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorSpecialist);
+        String specialization = specializationSpinner.getSelectedItem().toString();
 
-        // TODO: Gender
+        Spinner genderSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorGender);
+        String gender = genderSpinner.getSelectedItem().toString();
 
         // Errors
+        // TODO: Gender, specialization error checks (?)
         if(firstName.isEmpty()) {
             firstNameEditText.setError("Empty first name");
             return;
@@ -90,7 +93,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Person user = new Doctor(username, firstName, lastName);
+                    Person user = new Doctor(username, firstName, lastName, gender, specialization);
 
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child("Doctors")
