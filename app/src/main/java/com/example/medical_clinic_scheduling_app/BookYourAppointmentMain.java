@@ -21,21 +21,21 @@ public class BookYourAppointmentMain extends AppCompatActivity {
 
         //Setting up ListView of Appointments
         //TODO: create listView
-        ListView listView = (ListView) findViewById(R.id.appointmentListView);
-        ArrayList<String> appointments = new ArrayList<>(); //instead make it appointments
-        appointments.add("test1");
-        appointments.add("test2");
-        appointments.add("test3");
+        ListView doctorView = (ListView) findViewById(R.id.doctorListView);
+        ArrayList<String> doctors = new ArrayList<>(); //instead make it appointments
+        doctors .add("test1");
+        doctors .add("test2");
+        doctors .add("test3");
 
-        ArrayAdapter appointmentAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, appointments);
-        listView.setAdapter(appointmentAdapter);
+        ArrayAdapter appointmentAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, doctors );
+        doctorView.setAdapter(appointmentAdapter);
 
         /*
         //Setting up listener for when item is clicked.
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        doctorView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(BookYourAppointmentMain.this, "Selected Appointments: " + appointments.get(i).toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BookYourAppointmentMain.this, "Selected Doctors: " + doctors.get(i).toString(), Toast.LENGTH_SHORT).show();
             }
         });
         */
