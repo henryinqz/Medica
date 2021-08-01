@@ -30,6 +30,7 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         ArrayAdapter appointmentAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, appointments);
         listView.setAdapter(appointmentAdapter);
 
+        /*
         //Setting up listener for when item is clicked.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -37,9 +38,6 @@ public class BookYourAppointmentMain extends AppCompatActivity {
                 Toast.makeText(BookYourAppointmentMain.this, "Selected Appointments: " + appointments.get(i).toString(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-    public void onFilterButtonClicked (View view){
-        Intent intent = new Intent(this, AppointmentFilterOptions.class);
-        startActivity(intent);
+        */
     }
 }
