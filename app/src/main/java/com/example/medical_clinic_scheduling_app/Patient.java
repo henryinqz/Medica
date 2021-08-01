@@ -15,9 +15,12 @@ public class Patient extends Person implements Subject {
     private Set<Doctor> seenDoctors;
     private List<Observer> observers;
 
+    private Patient() {
+    }
+
 //    Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth) {
     Patient(String username, String firstname, String lastname, String gender) {
-        super(username, firstname, lastname, gender);
+        super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT);
 //        this.dateOfBirth = dateOfBirth;
         this.previousAppointments = new TreeSet<>();
         this.upcomingAppointments = new TreeSet<>();

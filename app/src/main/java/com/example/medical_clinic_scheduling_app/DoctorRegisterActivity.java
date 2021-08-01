@@ -96,7 +96,6 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                     Person user = new Doctor(username, firstName, lastName, gender, specialization);
 
                     FirebaseDatabase.getInstance().getReference("Users")
-                            .child("Doctors")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
