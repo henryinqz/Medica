@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
+            android:name=".AppointmentFilterOptions"
+            android:parentActivityName=".BookYourAppointmentMain"
+            />
+        <activity
             android:name=".PatientRegisterActivity"
             android:parentActivityName=".RegisterActivity"/>
         <activity
