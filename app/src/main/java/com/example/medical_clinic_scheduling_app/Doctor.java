@@ -10,9 +10,12 @@ public class Doctor extends Person implements Observer {
     private String specialization;
     private Set<Patient> seenPatients;
 
+    private Doctor(){
+    }
+
 //    Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations) {
     Doctor(String username, String firstName, String lastName, String gender, String specialization) {
-        super(username, firstName, lastName, gender);
+        super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR);
         this.specialization = specialization; // TODO: Replace with HashSet (ie. able to have multiple specializations)
         this.upcomingAppointments = new TreeSet<Appointment>();
         this.seenPatients = new HashSet<Patient>();
