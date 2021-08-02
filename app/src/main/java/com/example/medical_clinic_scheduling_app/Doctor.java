@@ -16,8 +16,8 @@ public class Doctor extends Person implements Observer {
 
     }
 
-    //Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations) {
-    Doctor(String username, String firstName, String lastName, String gender, String specialization) {
+    Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations) {
+    //Doctor(String username, String firstName, String lastName, String gender, String specialization) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR);
         this.specialization = specialization; // TODO: Replace with HashSet (ie. able to have multiple specializations)
         this.upcomingAppointments = new ArrayList<Integer>();
