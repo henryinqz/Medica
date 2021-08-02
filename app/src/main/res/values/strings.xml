@@ -48,4 +48,18 @@
     <string name="register_button">REGISTER</string>
     <string name="patient_birthday">Your Birthday</string>
     <string name="select_birthday">SELECT BIRTHDATE</string>
+
+    <!-- BOOK YOUR APPOINTMENT STRINGS -->
+    <string name="BYA_title">Book Your Appointment</string>
+    <string name="BYA_doctorList">List of Doctors</string>
+    <string name="BYA_filterBy">Filter by:</string>
+    <string name="BYA_filterText">FILTER</string>
+    <string name="BYA_bookText">BOOK</string>
+    <string name="BYA_filterByTitle">Filter Doctor By</string>
+    <string name="BYA_filterOptionsNone">None</string>
+    <string name="specialization">Specialization</string>
+
+    <!-- SELECT APPOINTMENT TIMES STRINGS -->
+    <string name="SAT_title">Doctor Availability Times</string>
+    <string name="SAT_book_button">BOOK</string>
 </resources>
