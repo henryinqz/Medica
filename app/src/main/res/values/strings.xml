@@ -1,5 +1,12 @@
 <resources>
+    <!--  Activity Titles  -->
     <string name="app_name">Medica</string>
+    <string name="login_title">Login</string>
+    <string name="register_title">Register</string>
+    <string name="register_patient_title">Register as a Patient</string>
+    <string name="register_doctor_title">Register as a Doctor</string>
+
+
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
     <string name="doctor_option">Doctor</string>
