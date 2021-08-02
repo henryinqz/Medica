@@ -82,13 +82,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRegisterDoctorGender" />
 
+    <Spinner
+        android:id="@+id/spinnerRegisterDoctorSpecialist"
+        android:layout_width="199dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterDoctorGender" />
+
     <TextView
         android:id="@+id/txtRegisterDoctorUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="60dp"
         android:text="@string/username_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRegisterDoctorSpecialist" />
@@ -129,9 +139,8 @@
     <Button
         android:id="@+id/btnRegisterDoctorSubmit"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="30dp"
         android:onClick="onClick"
         android:text="Register"
         android:textSize="26sp"
@@ -143,67 +152,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterDoctorPassword"
         app:layout_constraintVertical_bias="0.872" />
-
-    <CheckBox
-        android:id="@+id/Checkbox_Anatomical_Pathology"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:text="Anatomical Pathology"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toEndOf="@+id/txtRegisterDoctorSpecialist"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerRegisterDoctorGender" />
-
-    <CheckBox
-        android:id="@+id/Checkbox_Dermatology"
-        android:layout_width="0dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:text="Dermatology"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.233"
-        app:layout_constraintStart_toEndOf="@+id/txtRegisterDoctorSpecialist"
-        app:layout_constraintTop_toBottomOf="@+id/Checkbox_Cardiology" />
-
-    <CheckBox
-        android:id="@+id/Checkbox_Cardiovascular"
-        android:layout_width="0dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="10dp"
-        android:text="Cardiovascular/Thoracic Surgery"
-        app:layout_constraintBottom_toTopOf="@+id/editTextRegisterDoctorUsername"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
-        app:layout_constraintStart_toEndOf="@+id/txtRegisterDoctorSpecialist"
-        app:layout_constraintTop_toBottomOf="@+id/Checkbox_Dermatology" />
-
-    <CheckBox
-        android:id="@+id/Checkbox_Cardiology"
-        android:layout_width="0dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:text="Cardiology"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.233"
-        app:layout_constraintStart_toEndOf="@+id/txtRegisterDoctorSpecialist"
-        app:layout_constraintTop_toBottomOf="@+id/Checkbox_Anatomical_Pathology" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
