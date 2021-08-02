@@ -9,20 +9,21 @@ import java.util.TreeSet;
 
 public class Patient extends Person implements Subject {
     private Date dateOfBirth;
-
-    private Set<Appointment> previousAppointments;
-    private Set<Appointment> upcomingAppointments;
-    private Set<Doctor> seenDoctors;
+    private List<Integer> previousAppointments;
+    private List<Integer> upcomingAppointments;
+    private List<Integer> seenDoctors;
     private List<Observer> observers;
 
-    private Patient() {
+    Patient() {
+
     }
+
     Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth) {
         super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT);
         this.dateOfBirth = dateOfBirth;
-        this.previousAppointments = new TreeSet<>();
-        this.upcomingAppointments = new TreeSet<>();
-        this.seenDoctors = new HashSet<Doctor>();
+        this.previousAppointments = new ArrayList<Integer>();
+        this.upcomingAppointments = new ArrayList<Integer>();
+        this.seenDoctors = new ArrayList<Integer>();
         this.observers = new ArrayList<Observer>();
     }
 
@@ -34,12 +35,12 @@ public class Patient extends Person implements Subject {
     }
 
     public void addSeenDoctor(Doctor doctor) {
-        seenDoctors.add(doctor);
+        seenDoctors.add(doctor.hashCode());
     }
 
     public void bookAppointment(Appointment appointment) {
         attach(appointment.doctor);
-        upcomingAppointments.add(appointment);
+        upcomingAppointments.add(appointment.hashCode());
         notifyBooking(appointment);
     }
 

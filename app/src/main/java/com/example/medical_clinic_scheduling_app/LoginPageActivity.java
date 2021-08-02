@@ -55,6 +55,7 @@ public class LoginPageActivity extends AppCompatActivity {
 
         String emailUsername = username + "@example.com";
         FirebaseAuth auth = FirebaseAuth.getInstance();
+
         auth.signInWithEmailAndPassword(emailUsername, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
