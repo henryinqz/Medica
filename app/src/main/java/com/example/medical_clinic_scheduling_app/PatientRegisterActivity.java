@@ -26,6 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class PatientRegisterActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+    private Date dateOfBirth = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,8 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         String currentDateStr = DateFormat.getDateInstance().format(c.getTime());
         TextView textView = (TextView) findViewById(R.id.txtRegisterPatientBirthdayDate);
         textView.setText(currentDateStr);
+
+        dateOfBirth = c.getTime();
     }
 
     public void onClick(View view) {
@@ -108,13 +112,17 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
             passwordEditText.setError("Empty password");
             return;
         }
+        if (this.dateOfBirth == null) {
+            Toast.makeText(getApplicationContext(), "Empty date of birth", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.createUserWithEmailAndPassword(username + "@example.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Person user = new Patient(username, firstName, lastName, gender);
+                    Person user = new Patient(username, firstName, lastName, gender, dateOfBirth);
 
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

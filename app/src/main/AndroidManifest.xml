@@ -20,15 +20,19 @@
             android:parentActivityName=".LoginPageActivity" />
         <activity
             android:name=".PatientRegisterActivity"
-            android:parentActivityName=".RegisterActivity" />
+            android:label="@string/register_patient_title"
+            android:parentActivityName=".RegisterActivity"/>
         <activity
             android:name=".DoctorRegisterActivity"
+            android:label="@string/register_doctor_title"
             android:parentActivityName=".RegisterActivity" />
         <activity
             android:name=".RegisterActivity"
+            android:label="@string/register_title"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LoginPageActivity"
+            android:label="@string/login_title"
             android:parentActivityName=".MainActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->

@@ -17,23 +17,21 @@ public class Patient extends Person implements Subject {
 
     private Patient() {
     }
-
-//    Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth) {
-    Patient(String username, String firstname, String lastname, String gender) {
+    Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth) {
         super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT);
-//        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
         this.previousAppointments = new TreeSet<>();
         this.upcomingAppointments = new TreeSet<>();
         this.seenDoctors = new HashSet<Doctor>();
         this.observers = new ArrayList<Observer>();
     }
 
-//    public Date getDateOfBirth() {
-//        return dateOfBirth;
-//    }
-//    public void setDateOfBirth(Date dateOfBirth) {
-//        this.dateOfBirth = dateOfBirth;
-//    }
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public void addSeenDoctor(Doctor doctor) {
         seenDoctors.add(doctor);
