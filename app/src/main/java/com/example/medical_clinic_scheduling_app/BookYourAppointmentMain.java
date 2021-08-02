@@ -19,10 +19,9 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_your_appointment_main);
 
-        //Setting up ListView of Appointments
-        //TODO: create listView
+        //Setting up ListView of Doctors
         ListView doctorView = (ListView) findViewById(R.id.doctorListView);
-        ArrayList<String> doctors = new ArrayList<>(); //instead make it appointments
+        ArrayList<String> doctors = new ArrayList<>();
         doctors.add("test1");
         doctors.add("test2");
         doctors.add("test3");
@@ -34,14 +33,15 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         doctors.add("test9");
         doctors.add("test0");
 
-        ArrayAdapter appointmentAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, doctors);
-        doctorView.setAdapter(appointmentAdapter);
+        ArrayAdapter doctorAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, doctors);
+        doctorView.setAdapter(doctorAdapter);
 
         //Setting up listener for when item is clicked.
         doctorView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(BookYourAppointmentMain.this, "Selected Doctors: " + doctors.get(i).toString(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), SelectAppointmentTimes.class));
             }
         });
     }
