@@ -1,24 +1,32 @@
 <resources>
     <!--  Activity Titles  -->
-    <string name="app_name">Medica</string>
     <string name="login_title">Login</string>
     <string name="register_title">Register</string>
     <string name="register_patient_title">Register as a Patient</string>
     <string name="register_doctor_title">Register as a Doctor</string>
 
-
+    <!--  Main Activity  -->
+    <string name="app_name">Medica</string>
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
-    <string name="doctor_option">Doctor</string>
-    <string name="patient_option">Patient</string>
-    <string name="password_field">Password</string>
+
+    <!--  Login Page Activity  -->
     <string name="username_field">Username</string>
+    <string name="password_field">Password</string>
+    <string name="login_username_hint">Enter your username</string>
+    <string name="login_password_hint">Enter your password</string>
+
+    <!--  Register Activity  -->
+    <string name="register_question">Are you a patient or doctor?</string>
+    <string name="register_doctor">Doctor</string>
+    <string name="register_patient">Patient</string>
 
     <string-array name="SelectGender">
         <item>Male</item>
         <item>Female</item>
     </string-array>
 
+    <!--  Doctor Register Activity  -->
     <string-array name="SelectSpecialist">
         <item>Anatomical Pathology</item>
         <item>Anesthesiology</item>
@@ -32,8 +40,7 @@
         <item>Endocrinology and Metabolism</item>
     </string-array>
 
-    <!--PATIENT REGISTER STRINGS-->
-    <string name="patient_register_title">PATIENT REGISTER</string>
+    <!--  Patient Register Activity  -->
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="date_of_birth">Date of Birth</string>
