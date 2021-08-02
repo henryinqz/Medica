@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -16,7 +17,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 public class DoctorRegisterActivity extends AppCompatActivity {
+
+    private List<CheckBox> selectSpecialist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +37,18 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderSpinnerAdapter);
 
-        //Setting up the Specialist Dropdown List
-        Spinner specialistSpinner = (Spinner)findViewById(R.id.spinnerRegisterDoctorSpecialist);
-        ArrayAdapter<String> specialistSpinnerAdapter = new ArrayAdapter<String>(DoctorRegisterActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.SelectSpecialist));
-        genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        specialistSpinner.setAdapter(specialistSpinnerAdapter);
+        selectSpecialist = new ArrayList<CheckBox>();
+        selectSpecialist.add((CheckBox) findViewById(R.id.Checkbox_Cardiology));
+        selectSpecialist.add((CheckBox) findViewById(R.id.Checkbox_Anatomical_Pathology));
+        selectSpecialist.add((CheckBox) findViewById(R.id.Checkbox_Cardiovascular));
+        selectSpecialist.add((CheckBox) findViewById(R.id.Checkbox_Dermatology));
+
+//        //Setting up the Specialist Dropdown List
+//        MultiSpinner specialistSpinner = (MultiSpinner) findViewById(R.id.spinnerRegisterDoctorSpecialist);
+//        ArrayAdapter<String> specialistSpinnerAdapter = new ArrayAdapter<String>(DoctorRegisterActivity.this,
+//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.SelectSpecialist));
+//        genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        specialistSpinner.setAdapter(specialistSpinnerAdapter);
 
 
     }
@@ -63,8 +76,19 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         EditText passwordEditText = (EditText) findViewById(R.id.editTextRegisterDoctorPassword);
         String password = passwordEditText.getText().toString().trim();
 
-        Spinner specializationSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorSpecialist);
-        String specialization = specializationSpinner.getSelectedItem().toString();
+//        Spinner specializationSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorSpecialist);
+//        String specialization = specializationSpinner.getSelectedItem().toString();
+
+        HashSet<String> specialization = new HashSet<>();
+
+        // Specialist
+        for(CheckBox specialist: selectSpecialist){
+            if(specialist.isChecked()){
+                specialization.add((String)specialist.getText());
+                System.out.println("Selected: " + (String)specialist.getText());
+            }
+        }
+
 
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorGender);
         String gender = genderSpinner.getSelectedItem().toString();
