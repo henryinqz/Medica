@@ -2,10 +2,12 @@ package com.example.medical_clinic_scheduling_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,7 +25,7 @@ import java.util.List;
 
 public class DoctorRegisterActivity extends AppCompatActivity {
 
-    private List<CheckBox> selectSpecialist;
+    private HashSet<String> specialization;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +39,19 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderSpinnerAdapter);
 
-        selectSpecialist = new ArrayList<CheckBox>();
-        selectSpecialist.add((CheckBox) findViewById(R.id.Checkbox_Cardiology));
-        selectSpecialist.add((CheckBox) findViewById(R.id.Checkbox_Anatomical_Pathology));
-        selectSpecialist.add((CheckBox) findViewById(R.id.Checkbox_Cardiovascular));
-        selectSpecialist.add((CheckBox) findViewById(R.id.Checkbox_Dermatology));
-
-//        //Setting up the Specialist Dropdown List
-//        MultiSpinner specialistSpinner = (MultiSpinner) findViewById(R.id.spinnerRegisterDoctorSpecialist);
-//        ArrayAdapter<String> specialistSpinnerAdapter = new ArrayAdapter<String>(DoctorRegisterActivity.this,
-//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.SelectSpecialist));
-//        genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        specialistSpinner.setAdapter(specialistSpinnerAdapter);
-
+        Button btnSelectSpecialist = (Button) findViewById(R.id.Button_Select_Specialist);
+        btnSelectSpecialist.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                MultipleSpecialistSelectionFragment selectionDialog = new MultipleSpecialistSelectionFragment();
+                selectionDialog.show(getSupportFragmentManager(), "SelectSpecialistDialog");
+                specialization = selectionDialog.getSelectedItems();
+            }
+        });
 
     }
+
+
 
     public void onClick(View view) {
         switch (view.getId()) {
@@ -79,16 +79,9 @@ public class DoctorRegisterActivity extends AppCompatActivity {
 //        Spinner specializationSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorSpecialist);
 //        String specialization = specializationSpinner.getSelectedItem().toString();
 
-        HashSet<String> specialization = new HashSet<>();
-
-        // Specialist
-        for(CheckBox specialist: selectSpecialist){
-            if(specialist.isChecked()){
-                specialization.add((String)specialist.getText());
-                System.out.println("Selected: " + (String)specialist.getText());
-            }
+        for(String specialist: specialization){
+            System.out.println("Selected: " + specialist);
         }
-
 
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorGender);
         String gender = genderSpinner.getSelectedItem().toString();
