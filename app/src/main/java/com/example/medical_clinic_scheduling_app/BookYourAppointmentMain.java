@@ -22,16 +22,12 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         //Setting up ListView of Doctors
         ListView doctorView = (ListView) findViewById(R.id.doctorListView);
         ArrayList<String> doctors = new ArrayList<>();
-        doctors.add("test1");
-        doctors.add("test2");
-        doctors.add("test3");
-        doctors.add("test4");
-        doctors.add("test5");
-        doctors.add("test6");
-        doctors.add("test7");
-        doctors.add("test8");
-        doctors.add("test9");
-        doctors.add("test0");
+        //The format can be: "Dr. NAME\nGENDER\nSPECIALIZATION"
+        doctors.add("Dr. Eric Zhou\nMale\nCardiology");
+        doctors.add("Dr. Eric Zhou\nMale\nCardiology");
+        doctors.add("Dr. Eric Zhou\nMale\nCardiology");
+        doctors.add("Dr. Eric Zhou\nMale\nCardiology");
+        doctors.add("Dr. Eric Zhou\nMale\nCardiology");
 
         ArrayAdapter doctorAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, doctors);
         doctorView.setAdapter(doctorAdapter);
