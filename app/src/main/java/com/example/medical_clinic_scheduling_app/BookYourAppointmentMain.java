@@ -23,14 +23,20 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         //TODO: create listView
         ListView doctorView = (ListView) findViewById(R.id.doctorListView);
         ArrayList<String> doctors = new ArrayList<>(); //instead make it appointments
-        doctors .add("test1");
-        doctors .add("test2");
-        doctors .add("test3");
+        doctors.add("test1");
+        doctors.add("test2");
+        doctors.add("test3");
+        doctors.add("test4");
+        doctors.add("test5");
+        doctors.add("test6");
+        doctors.add("test7");
+        doctors.add("test8");
+        doctors.add("test9");
+        doctors.add("test0");
 
-        ArrayAdapter appointmentAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, doctors );
+        ArrayAdapter appointmentAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, doctors);
         doctorView.setAdapter(appointmentAdapter);
 
-        /*
         //Setting up listener for when item is clicked.
         doctorView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -38,6 +44,12 @@ public class BookYourAppointmentMain extends AppCompatActivity {
                 Toast.makeText(BookYourAppointmentMain.this, "Selected Doctors: " + doctors.get(i).toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        */
+    }
+
+    public void onFilterStartButtonClicked (View view){
+        //TODO: filter database w/ selected options and return result to main page
+
+        Intent intent = new Intent(this, AppointmentFilterOptions.class);
+        startActivity(intent);
     }
 }

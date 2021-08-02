@@ -14,6 +14,10 @@
             android:parentActivityName=".BookYourAppointmentMain"
             />
         <activity
+            android:name=".BookYourAppointmentMain"
+            android:parentActivityName=".LoginPageActivity"
+            />
+        <activity
             android:name=".PatientRegisterActivity"
             android:parentActivityName=".RegisterActivity"/>
         <activity
