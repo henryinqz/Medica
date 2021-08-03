@@ -3,43 +3,54 @@ package com.example.medical_clinic_scheduling_app;
 import androidx.annotation.NonNull;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class Appointment implements Comparable<Appointment> {
-    Date date;
-    Doctor doctor;
-    Patient patient;
-    String id;
+    private Date date;
+    private String doctorID, patientID, appointmentID;
 
     Appointment(Date date, Doctor doctor, Patient patient) {
         this.date = date;
-        this.doctor = doctor;
-        this.patient = patient;
+        this.doctorID = doctor.getID();
+        this.patientID = patient.getID();
 
-        this.id = hashCode() + ""; // TODO: Make a better ID?
+        this.appointmentID = hashCode() + ""; // TODO: Make a better ID?
     }
 
-    public String getID() {
-        return this.id;
+    // Getters/setters:
+    // Date
+    public Date getDate() {
+        return this.date;
     }
-    public void setID(String id) {
-        this.id = id;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    // doctorID
+    public String getDoctorID() {
+        return this.doctorID;
+    }
+    public void setDoctorID(String doctorID) {
+        this.doctorID = doctorID;
+    }
+
+    // patientID
+    public String getPatientID() {
+        return this.patientID;
+    }
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
+
+    // appointmentID
+    public String getAppointmentID() {
+        return this.appointmentID;
+    }
+    public void setAppointmentID(String appointmentID) {
+        this.appointmentID = appointmentID;
     }
 
     @Override
     public int compareTo(Appointment o) {
         return this.date.compareTo(o.date);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Appointment that = (Appointment) o;
-        return date.equals(that.date) && doctor.equals(that.doctor) && patient.equals(that.patient);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(date, doctor, patient);
     }
 }
