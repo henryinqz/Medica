@@ -1,20 +1,18 @@
 package com.example.medical_clinic_scheduling_app;
 
-import java.util.Objects;
-
 public class Person {
-    private String username, firstName, lastName, gender, type, uid;
+    private String username, firstName, lastName, gender, type, id;
 
     Person() {
     }
-    Person(String username, String firstname, String lastname, String gender, String type, String uid) {
+    Person(String username, String firstname, String lastname, String gender, String type, String id) {
         this.username = username;
         this.firstName = firstname;
         this.lastName = lastname;
         this.gender = gender;
 
         this.type = type;
-        this.uid = uid;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -52,11 +50,11 @@ public class Person {
         this.type = type;
     }
 
-    public String getUid() {
-        return uid;
+    public String getID() {
+        return this.id;
     }
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setID(String id) {
+        this.id = id;
     }
 
 //    @Override
