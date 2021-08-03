@@ -6,16 +6,16 @@ import java.util.Date;
 
 public class Patient extends Person implements Subject {
     private Date dateOfBirth;
-    private List<Integer> prevAppointmentIDs, upcomingAppointmentIDs, seenDoctorIDs;
+    private List<String> prevAppointmentIDs, upcomingAppointmentIDs, seenDoctorIDs;
     private List<Observer> observers;
 
     Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth, String uid) {
         super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT, uid);
         this.dateOfBirth = dateOfBirth;
 
-        this.prevAppointmentIDs = new ArrayList<Integer>();
-        this.upcomingAppointmentIDs = new ArrayList<Integer>();
-        this.seenDoctorIDs = new ArrayList<Integer>();
+        this.prevAppointmentIDs = new ArrayList<String>();
+        this.upcomingAppointmentIDs = new ArrayList<String>();
+        this.seenDoctorIDs = new ArrayList<String>();
         this.observers = new ArrayList<Observer>();
     }
 
