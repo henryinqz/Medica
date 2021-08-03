@@ -62,7 +62,7 @@ public class SelectAppointmentTimes extends AppCompatActivity {
 
     }
 
-    public void onClickedBookAppointmentButton(){
-        //TODO: go to main page showing new selected appointment
+    public void onClickedBookAppointmentButton(View view){
+        startActivity(new Intent(this, PatientAppointmentsView.class));
     }
 }
