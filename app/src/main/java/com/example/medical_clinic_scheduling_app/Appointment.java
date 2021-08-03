@@ -7,11 +7,21 @@ public class Appointment implements Comparable<Appointment> {
     Date date;
     Doctor doctor;
     Patient patient;
+    String id;
 
     Appointment(Date date, Doctor doctor, Patient patient) {
         this.date = date;
         this.doctor = doctor;
         this.patient = patient;
+
+        this.id = hashCode() + ""; // TODO: Make a better ID?
+    }
+
+    public String getID() {
+        return this.id;
+    }
+    public void setID(String id) {
+        this.id = id;
     }
 
     @Override

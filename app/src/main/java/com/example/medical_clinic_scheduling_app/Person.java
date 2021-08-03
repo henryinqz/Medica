@@ -1,19 +1,18 @@
 package com.example.medical_clinic_scheduling_app;
 
-import java.util.Objects;
-
 public class Person {
-    private String username, firstName, lastName, gender, type;
+    private String username, firstName, lastName, gender, type, id;
 
     Person() {
     }
-    Person(String username, String firstname, String lastname, String gender, String type) {
+    Person(String username, String firstname, String lastname, String gender, String type, String id) {
         this.username = username;
         this.firstName = firstname;
         this.lastName = lastname;
         this.gender = gender;
 
         this.type = type;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -51,21 +50,27 @@ public class Person {
         this.type = type;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Person)) return false;
-        Person person = (Person) o;
-        return getUsername().equals(person.getUsername()) && getType().equals(person.getType());
+    public String getID() {
+        return this.id;
     }
-    @Override
-    public int hashCode() {
-        return Objects.hash(getUsername(), getType());
+    public void setID(String id) {
+        this.id = id;
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Person)) return false;
+//        Person person = (Person) o;
+//        return getUsername().equals(person.getUsername()) && getType().equals(person.getType());
+//    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(getUsername(), getType());
+//    }
 
     @Override
     public String toString(){
         return this.firstName + " " + this.lastName;
     }
-
 }

@@ -8,8 +8,8 @@ public class Doctor extends Person implements Observer {
     private List<String> specializations;
     private List<Integer> upcomingAppointmentIDs, seenPatientIDs;
 
-    Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations) {
-        super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR);
+    Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
+        super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR, uid);
 
         this.specializations = new ArrayList<String>(specializations);
         this.upcomingAppointmentIDs = new ArrayList<Integer>();
@@ -28,14 +28,14 @@ public class Doctor extends Person implements Observer {
     public List<Integer> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
-    public void addUpcomingAppointment(Appointment upcomingAppt) {
+    private void addUpcomingAppointment(Appointment upcomingAppt) {
         this.upcomingAppointmentIDs.add(upcomingAppt.hashCode());
     }
     // seenPatientIDs
     public List<Integer> getSeenPatientIDs() {
         return this.seenPatientIDs;
     }
-    public void addSeenPatient(Patient patient) { // TODO: Maybe private & only accessed by observers after appointment passes?
+    private void addSeenPatient(Patient patient) { // TODO: Accessed by observers after appointment passes?
         this.seenPatientIDs.add(patient.hashCode());
     }
 

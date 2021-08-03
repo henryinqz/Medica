@@ -9,8 +9,8 @@ public class Patient extends Person implements Subject {
     private List<Integer> prevAppointmentIDs, upcomingAppointmentIDs, seenDoctorIDs;
     private List<Observer> observers;
 
-    Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth) {
-        super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT);
+    Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth, String uid) {
+        super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT, uid);
         this.dateOfBirth = dateOfBirth;
 
         this.prevAppointmentIDs = new ArrayList<Integer>();
@@ -31,21 +31,21 @@ public class Patient extends Person implements Subject {
     public List<Integer> getPrevAppointmentIDs() {
         return this.prevAppointmentIDs;
     }
-    public void addPrevAppointment(Appointment prevAppt) {
+    private void addPrevAppointment(Appointment prevAppt) {
         this.prevAppointmentIDs.add(prevAppt.hashCode());
     }
     // upcomingAppointmentIDs
     public List<Integer> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
-    public void addUpcomingAppointment(Appointment upcomingAppt) {
+    private void addUpcomingAppointment(Appointment upcomingAppt) {
         this.upcomingAppointmentIDs.add(upcomingAppt.hashCode());
     }
     // seenDoctorIDs
     public List<Integer> getSeenDoctorIDs() {
         return seenDoctorIDs;
     }
-    public void addSeenDoctor(Doctor doctor) { // TODO: Maybe private & only accessed by observers after appointment passes?
+    private void addSeenDoctor(Doctor doctor) { // TODO: Accessed by observers after appointment passes?
         this.seenDoctorIDs.add(doctor.hashCode());
     }
     // TODO: observers (? Not sure if this should be sent to Firebase)
@@ -54,7 +54,8 @@ public class Patient extends Person implements Subject {
 
     public void bookAppointment(Appointment appt) {
         attach(appt.doctor);
-        this.upcomingAppointmentIDs.add(appt.hashCode());
+//        this.upcomingAppointmentIDs.add(appt.hashCode());
+        addUpcomingAppointment(appt);
         notifyBooking(appt);
     }
 
