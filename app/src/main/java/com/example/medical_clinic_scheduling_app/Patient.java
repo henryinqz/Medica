@@ -64,7 +64,7 @@ public class Patient extends Person implements Subject {
         observers.add(o);
     }
     @Override
-    public void dettach(Observer o) {
+    public void detach(Observer o) {
         observers.remove(o);
     }
     @Override
