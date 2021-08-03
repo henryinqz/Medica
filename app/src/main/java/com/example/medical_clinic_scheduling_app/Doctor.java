@@ -44,6 +44,7 @@ public class Doctor extends Person implements Observer {
     public void updateBooking(Appointment appt) {
         this.upcomingAppointmentIDs.add(appt.hashCode());
     }
+
     @Override
     public void updatePassing(Appointment appt) {
         this.upcomingAppointmentIDs.remove(appt.hashCode());
