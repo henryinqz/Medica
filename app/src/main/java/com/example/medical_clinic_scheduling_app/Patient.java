@@ -92,7 +92,7 @@ public class Patient extends Person {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // ERROR
+                    // ERROR: Doctor w/ observerID does not exist
                 }
             });
         }
