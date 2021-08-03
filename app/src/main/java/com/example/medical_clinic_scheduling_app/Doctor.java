@@ -3,20 +3,18 @@ package com.example.medical_clinic_scheduling_app;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Doctor extends Person implements Observer {
     private List<String> specializations;
-    private List<Integer> upcomingAppointments;
-    private List<Integer> seenPatients;
+    private List<Integer> upcomingAppointmentIDs;
+    private List<Integer> seenPatientIDs;
 
     Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR);
 
         this.specializations = new ArrayList<String>(specializations);
-        this.upcomingAppointments = new ArrayList<Integer>();
-        this.seenPatients = new ArrayList<Integer>();
+        this.upcomingAppointmentIDs = new ArrayList<Integer>();
+        this.seenPatientIDs = new ArrayList<Integer>();
     }
 
     public List<String> getSpecializations() {
@@ -43,28 +41,19 @@ public class Doctor extends Person implements Observer {
 //        this.upcomingAppointments = upcomingAppointments;
 //    }
 
-    // TODO: Uncomment after specializations (ie. HashSet) is reimplemented
-//    public void addSpecialization(String specialization) {
-//        specializations.add(specialization);
-//    }
-//
-//    public void removeSpecialization(String specialization) {
-//        specializations.remove(specialization);
-//    }
-
     public void addSeenPatient(Patient patient) {
-        seenPatients.add(patient.hashCode());
+        seenPatientIDs.add(patient.hashCode());
     }
 
 
     @Override
     public void updateBooking(Appointment appointment) {
-        upcomingAppointments.add(appointment.hashCode());
+        upcomingAppointmentIDs.add(appointment.hashCode());
     }
 
     @Override
     public void updatePassing(Appointment appointment) {
-        upcomingAppointments.remove(appointment.hashCode());
-        seenPatients.add(appointment.patient.hashCode());
+        upcomingAppointmentIDs.remove(appointment.hashCode());
+        seenPatientIDs.add(appointment.patient.hashCode());
     }
 }
