@@ -50,4 +50,20 @@ public class Doctor extends Person implements Observer {
         this.upcomingAppointmentIDs.remove(appt.hashCode());
         this.seenPatientIDs.add(appt.patient.hashCode());
     }
+
+    @Override
+    public String toString(){
+        String doctorString = "Dr. " + this.getFirstName() + " " + this.getLastName();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append(doctorString);
+//        stringBuilder.append("\n");
+//        stringBuilder.append(this.getGender());
+//        stringBuilder.append("\n");
+//        for(String specialist: specializations){
+//            stringBuilder.append(specialist);
+//            stringBuilder.append("\n");
+//        }
+//        doctorString = stringBuilder.toString();
+        return  doctorString;
+    }
 }
