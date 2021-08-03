@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
+            android:name=".PatientAppointmentsView"
+            android:exported="true" />
+        <activity
             android:name=".DoctorViewAppointmentActivity"
             android:exported="true" />
         <activity
