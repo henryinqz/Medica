@@ -5,8 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Doctor extends Person {
-    private List<String> specializations;
-    private List<String> upcomingAppointmentIDs, seenPatientIDs;
+    private List<String> specializations, upcomingAppointmentIDs, seenPatientIDs;
 
     Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR, uid);

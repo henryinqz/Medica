@@ -1,5 +1,15 @@
 package com.example.medical_clinic_scheduling_app;
 
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -50,8 +60,6 @@ public class Patient extends Person {
     }
     // TODO: observers (? Not sure if this should be sent to Firebase)
 
-
-
     public void bookAppointment(Appointment appt) {
         attach(appt.getDoctorID());
 //        this.upcomingAppointmentIDs.add(appt.hashCode());
@@ -60,18 +68,33 @@ public class Patient extends Person {
     }
 
     // Observers
-
-    public void attach(String o) {
-        this.observers.add(o);
+    public void attach(String observerID) {
+        this.observers.add(observerID);
     }
 
-    public void detach(String o) {
-        this.observers.remove(o);
+    public void detach(String observerID) {
+        this.observers.remove(observerID);
     }
 
     public void notifyBooking(Appointment appt) {
-        for (String o : this.observers) {
-            o.updateBooking(appt.getAppointmentID());
+        for (String observerID : this.observers) {
+            // Access Firebase to get user w/ observerID
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+
+            ref.child(observerID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Doctor user = snapshot.getValue(Doctor.class);
+
+                    if (user != null) {
+                        user.updateBooking(appt.getAppointmentID());
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // ERROR
+                }
+            });
         }
     }
 }
