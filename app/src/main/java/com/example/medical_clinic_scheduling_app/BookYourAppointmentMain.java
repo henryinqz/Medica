@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 
 public class BookYourAppointmentMain extends AppCompatActivity {
@@ -43,15 +44,18 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         String specialization = getIntent().getStringExtra("specialization");
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        //If there are no FilterOptions
         ref.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     String type = child.child("type").getValue(String.class);
                     String userGender = child.child("gender").getValue(String.class);
+                    List<String> userSpecialization = (List<String>) child.child("specializations").getValue();
                     if (type.equals("DOCTOR") &&
-                            (gender == null || (gender != null && userGender.equals(gender)))) {
+                            (gender == null || (gender != null && userGender.equals(gender)))
+                            && (specialization == null ||
+                            (specialization != null && userSpecialization != null
+                                    && userSpecialization.contains(specialization)))) {
                         StringBuilder stringBuilder = new StringBuilder();
                         stringBuilder.append("Dr. ");
                         stringBuilder.append(child.child("firstName").getValue(String.class));
