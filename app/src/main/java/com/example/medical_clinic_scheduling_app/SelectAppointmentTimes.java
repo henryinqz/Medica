@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,10 +34,10 @@ public class SelectAppointmentTimes extends AppCompatActivity {
         //Setting up RadioGroup of Appointments
         RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
         ArrayList<String> appointments = new ArrayList<>();
-        appointments.add("Tuesday July 27, 2021\n12:00a.m - 1:00p.m");
-        appointments.add("Tuesday July 27, 2021\n1:00p.m - 2:00p.m");
-        appointments.add("Tuesday July 27, 2021\n2:00p.m - 3:00p.m");
-        appointments.add("Tuesday July 27, 2021\n3:00p.m - 4:00p.m");
+        appointments.add("Date: Tuesday July 27, 2021\nTime: 12:00a.m - 1:00p.m");
+        appointments.add("Date: Tuesday July 27, 2021\nTime: 1:00p.m - 2:00p.m");
+        appointments.add("Date: Tuesday July 27, 2021\nTime: 2:00p.m - 3:00p.m");
+        appointments.add("Date: Tuesday July 27, 2021\nTime: 3:00p.m - 4:00p.m");
 
         //Adding appointments to RadioGroup
         int i = 0;

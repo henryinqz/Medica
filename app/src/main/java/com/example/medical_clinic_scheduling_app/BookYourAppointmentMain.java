@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Locale;
 
 public class BookYourAppointmentMain extends AppCompatActivity {
@@ -37,13 +38,18 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         //The format can be: "Dr. NAME\nGENDER\nSPECIALIZATION"
 //        doctors.add("Dr. Eric Zhou\nMale\nCardiology");
 
+        //Getting filter options
+        String gender = getIntent().getStringExtra("gender"); //null if DNE
+        String specialization = getIntent().getStringExtra("specialization");
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        //If there are no FilterOptions
         ref.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot child: snapshot.getChildren()){
+                for (DataSnapshot child : snapshot.getChildren()) {
                     String type = child.child("type").getValue(String.class);
-                    if(type.equals("DOCTOR")){
+                    if (type.equals("DOCTOR")) {
                         StringBuilder stringBuilder = new StringBuilder();
                         stringBuilder.append("Dr. ");
                         stringBuilder.append(child.child("firstName").getValue(String.class));
@@ -53,7 +59,7 @@ public class BookYourAppointmentMain extends AppCompatActivity {
                         stringBuilder.append(child.child("gender").getValue(String.class));
                         stringBuilder.append("\n");
                         Iterable<DataSnapshot> specializations = child.child("specializations").getChildren();
-                        for(DataSnapshot specialist: specializations){
+                        for (DataSnapshot specialist : specializations) {
                             stringBuilder.append(specialist.getValue(String.class));
                             stringBuilder.append("\n");
                         }
