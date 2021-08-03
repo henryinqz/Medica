@@ -28,14 +28,14 @@ public class Doctor extends Person implements Observer {
     public List<Integer> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
-    public void addUpcomingAppointment(Appointment upcomingAppt) {
+    private void addUpcomingAppointment(Appointment upcomingAppt) {
         this.upcomingAppointmentIDs.add(upcomingAppt.hashCode());
     }
     // seenPatientIDs
     public List<Integer> getSeenPatientIDs() {
         return this.seenPatientIDs;
     }
-    public void addSeenPatient(Patient patient) { // TODO: Maybe private & only accessed by observers after appointment passes?
+    private void addSeenPatient(Patient patient) { // TODO: Accessed by observers after appointment passes?
         this.seenPatientIDs.add(patient.hashCode());
     }
 
