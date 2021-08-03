@@ -2,7 +2,9 @@ package com.example.medical_clinic_scheduling_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -26,5 +28,10 @@ public class PatientAppointmentsView extends AppCompatActivity {
 
         ArrayAdapter appointmentAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, appointments);
         appointmentsView.setAdapter(appointmentAdapter);
+    }
+
+    public void onBookAppBtnClicked (View view){
+        Intent intent = new Intent(this, BookYourAppointmentMain.class);
+        startActivity(intent);
     }
 }
