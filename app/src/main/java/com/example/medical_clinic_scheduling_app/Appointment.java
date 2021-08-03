@@ -2,7 +2,7 @@ package com.example.medical_clinic_scheduling_app;
 
 import java.util.Date;
 
-public class Appointment implements Comparable<Appointment> {
+public class Appointment {
     private Date date;
     private String doctorID, patientID, appointmentID;
 
@@ -45,10 +45,5 @@ public class Appointment implements Comparable<Appointment> {
     }
     public void setAppointmentID(String appointmentID) {
         this.appointmentID = appointmentID;
-    }
-
-    @Override
-    public int compareTo(Appointment o) {
-        return this.date.compareTo(o.date);
     }
 }

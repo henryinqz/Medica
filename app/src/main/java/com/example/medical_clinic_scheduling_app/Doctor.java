@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Doctor extends Person implements Observer {
     private List<String> specializations;
-    private List<Integer> upcomingAppointmentIDs, seenPatientIDs;
+    private List<String> upcomingAppointmentIDs, seenPatientIDs;
 
     Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR, uid);
 
         this.specializations = new ArrayList<String>(specializations);
-        this.upcomingAppointmentIDs = new ArrayList<Integer>();
-        this.seenPatientIDs = new ArrayList<Integer>();
+        this.upcomingAppointmentIDs = new ArrayList<String>();
+        this.seenPatientIDs = new ArrayList<String>();
     }
 
     // Getters/setters:
@@ -25,28 +25,29 @@ public class Doctor extends Person implements Observer {
         this.specializations = specializations;
     }
     // upcomingAppointmentIDs
-    public List<Integer> getUpcomingAppointmentIDs() {
+    public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
     private void addUpcomingAppointment(Appointment upcomingAppt) {
-        this.upcomingAppointmentIDs.add(upcomingAppt.hashCode());
+        this.upcomingAppointmentIDs.add(upcomingAppt.getAppointmentID());
     }
     // seenPatientIDs
-    public List<Integer> getSeenPatientIDs() {
+    public List<String> getSeenPatientIDs() {
         return this.seenPatientIDs;
     }
+
     private void addSeenPatient(Patient patient) { // TODO: Accessed by observers after appointment passes?
-        this.seenPatientIDs.add(patient.hashCode());
+        this.seenPatientIDs.add(patient.getID());
     }
 
 
     @Override
     public void updateBooking(Appointment appt) {
-        this.upcomingAppointmentIDs.add(appt.hashCode());
+        this.upcomingAppointmentIDs.add(appt.getAppointmentID());
     }
     @Override
     public void updatePassing(Appointment appt) {
         this.upcomingAppointmentIDs.remove(appt.hashCode());
-        this.seenPatientIDs.add(appt.patient.hashCode());
+        this.seenPatientIDs.add(appt.getPatientID());
     }
 }

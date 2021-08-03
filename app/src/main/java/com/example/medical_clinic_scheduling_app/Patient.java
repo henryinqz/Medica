@@ -6,16 +6,16 @@ import java.util.Date;
 
 public class Patient extends Person implements Subject {
     private Date dateOfBirth;
-    private List<Integer> prevAppointmentIDs, upcomingAppointmentIDs, seenDoctorIDs;
+    private List<String> prevAppointmentIDs, upcomingAppointmentIDs, seenDoctorIDs;
     private List<Observer> observers;
 
     Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth, String uid) {
         super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT, uid);
         this.dateOfBirth = dateOfBirth;
 
-        this.prevAppointmentIDs = new ArrayList<Integer>();
-        this.upcomingAppointmentIDs = new ArrayList<Integer>();
-        this.seenDoctorIDs = new ArrayList<Integer>();
+        this.prevAppointmentIDs = new ArrayList<String>();
+        this.upcomingAppointmentIDs = new ArrayList<String>();
+        this.seenDoctorIDs = new ArrayList<String>();
         this.observers = new ArrayList<Observer>();
     }
 
@@ -28,32 +28,32 @@ public class Patient extends Person implements Subject {
         this.dateOfBirth = dateOfBirth;
     }
     // prevAppointmentIDs
-    public List<Integer> getPrevAppointmentIDs() {
+    public List<String> getPrevAppointmentIDs() {
         return this.prevAppointmentIDs;
     }
     private void addPrevAppointment(Appointment prevAppt) {
-        this.prevAppointmentIDs.add(prevAppt.hashCode());
+        this.prevAppointmentIDs.add(prevAppt.getAppointmentID());
     }
     // upcomingAppointmentIDs
-    public List<Integer> getUpcomingAppointmentIDs() {
+    public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
     private void addUpcomingAppointment(Appointment upcomingAppt) {
-        this.upcomingAppointmentIDs.add(upcomingAppt.hashCode());
+        this.upcomingAppointmentIDs.add(upcomingAppt.getAppointmentID());
     }
     // seenDoctorIDs
-    public List<Integer> getSeenDoctorIDs() {
+    public List<String> getSeenDoctorIDs() {
         return seenDoctorIDs;
     }
     private void addSeenDoctor(Doctor doctor) { // TODO: Accessed by observers after appointment passes?
-        this.seenDoctorIDs.add(doctor.hashCode());
+        this.seenDoctorIDs.add(doctor.getID());
     }
     // TODO: observers (? Not sure if this should be sent to Firebase)
 
 
 
     public void bookAppointment(Appointment appt) {
-        attach(appt.doctor);
+        attach(appt.getDoctorID());
 //        this.upcomingAppointmentIDs.add(appt.hashCode());
         addUpcomingAppointment(appt);
         notifyBooking(appt);
