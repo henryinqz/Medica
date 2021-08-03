@@ -68,4 +68,9 @@ public class Person {
 //    public int hashCode() {
 //        return Objects.hash(getUsername(), getType());
 //    }
+
+    @Override
+    public String toString(){
+        return this.firstName + " " + this.lastName;
+    }
 }

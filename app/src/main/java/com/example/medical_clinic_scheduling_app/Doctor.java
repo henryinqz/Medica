@@ -1,6 +1,10 @@
 package com.example.medical_clinic_scheduling_app;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -45,5 +49,21 @@ public class Doctor extends Person {
     public void updatePassing(Appointment appt) {
         this.upcomingAppointmentIDs.remove(appt.hashCode());
         this.seenPatientIDs.add(appt.getPatientID());
+    }
+
+    @Override
+    public String toString(){
+        String doctorString = "Dr. " + this.getFirstName() + " " + this.getLastName();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append(doctorString);
+//        stringBuilder.append("\n");
+//        stringBuilder.append(this.getGender());
+//        stringBuilder.append("\n");
+//        for(String specialist: specializations){
+//            stringBuilder.append(specialist);
+//            stringBuilder.append("\n");
+//        }
+//        doctorString = stringBuilder.toString();
+        return  doctorString;
     }
 }
