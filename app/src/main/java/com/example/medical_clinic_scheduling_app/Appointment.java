@@ -3,7 +3,7 @@ package com.example.medical_clinic_scheduling_app;
 import java.util.Date;
 import java.util.Objects;
 
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
     private Date date;
     private String doctorID, patientID, appointmentID;
 
@@ -59,5 +59,10 @@ public class Appointment {
     @Override
     public int hashCode() {
         return Objects.hash(getDate(), getDoctorID(), getPatientID());
+    }
+
+    @Override
+    public int compareTo(Appointment o) {
+        return this.date.compareTo(o.date);
     }
 }

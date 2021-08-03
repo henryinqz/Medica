@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-public class Patient extends Person implements Subject {
+public class Patient extends Person {
     private Date dateOfBirth;
     private List<String> prevAppointmentIDs, upcomingAppointmentIDs, seenDoctorIDs;
-    private List<Observer> observers;
+    private List<String> observers;
 
     Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth, String uid) {
         super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT, uid);
@@ -16,7 +16,7 @@ public class Patient extends Person implements Subject {
         this.prevAppointmentIDs = new ArrayList<String>();
         this.upcomingAppointmentIDs = new ArrayList<String>();
         this.seenDoctorIDs = new ArrayList<String>();
-        this.observers = new ArrayList<Observer>();
+        this.observers = new ArrayList<String>();
     }
 
     // Getters/setters:
@@ -60,18 +60,18 @@ public class Patient extends Person implements Subject {
     }
 
     // Observers
-    @Override
-    public void attach(Observer o) {
+
+    public void attach(String o) {
         this.observers.add(o);
     }
-    @Override
-    public void detach(Observer o) {
+
+    public void detach(String o) {
         this.observers.remove(o);
     }
-    @Override
+
     public void notifyBooking(Appointment appt) {
-        for (Observer o : this.observers) {
-            o.updateBooking(appt);
+        for (String o : this.observers) {
+            o.updateBooking(appt.getAppointmentID());
         }
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class Doctor extends Person implements Observer {
+public class Doctor extends Person {
     private List<String> specializations;
     private List<String> upcomingAppointmentIDs, seenPatientIDs;
 
@@ -39,13 +39,10 @@ public class Doctor extends Person implements Observer {
     private void addSeenPatient(Patient patient) { // TODO: Accessed by observers after appointment passes?
         this.seenPatientIDs.add(patient.getID());
     }
-
-
-    @Override
-    public void updateBooking(Appointment appt) {
-        this.upcomingAppointmentIDs.add(appt.getAppointmentID());
+    public void updateBooking(String appt) {
+        this.upcomingAppointmentIDs.add(appt);
     }
-    @Override
+
     public void updatePassing(Appointment appt) {
         this.upcomingAppointmentIDs.remove(appt.hashCode());
         this.seenPatientIDs.add(appt.getPatientID());
