@@ -7,29 +7,23 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Doctor extends Person implements Observer {
+    private List<String> specializations;
     private List<Integer> upcomingAppointments;
-//    private List<String> specializations;
-    private String specialization;
     private List<Integer> seenPatients;
 
-    Doctor(){
-
-    }
-
     Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations) {
-    //Doctor(String username, String firstName, String lastName, String gender, String specialization) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR);
-        this.specialization = specialization; // TODO: Replace with HashSet (ie. able to have multiple specializations)
+
+        this.specializations = new ArrayList<String>(specializations);
         this.upcomingAppointments = new ArrayList<Integer>();
         this.seenPatients = new ArrayList<Integer>();
     }
 
-    public String getSpecialization() {
-        return specialization;
+    public List<String> getSpecializations() {
+        return specializations;
     }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+    public void setSpecializations(List<String> specializations) {
+        this.specializations = specializations;
     }
 
     // TODO: Fix crashes when these Set<> getters/setters are uncommented

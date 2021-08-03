@@ -2,13 +2,11 @@ package com.example.medical_clinic_scheduling_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -19,13 +17,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 public class DoctorRegisterActivity extends AppCompatActivity {
-
-    private HashSet<String> specialization;
+    private HashSet<String> specializations = new HashSet<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +34,18 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderSpinnerAdapter);
 
+        // Specialist dialog list
         Button btnSelectSpecialist = (Button) findViewById(R.id.Button_Select_Specialist);
         btnSelectSpecialist.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 MultipleSpecialistSelectionFragment selectionDialog = new MultipleSpecialistSelectionFragment();
                 selectionDialog.show(getSupportFragmentManager(), "SelectSpecialistDialog");
-                specialization = selectionDialog.getSelectedItems();
+                specializations = selectionDialog.getSelectedItems();
             }
         });
 
     }
-
 
 
     public void onClick(View view) {
@@ -79,9 +74,9 @@ public class DoctorRegisterActivity extends AppCompatActivity {
 //        Spinner specializationSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorSpecialist);
 //        String specialization = specializationSpinner.getSelectedItem().toString();
 
-        for(String specialist: specialization){
-            System.out.println("Selected: " + specialist);
-        }
+//        for(String specialist: specializations){
+//            System.out.println("Selected: " + specialist);
+//        }
 
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorGender);
         String gender = genderSpinner.getSelectedItem().toString();
@@ -110,7 +105,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Person user = new Doctor(username, firstName, lastName, gender, specialization);
+                    Person user = new Doctor(username, firstName, lastName, gender, specializations);
 
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

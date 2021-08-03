@@ -14,13 +14,10 @@ public class Patient extends Person implements Subject {
     private List<Integer> seenDoctors;
     private List<Observer> observers;
 
-    Patient() {
-
-    }
-
     Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth) {
         super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT);
         this.dateOfBirth = dateOfBirth;
+
         this.previousAppointments = new ArrayList<Integer>();
         this.upcomingAppointments = new ArrayList<Integer>();
         this.seenDoctors = new ArrayList<Integer>();
