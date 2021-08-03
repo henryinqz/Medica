@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -51,6 +54,22 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         //Getting filter options
         String gender = getIntent().getStringExtra("gender"); //null if DNE
         ArrayList<String> specialization = getIntent().getStringArrayListExtra("specialization");
+
+        //Updating filter textView
+        String genderText;
+        if (gender == null){
+            genderText = "";
+        } else { genderText=gender; }
+        StringBuilder specializationText = new StringBuilder();
+        if (specialization == null) { specializationText.append(""); }
+        else {
+            for (String s : specialization) {
+                specializationText.append(s + "\n");
+            }
+
+        }
+        TextView filterOptions = (TextView) findViewById(R.id.filterOptionsSelected);
+        filterOptions.setText(genderText + "\n" + specializationText.toString());
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child("Users").addValueEventListener(new ValueEventListener() {
