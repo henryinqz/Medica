@@ -3,6 +3,7 @@ package com.example.medical_clinic_scheduling_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -75,9 +76,11 @@ public class LoginPageActivity extends AppCompatActivity {
                                 if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
                                     Toast.makeText(getApplicationContext(), "Hello doctor " + user.getUsername(), Toast.LENGTH_LONG).show();
                                     // TODO: Redirect to doctor page
+                                    startActivity(new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class));
                                 } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
                                     Toast.makeText(getApplicationContext(), "Hello patient " + user.getUsername(), Toast.LENGTH_LONG).show();
                                     // TODO: Redirect to patient page
+                                    startActivity(new Intent(getApplicationContext(),PatientAppointmentsView.class));
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Error: user has no type", Toast.LENGTH_LONG).show();
                                 }
