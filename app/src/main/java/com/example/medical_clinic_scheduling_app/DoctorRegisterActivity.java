@@ -47,7 +47,6 @@ public class DoctorRegisterActivity extends AppCompatActivity {
 
     }
 
-
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnRegisterDoctorSubmit: // Submit button
@@ -71,18 +70,11 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         EditText passwordEditText = (EditText) findViewById(R.id.editTextRegisterDoctorPassword);
         String password = passwordEditText.getText().toString().trim();
 
-//        Spinner specializationSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorSpecialist);
-//        String specialization = specializationSpinner.getSelectedItem().toString();
-
-//        for(String specialist: specializations){
-//            System.out.println("Selected: " + specialist);
-//        }
-
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinnerRegisterDoctorGender);
         String gender = genderSpinner.getSelectedItem().toString();
 
         // Errors
-        // TODO: Gender, specialization error checks (?)
+        // TODO: Gender, specialization error checks (?) (Shouldn't be errors but maybe check if the strings match something expected input?)
         if(firstName.isEmpty()) {
             firstNameEditText.setError("Empty first name");
             return;
@@ -110,16 +102,16 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) { // Created user
-                                Toast.makeText(getApplicationContext(), "Created doctor user", Toast.LENGTH_LONG).show();
-                                // TODO: Login & go to next intent
-                            } else { // Failed to create user
-                                Toast.makeText(getApplicationContext(), "Failed to create doctor", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) { // Created user
+                                        Toast.makeText(getApplicationContext(), "Created doctor user", Toast.LENGTH_LONG).show();
+                                        // TODO: Login & go to next intent
+                                    } else { // Failed to create user
+                                        Toast.makeText(getApplicationContext(), "Failed to create doctor", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
                 } else { // Failed to create user
                     Toast.makeText(getApplicationContext(), "Failed to create doctor", Toast.LENGTH_LONG).show();
                 }

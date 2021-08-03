@@ -30,7 +30,7 @@ public class DatePickerFragment extends DialogFragment {
 
         this.datePickerDialog = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)getActivity(), year, month, day);
 
-        // If the respective parameter is -1, there no minDate/maxDate will be set
+        // If the respective parameter is -1, then no minDate/maxDate will be set
         if (minDate >= 0)
             setMinDate(minDate);
         else if (maxDate >= 0)

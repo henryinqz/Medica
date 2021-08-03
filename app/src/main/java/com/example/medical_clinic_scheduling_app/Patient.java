@@ -22,21 +22,21 @@ public class Patient extends Person implements Subject {
     // Getters/setters:
     // dateOfBirth
     public Date getDateOfBirth() {
-        return dateOfBirth;
+        return this.dateOfBirth;
     }
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
     // prevAppointmentIDs
     public List<Integer> getPrevAppointmentIDs() {
-        return prevAppointmentIDs;
+        return this.prevAppointmentIDs;
     }
     public void addPrevAppointment(Appointment prevAppt) {
         this.prevAppointmentIDs.add(prevAppt.hashCode());
     }
     // upcomingAppointmentIDs
     public List<Integer> getUpcomingAppointmentIDs() {
-        return upcomingAppointmentIDs;
+        return this.upcomingAppointmentIDs;
     }
     public void addUpcomingAppointment(Appointment upcomingAppt) {
         this.upcomingAppointmentIDs.add(upcomingAppt.hashCode());
@@ -52,25 +52,25 @@ public class Patient extends Person implements Subject {
 
 
 
-    public void bookAppointment(Appointment appointment) {
-        attach(appointment.doctor);
-        upcomingAppointmentIDs.add(appointment.hashCode());
-        notifyBooking(appointment);
+    public void bookAppointment(Appointment appt) {
+        attach(appt.doctor);
+        this.upcomingAppointmentIDs.add(appt.hashCode());
+        notifyBooking(appt);
     }
 
     // Observers
     @Override
     public void attach(Observer o) {
-        observers.add(o);
+        this.observers.add(o);
     }
     @Override
     public void detach(Observer o) {
-        observers.remove(o);
+        this.observers.remove(o);
     }
     @Override
-    public void notifyBooking(Appointment appointment) {
-        for (Observer o : observers) {
-            o.updateBooking(appointment);
+    public void notifyBooking(Appointment appt) {
+        for (Observer o : this.observers) {
+            o.updateBooking(appt);
         }
     }
 }

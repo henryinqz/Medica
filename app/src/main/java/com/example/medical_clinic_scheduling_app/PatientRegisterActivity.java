@@ -89,13 +89,11 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         EditText passwordEditText = (EditText) findViewById(R.id.editTextRegisterPatientPassword);
         String password = passwordEditText.getText().toString().trim();
 
-        // TODO: Date
-
         Spinner genderSpinner = (Spinner) findViewById(R.id.spinnerRegisterPatientGender);
         String gender = genderSpinner.getSelectedItem().toString();
 
         // Errors
-        // TODO: Gender, date error checks (?)
+        // TODO: Gender checks (?)  (Shouldn't be errors but maybe check if the strings match something expected input?)
         if(firstName.isEmpty()) {
             firstNameEditText.setError("Empty first name");
             return;
@@ -127,16 +125,16 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) { // Created user
-                                Toast.makeText(getApplicationContext(), "Created patient user", Toast.LENGTH_LONG).show();
-                                // TODO: Login & go to next intent
-                            } else { // Failed to create user
-                                Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) { // Created user
+                                        Toast.makeText(getApplicationContext(), "Created patient user", Toast.LENGTH_LONG).show();
+                                        // TODO: Login & go to next intent
+                                    } else { // Failed to create user
+                                        Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
                 } else { // Failed to create user
                     Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
                 }

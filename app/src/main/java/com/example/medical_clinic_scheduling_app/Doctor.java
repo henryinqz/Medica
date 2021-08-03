@@ -19,21 +19,21 @@ public class Doctor extends Person implements Observer {
     // Getters/setters:
     // specializations
     public List<String> getSpecializations() {
-        return specializations;
+        return this.specializations;
     }
     public void setSpecializations(List<String> specializations) {
         this.specializations = specializations;
     }
     // upcomingAppointmentIDs
     public List<Integer> getUpcomingAppointmentIDs() {
-        return upcomingAppointmentIDs;
+        return this.upcomingAppointmentIDs;
     }
     public void addUpcomingAppointment(Appointment upcomingAppt) {
         this.upcomingAppointmentIDs.add(upcomingAppt.hashCode());
     }
     // seenPatientIDs
     public List<Integer> getSeenPatientIDs() {
-        return seenPatientIDs;
+        return this.seenPatientIDs;
     }
     public void addSeenPatient(Patient patient) { // TODO: Maybe private & only accessed by observers after appointment passes?
         this.seenPatientIDs.add(patient.hashCode());
@@ -41,12 +41,12 @@ public class Doctor extends Person implements Observer {
 
 
     @Override
-    public void updateBooking(Appointment appointment) {
-        upcomingAppointmentIDs.add(appointment.hashCode());
+    public void updateBooking(Appointment appt) {
+        this.upcomingAppointmentIDs.add(appt.hashCode());
     }
     @Override
-    public void updatePassing(Appointment appointment) {
-        upcomingAppointmentIDs.remove(appointment.hashCode());
-        seenPatientIDs.add(appointment.patient.hashCode());
+    public void updatePassing(Appointment appt) {
+        this.upcomingAppointmentIDs.remove(appt.hashCode());
+        this.seenPatientIDs.add(appt.patient.hashCode());
     }
 }

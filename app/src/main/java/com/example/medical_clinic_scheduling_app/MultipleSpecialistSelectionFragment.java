@@ -11,7 +11,6 @@ import androidx.fragment.app.DialogFragment;
 import java.util.HashSet;
 
 public class MultipleSpecialistSelectionFragment extends DialogFragment {
-
     private HashSet<String> selectedItems = new HashSet<String>();
 
     @NonNull
@@ -19,10 +18,10 @@ public class MultipleSpecialistSelectionFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         String[] selectionList = getActivity().getResources().getStringArray(R.array.SelectSpecialist);
-        dialogBuilder.setTitle("Please Select from the Following Specialists");
+        dialogBuilder.setTitle("Select your specializations");
         dialogBuilder.setMultiChoiceItems(selectionList, null, new DialogInterface.OnMultiChoiceClickListener(){
             @Override
-            public void onClick(DialogInterface dialogInterface, int a, boolean b){
+            public void onClick(DialogInterface dialogInterface, int a, boolean b){ // TODO: Rename a, b? Not sure what they are
                 if(b) {
                     selectedItems.add(selectionList[a]);
                 }else{
