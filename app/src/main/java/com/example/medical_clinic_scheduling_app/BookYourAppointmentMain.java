@@ -21,7 +21,7 @@ public class BookYourAppointmentMain extends AppCompatActivity {
 
         //Setting up ListView of Doctors
         ListView doctorView = (ListView) findViewById(R.id.doctorListView);
-        ArrayList<String> doctors = new ArrayList<>();
+        ArrayList<String> doctors = new ArrayList<>(); //change to Doctor type & make toString() method.
         //The format can be: "Dr. NAME\nGENDER\nSPECIALIZATION"
         doctors.add("Dr. Eric Zhou\nMale\nCardiology");
         doctors.add("Dr. Eric Zhou\nMale\nCardiology");

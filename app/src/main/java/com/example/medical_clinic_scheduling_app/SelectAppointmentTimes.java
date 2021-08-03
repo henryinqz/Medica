@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -27,27 +29,36 @@ public class SelectAppointmentTimes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_appointment_times);
 
-        //Setting up ListView of Appointments
-        ListView appointmentView = (ListView) findViewById(R.id.appointmentListView);
+        //Setting up RadioGroup of Appointments
+        RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
         ArrayList<String> appointments = new ArrayList<>();
-        //Can choose different format
-        appointments.add("Tuesday, Aug 3 2021 @12-2pm");
-        appointments.add("Wednesday, Aug 4 2021 @1-3pm");
-        appointments.add("Thursday, Aug 5 2021 @4-5pm");
-        appointments.add("Friday, Aug 6 2021 @7-8pm");
-        appointments.add("Saturday, Aug 7 2021 @9-10am");
+        appointments.add("Tuesday July 27, 2021\n12:00a.m - 1:00p.m");
+        appointments.add("Tuesday July 27, 2021\n1:00p.m - 2:00p.m");
+        appointments.add("Tuesday July 27, 2021\n2:00p.m - 3:00p.m");
+        appointments.add("Tuesday July 27, 2021\n3:00p.m - 4:00p.m");
 
-        ArrayAdapter appointmentAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, appointments);
-        appointmentView.setAdapter(appointmentAdapter);
+        //Adding appointments to RadioGroup
+        int i = 0;
+        RadioButton appointment;
+        for (String s: appointments) {
+            appointment = new RadioButton(this);
+            appointment.setText(s);
+            appointmentGroup.addView(appointment);
+            appointment.setId(i);
+            i++;
+        }
 
-        //Setting up listener for when item is clicked.
-        appointmentView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //Setting up onCheckedChangeListener & showing selected appointment when clicked.
+        appointmentGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(SelectAppointmentTimes.this, "Selected Appointment: " + appointments.get(i).toString(), Toast.LENGTH_SHORT).show();
-//                selectedAppointment = new Appointment(sdf.parse(appointments.get(i)), ); TODO: Hook up the database to the page.
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton selected = (RadioButton) appointmentGroup.getChildAt(i);
+                Toast.makeText(getApplicationContext(),"Selected: " + selected.getText(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 
     public void onClickedBookAppointmentButton(){
