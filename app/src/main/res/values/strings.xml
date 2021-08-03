@@ -26,6 +26,12 @@
         <item>Female</item>
     </string-array>
 
+    <string-array name="FilterGender">
+        <item>Any</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
     <!--  Doctor Register Activity  -->
     <string-array name="SelectSpecialist">
         <item>Anatomical Pathology</item>
@@ -58,6 +64,7 @@
     <string name="BYA_filterByTitle">Filter Doctor By</string>
     <string name="BYA_filterOptionsNone">None</string>
     <string name="specialization">Specialization</string>
+    <string name="filter_specialist_button">Filter Specialist</string>
 
     <!-- SELECT APPOINTMENT TIMES STRINGS -->
     <string name="SAT_title">Doctor Availability Times</string>

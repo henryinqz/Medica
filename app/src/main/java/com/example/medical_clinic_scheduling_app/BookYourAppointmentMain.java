@@ -27,6 +27,15 @@ import java.util.Locale;
 
 public class BookYourAppointmentMain extends AppCompatActivity {
 
+    protected boolean checkSpecializations (List<String> a, List<String> b){
+        for (String s: b){
+            if (!a.contains(s)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +50,7 @@ public class BookYourAppointmentMain extends AppCompatActivity {
 
         //Getting filter options
         String gender = getIntent().getStringExtra("gender"); //null if DNE
-        String specialization = getIntent().getStringExtra("specialization");
+        ArrayList<String> specialization = getIntent().getStringArrayListExtra("specialization");
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child("Users").addValueEventListener(new ValueEventListener() {
@@ -51,11 +60,12 @@ public class BookYourAppointmentMain extends AppCompatActivity {
                     String type = child.child("type").getValue(String.class);
                     String userGender = child.child("gender").getValue(String.class);
                     List<String> userSpecialization = (List<String>) child.child("specializations").getValue();
+
                     if (type.equals("DOCTOR") &&
-                            (gender == null || (gender != null && userGender.equals(gender)))
+                            (gender == null || (gender != null && (userGender.equals(gender) || gender.equals("Any"))))
                             && (specialization == null ||
                             (specialization != null && userSpecialization != null
-                                    && userSpecialization.contains(specialization)))) {
+                                    && checkSpecializations(userSpecialization, specialization)))) {
                         StringBuilder stringBuilder = new StringBuilder();
                         stringBuilder.append("Dr. ");
                         stringBuilder.append(child.child("firstName").getValue(String.class));
