@@ -74,4 +74,5 @@ public class Patient extends Person implements Subject {
             o.updateBooking(appt);
         }
     }
+
 }
