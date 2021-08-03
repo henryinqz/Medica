@@ -1,5 +1,7 @@
 package com.example.medical_clinic_scheduling_app;
 
+import java.util.Objects;
+
 public class Person {
     private String username, firstName, lastName, gender, type;
 
@@ -47,5 +49,17 @@ public class Person {
     }
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return getUsername().equals(person.getUsername()) && getType().equals(person.getType());
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUsername(), getType());
     }
 }

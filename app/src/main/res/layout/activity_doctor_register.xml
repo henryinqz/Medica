@@ -82,16 +82,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRegisterDoctorGender" />
 
-    <Spinner
-        android:id="@+id/spinnerRegisterDoctorSpecialist"
-        android:layout_width="199dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterDoctorGender" />
-
     <TextView
         android:id="@+id/txtRegisterDoctorUsername"
         android:layout_width="wrap_content"
@@ -152,5 +142,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterDoctorPassword"
         app:layout_constraintVertical_bias="0.872" />
+
+    <Button
+        android:id="@+id/Button_Select_Specialist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:text="Select Specialist"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtRegisterDoctorSpecialist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtRegisterDoctorSpecialist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
