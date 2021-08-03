@@ -97,10 +97,11 @@ public class DoctorRegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Person user = new Doctor(username, firstName, lastName, gender, specializations);
+                    String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    Person user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
 
                     FirebaseDatabase.getInstance().getReference("Users")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .child(userUid)
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

@@ -9,8 +9,8 @@ public class Patient extends Person implements Subject {
     private List<Integer> prevAppointmentIDs, upcomingAppointmentIDs, seenDoctorIDs;
     private List<Observer> observers;
 
-    Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth) {
-        super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT);
+    Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth, String uid) {
+        super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT, uid);
         this.dateOfBirth = dateOfBirth;
 
         this.prevAppointmentIDs = new ArrayList<Integer>();

@@ -3,17 +3,18 @@ package com.example.medical_clinic_scheduling_app;
 import java.util.Objects;
 
 public class Person {
-    private String username, firstName, lastName, gender, type;
+    private String username, firstName, lastName, gender, type, uid;
 
     Person() {
     }
-    Person(String username, String firstname, String lastname, String gender, String type) {
+    Person(String username, String firstname, String lastname, String gender, String type, String uid) {
         this.username = username;
         this.firstName = firstname;
         this.lastName = lastname;
         this.gender = gender;
 
         this.type = type;
+        this.uid = uid;
     }
 
     public String getUsername() {
@@ -51,15 +52,22 @@ public class Person {
         this.type = type;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Person)) return false;
-        Person person = (Person) o;
-        return getUsername().equals(person.getUsername()) && getType().equals(person.getType());
+    public String getUid() {
+        return uid;
     }
-    @Override
-    public int hashCode() {
-        return Objects.hash(getUsername(), getType());
+    public void setUid(String uid) {
+        this.uid = uid;
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Person)) return false;
+//        Person person = (Person) o;
+//        return getUsername().equals(person.getUsername()) && getType().equals(person.getType());
+//    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(getUsername(), getType());
+//    }
 }
