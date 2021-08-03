@@ -45,6 +45,7 @@ public class SelectAppointmentTimes extends AppCompatActivity {
             appointment.setText(s);
             appointmentGroup.addView(appointment);
             appointment.setId(i);
+            appointment.setPadding(0,0,0,16);
             i++;
         }
 
