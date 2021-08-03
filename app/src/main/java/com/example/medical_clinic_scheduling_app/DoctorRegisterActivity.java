@@ -39,7 +39,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         btnSelectSpecialist.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                MultipleSpecialistSelectionFragment selectionDialog = new MultipleSpecialistSelectionFragment();
+                MultipleSelectionFragment selectionDialog = new MultipleSelectionFragment(getResources().getStringArray(R.array.SelectSpecialist), "Select your specializations");
                 selectionDialog.show(getSupportFragmentManager(), "SelectSpecialistDialog");
                 specializations = selectionDialog.getSelectedItems();
             }
