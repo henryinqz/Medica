@@ -49,7 +49,9 @@ public class BookYourAppointmentMain extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     String type = child.child("type").getValue(String.class);
-                    if (type.equals("DOCTOR")) {
+                    String userGender = child.child("gender").getValue(String.class);
+                    if (type.equals("DOCTOR") &&
+                            (gender == null || (gender != null && userGender.equals(gender)))) {
                         StringBuilder stringBuilder = new StringBuilder();
                         stringBuilder.append("Dr. ");
                         stringBuilder.append(child.child("firstName").getValue(String.class));
