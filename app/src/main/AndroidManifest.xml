@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
+            android:name=".PatientAppointmentsView"
+            android:parentActivityName=".LoginPageActivity"/>
+        <activity
             android:name=".DoctorViewAppointmentActivity"
             android:exported="true" />
         <activity
@@ -20,7 +23,7 @@
             android:parentActivityName=".BookYourAppointmentMain" />
         <activity
             android:name=".BookYourAppointmentMain"
-            android:parentActivityName=".LoginPageActivity" />
+            android:parentActivityName=".PatientAppointmentsView" />
         <activity
             android:name=".PatientRegisterActivity"
             android:label="@string/register_patient_title"
