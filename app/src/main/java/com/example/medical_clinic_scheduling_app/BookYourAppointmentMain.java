@@ -81,7 +81,7 @@ public class BookYourAppointmentMain extends AppCompatActivity {
                     List<String> userSpecialization = (List<String>) child.child("specializations").getValue();
 
                     if (type.equals("DOCTOR") &&
-                            (gender == null || (gender != null && (userGender.equals(gender) || gender.equals("Any"))))
+                            (gender == null || (gender != null && (userGender.equals(gender) || gender.equals("Any Gender"))))
                             && (specialization == null ||
                             (specialization != null && userSpecialization != null
                                     && checkSpecializations(userSpecialization, specialization)))) {
