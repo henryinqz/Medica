@@ -44,7 +44,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:text="@string/upcoming_appointments"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

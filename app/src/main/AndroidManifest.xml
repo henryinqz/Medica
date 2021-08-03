@@ -11,7 +11,7 @@
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
             android:name=".PatientAppointmentsView"
-            android:exported="true" />
+            android:parentActivityName=".LoginPageActivity"/>
         <activity
             android:name=".DoctorViewAppointmentActivity"
             android:exported="true" />
@@ -23,7 +23,7 @@
             android:parentActivityName=".BookYourAppointmentMain" />
         <activity
             android:name=".BookYourAppointmentMain"
-            android:parentActivityName=".LoginPageActivity" />
+            android:parentActivityName=".PatientAppointmentsView" />
         <activity
             android:name=".PatientRegisterActivity"
             android:label="@string/register_patient_title"
