@@ -6,4 +6,5 @@ public class Constants {
 
     public static final String FIREBASE_PATH_USERS = "Users";
     public static final String FIREBASE_PATH_APPOINTMENTS = "Appointments";
+    public static final String FIREBASE_PATH_APPOINTMENTS_PATIENT_ID = "patientID";
 }

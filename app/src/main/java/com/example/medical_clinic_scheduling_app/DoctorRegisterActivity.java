@@ -75,7 +75,6 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         String gender = genderSpinner.getSelectedItem().toString();
 
         // Errors
-        // TODO: Gender, specialization error checks (?) (Shouldn't be errors but maybe check if the strings match something expected input?)
         if(firstName.isEmpty()) {
             firstNameEditText.setError("Empty first name");
             return;
@@ -99,25 +98,9 @@ public class DoctorRegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                    Person user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
                     Doctor user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
 
-//                    // TEMP: Add misc appointments to Firebase
-//                    Appointment appt = new Appointment(new Date(System.currentTimeMillis()), (Doctor) user, null);
-//
-//                    FirebaseDatabase.getInstance().getReference("Appointments")
-//                            .child(appt.getAppointmentID())
-//                            .setValue(appt).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) { // Added appointment
-//                                user.addAvailableAppointment(appt);
-//                            } else { // Failed to add appointment
-//                                Toast.makeText(getApplicationContext(), "Failed to create doctor appt", Toast.LENGTH_LONG).show();
-//                            }
-//                        }
-//                    });
-
+                    Appointment.generateAvailableAppointment(new Date(System.currentTimeMillis()), user); // TODO: Broken (in method)
 
                     FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                             .child(userUid)

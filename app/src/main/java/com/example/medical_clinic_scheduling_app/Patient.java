@@ -41,27 +41,30 @@ public class Patient extends Person {
     public List<String> getPrevAppointmentIDs() {
         return this.prevAppointmentIDs;
     }
-    private void addPrevAppointment(Appointment prevAppt) {
+    public void addPrevAppointment(Appointment prevAppt) {
         this.prevAppointmentIDs.add(prevAppt.getAppointmentID());
     }
     // upcomingAppointmentIDs
     public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
-    private void addUpcomingAppointment(Appointment upcomingAppt) {
-        this.upcomingAppointmentIDs.add(upcomingAppt.getAppointmentID());
+    public void addUpcomingAppointment(Appointment upcomingAppt) {
+        addUpcomingAppointment(upcomingAppt.getAppointmentID());
     }
-    private void removeUpcomingAppointment(Appointment upcomingAppt) {
+    public void addUpcomingAppointment(String upcomingApptID) {
+        this.upcomingAppointmentIDs.add(upcomingApptID);
+    }
+    public void removeUpcomingAppointment(Appointment upcomingAppt) {
         this.upcomingAppointmentIDs.remove(upcomingAppt.getAppointmentID());
     }
     // seenDoctorIDs
     public List<String> getSeenDoctorIDs() {
         return seenDoctorIDs;
     }
-    private void addSeenDoctor(Doctor doctor) {
+    public void addSeenDoctor(Doctor doctor) {
         this.seenDoctorIDs.add(doctor.getID());
     }
-    private void addSeenDoctor(String doctorID) {
+    public void addSeenDoctor(String doctorID) {
         this.seenDoctorIDs.add(doctorID);
     }
 

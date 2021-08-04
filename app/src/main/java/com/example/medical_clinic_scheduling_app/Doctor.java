@@ -23,34 +23,50 @@ public class Doctor extends Person {
     public void setSpecializations(List<String> specializations) {
         this.specializations = specializations;
     }
+
     // availableAppointmentIDs
     public List<String> getAvailableAppointmentIDs() {
         return availableAppointmentIDs;
     }
+    public void addAvailableAppointment(String availableApptID) {
+        this.availableAppointmentIDs.add(availableApptID);
+        // TODO: Add to Firebase
+    }
     public void addAvailableAppointment(Appointment availableAppt) {
-        this.availableAppointmentIDs.add(availableAppt.getAppointmentID());
+        this.addAvailableAppointment(availableAppt.getAppointmentID());
     }
-    private void removeAvailableAppointment(Appointment availableAppt) {
-        this.availableAppointmentIDs.remove(availableAppt.getAppointmentID());
+
+    public void removeAvailableAppointment(String availableApptID) {
+        this.availableAppointmentIDs.remove(availableApptID);
     }
+    public void removeAvailableAppointment(Appointment availableAppt) {
+        this.removeAvailableAppointment(availableAppt.getAppointmentID());
+    }
+
     // upcomingAppointmentIDs
     public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
-    private void addUpcomingAppointment(Appointment upcomingAppt) {
-        this.upcomingAppointmentIDs.add(upcomingAppt.getAppointmentID());
+    public void addUpcomingAppointment(String upcomingApptID) {
+        this.upcomingAppointmentIDs.add(upcomingApptID);
     }
-    private void removeUpcomingAppointment(Appointment upcomingAppt) {
-        this.upcomingAppointmentIDs.remove(upcomingAppt.getAppointmentID());
+    public void addUpcomingAppointment(Appointment upcomingAppt) {
+        this.addUpcomingAppointment(upcomingAppt.getAppointmentID());
+    }
+    public void removeUpcomingAppointment(String upcomingApptID) {
+        this.upcomingAppointmentIDs.remove(upcomingApptID);
+    }
+    public void removeUpcomingAppointment(Appointment upcomingAppt) {
+        this.removeUpcomingAppointment(upcomingAppt.getAppointmentID());
     }
     // seenPatientIDs
     public List<String> getSeenPatientIDs() {
         return this.seenPatientIDs;
     }
-    private void addSeenPatient(Patient patient) {
+    public void addSeenPatient(Patient patient) {
         this.seenPatientIDs.add(patient.getID());
     }
-    private void addSeenPatient(String patientID) {
+    public void addSeenPatient(String patientID) {
         this.seenPatientIDs.add(patientID);
     }
 
