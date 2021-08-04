@@ -83,7 +83,7 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Appointment appt = child.getValue(Appointment.class);
-                    if (!appt.isBooked() && appt.getDate().equals(date)) { // TODO: Make sure this ignores time (show all appointments regardless of time of day)
+                    if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
                         apptIDs.add(appt.getAppointmentID());
                     }
                 }
