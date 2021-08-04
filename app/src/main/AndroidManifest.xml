@@ -14,6 +14,7 @@
             android:parentActivityName=".LoginPageActivity"/>
         <activity
             android:name=".DoctorViewAppointmentActivity"
+            android:parentActivityName=".LoginPageActivity"
             android:exported="true" />
         <activity
             android:name=".SelectAppointmentTimes"
