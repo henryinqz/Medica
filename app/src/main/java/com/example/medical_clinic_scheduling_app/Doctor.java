@@ -50,7 +50,7 @@ public class Doctor extends Person {
     private void addSeenPatient(Patient patient) {
         this.seenPatientIDs.add(patient.getID());
     }
-    private void addSeenPatientID(String patientID) {
+    private void addSeenPatient(String patientID) {
         this.seenPatientIDs.add(patientID);
     }
 
@@ -61,6 +61,6 @@ public class Doctor extends Person {
     }
     public void updatePassing(Appointment appt) {
         this.removeUpcomingAppointment(appt);
-        this.addSeenPatientID(appt.getPatientID());
+        this.addSeenPatient(appt.getPatientID());
     }
 }

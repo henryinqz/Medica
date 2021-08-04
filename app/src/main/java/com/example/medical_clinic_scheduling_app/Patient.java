@@ -51,14 +51,20 @@ public class Patient extends Person {
     private void addUpcomingAppointment(Appointment upcomingAppt) {
         this.upcomingAppointmentIDs.add(upcomingAppt.getAppointmentID());
     }
+    private void removeUpcomingAppointment(Appointment upcomingAppt) {
+        this.upcomingAppointmentIDs.remove(upcomingAppt.getAppointmentID());
+    }
     // seenDoctorIDs
     public List<String> getSeenDoctorIDs() {
         return seenDoctorIDs;
     }
-    private void addSeenDoctor(Doctor doctor) { // TODO: Accessed by observers after appointment passes?
+    private void addSeenDoctor(Doctor doctor) {
         this.seenDoctorIDs.add(doctor.getID());
     }
-    // TODO: observers (? Not sure if this should be sent to Firebase)
+    private void addSeenDoctor(String doctorID) {
+        this.seenDoctorIDs.add(doctorID);
+    }
+
 
     public void bookAppointment(Appointment appt) {
         attach(appt.getDoctorID());
