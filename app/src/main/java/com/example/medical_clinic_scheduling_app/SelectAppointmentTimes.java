@@ -164,7 +164,7 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
             }
         }
     }
-    public void displayAppointmentsOnDate(Date date) {
+    public void displayAppointmentsOnDate(Date date) { // TODO: Change to only show availabilities from Doctor that is passed from BookYourAppointmentsMain
         ArrayList<Appointment> appts = new ArrayList<>();
 
         // Access Firebase to get Appointments

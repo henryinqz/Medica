@@ -11,6 +11,7 @@ public class Doctor extends Person {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR, uid);
 
         this.specializations = new ArrayList<String>(specializations);
+        this.availableAppointmentIDs = new ArrayList<String>();
         this.upcomingAppointmentIDs = new ArrayList<String>();
         this.seenPatientIDs = new ArrayList<String>();
     }
