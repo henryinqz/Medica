@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,7 +35,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class SelectAppointmentTimes extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-
     private Appointment selectedAppointment = null;
     private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MM dd yyyy @hh");
 
@@ -70,15 +70,17 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
         apptDateCalendar.set(Calendar.SECOND, 0);
         apptDateCalendar.set(Calendar.MILLISECOND, 0);
 
-        displayAppointments(getAppointmentIDsOnDate(apptDateCalendar.getTime()));
+//        displayAppointments(getAppointmentIDsOnDate(apptDateCalendar.getTime()));
+        displayAppointmentsOnDate(apptDateCalendar.getTime());
     }
 
-    public ArrayList<String> getAppointmentIDsOnDate(Date date) {
+    /*
+    public ArrayList<String> getAppointmentIDsOnDate(Date date) { // Doesn't wait for Firebase to get data before returning, hence creation of displayAppointmentsonDate()
         ArrayList<String> apptIDs = new ArrayList<>();
 
         // Access Firebase to get Appointments
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Appointments");
-        ref.addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
@@ -87,20 +89,20 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
                         apptIDs.add(appt.getAppointmentID());
                     }
                 }
+                Log.i("appt_id", apptIDs.size() + " size1");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Error: no appointments found
-                Toast.makeText(getApplicationContext(), "No appointments found on that date", Toast.LENGTH_SHORT).show();
             }
         });
 
         return apptIDs;
-    }
+    } */
 
     public void displayAppointments(ArrayList<String> apptIDs) {
         if (apptIDs.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "No appointments found on that date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Error: no availabilities on that date", Toast.LENGTH_SHORT).show();
         } else {
             //Adding appointments to RadioGroup
             int index = 0;
@@ -108,13 +110,38 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
 
             for (String apptID : apptIDs) {
                 RadioButton appt = new RadioButton(this);
-                appt.setText(apptID);
+                appt.setText(apptID); // TODO: Instead of showing appointmentID, show data from the appointment
                 apptGroup.addView(appt);
                 appt.setId(index);
                 appt.setPadding(0,0,0,16);
                 index++;
             }
         }
+    }
+
+    public void displayAppointmentsOnDate(Date date) {
+        ArrayList<String> apptIDs = new ArrayList<>();
+
+        // Access Firebase to get Appointments
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    Appointment appt = child.getValue(Appointment.class);
+                    if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
+                        apptIDs.add(appt.getAppointmentID());
+                    }
+                }
+
+                displayAppointments(apptIDs);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Error: no appointments found
+                Toast.makeText(getApplicationContext(), "Error: couldn't find appointments", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void onClickedBookAppointmentButton(View view){

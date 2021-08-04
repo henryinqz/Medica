@@ -85,7 +85,7 @@ public class Patient extends Person {
     public void notifyBooking(Appointment appt) {
         for (String observerID : this.observers) {
             // Access Firebase to get user w/ observerID
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS);
 
             ref.child(observerID).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

@@ -127,7 +127,7 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Person user = new Patient(username, firstName, lastName, gender, dateOfBirth, userUid);
 
-                    FirebaseDatabase.getInstance().getReference("Users")
+                    FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                             .child(userUid)
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

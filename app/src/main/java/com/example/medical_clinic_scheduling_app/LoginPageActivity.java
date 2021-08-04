@@ -64,7 +64,7 @@ public class LoginPageActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_LONG).show();
 
                     String userID = auth.getCurrentUser().getUid();
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS);
 
                     ref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
