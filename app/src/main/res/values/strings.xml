@@ -67,9 +67,10 @@
     <string name="filter_specialist_button">Filter Specialist</string>
 
     <!-- SELECT APPOINTMENT TIMES STRINGS -->
-    <string name="SAT_title">Doctor Availability Times</string>
+    <string name="SAT_title">Availability Times</string>
     <string name="SAT_book_button">BOOK</string>
-    <string name="title_activity_doctor_after_login">Doctor_After_Login_Activity</string>
+    <string name="title_activity_doctor_after_login">Doctor_After_Login_Activity</string>-
+    <string name="none">None</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

@@ -118,7 +118,9 @@ public class BookYourAppointmentMain extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(BookYourAppointmentMain.this, "Selected Doctors: " + doctors.get(i).toString(), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), SelectAppointmentTimes.class));
+                Intent intent = new Intent(getApplicationContext(), SelectAppointmentTimes.class);
+                intent.putExtra("doctor", doctors.get(i).toString());
+                startActivity(intent);
             }
         });
     }

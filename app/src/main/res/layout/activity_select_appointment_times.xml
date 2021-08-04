@@ -7,16 +7,16 @@
     tools:context=".SelectAppointmentTimes">
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/availability"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:text="@string/SAT_title"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/selectDoctorName" />
 
     <Button
         android:id="@+id/bookAppointmentButton"
@@ -33,13 +33,13 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="396dp"
-        android:layout_height="399dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="397dp"
+        android:layout_height="384dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7">
+        app:layout_constraintTop_toBottomOf="@+id/availability">
 
         <RadioGroup
             android:id="@+id/appointmentRadioGroup"
@@ -48,7 +48,18 @@
             android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintTop_toBottomOf="@+id/availability" />
     </ScrollView>
+
+    <TextView
+        android:id="@+id/selectDoctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/none"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

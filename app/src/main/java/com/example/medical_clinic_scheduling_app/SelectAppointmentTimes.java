@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +37,16 @@ public class SelectAppointmentTimes extends AppCompatActivity {
 
         //Setting up RadioGroup of Appointments
         RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
+
+        //Setting up textView (doctor name)
+        String doctor = getIntent().getStringExtra("doctor");
+        TextView doctorName = findViewById(R.id.selectDoctorName);
+        doctorName.setText(doctor.substring(0, doctor.indexOf("\n")));
+
+        //Setting up firebase appointments
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        //ref.child("Appointments").addValueListener()
+
         ArrayList<String> appointments = new ArrayList<>();
         appointments.add("Tuesday Jul 27, 2021\n12:00 am - 1:00 pm");
         appointments.add("Tuesday Jul 27, 2021\n1:00 pm - 2:00 pm");
