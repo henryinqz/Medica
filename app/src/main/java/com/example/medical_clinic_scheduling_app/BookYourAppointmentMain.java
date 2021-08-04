@@ -114,8 +114,8 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         //Setting up listener for when item is clicked.
         doctorView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(BookYourAppointmentMain.this, "Selected Doctors: " + doctors.get(i).toString(), Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                Toast.makeText(BookYourAppointmentMain.this, "Selected " + doctors.get(index).toString(), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), SelectAppointmentTimes.class));
             }
         });

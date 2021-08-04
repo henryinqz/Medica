@@ -9,10 +9,18 @@ public class Appointment implements Comparable<Appointment> {
     private Date date;
     private String doctorID, patientID, appointmentID;
 
+    private Appointment() {
+
+    }
     Appointment(Date date, Doctor doctor, Patient patient) {
         this.date = date;
         this.doctorID = doctor.getID();
-        this.patientID = patient.getID();
+
+        if (patient == null) { // i.e. appointment is available
+            this.setPatientID("");
+        } else {
+            this.setPatientID(patient.getID());
+        }
 
         this.appointmentID = hashCode() + ""; // TODO: Make a better ID?
     }
@@ -48,6 +56,10 @@ public class Appointment implements Comparable<Appointment> {
     }
     public void setAppointmentID(String appointmentID) {
         this.appointmentID = appointmentID;
+    }
+
+    public boolean isBooked() {
+        return !this.patientID.isEmpty();
     }
 
     @Override

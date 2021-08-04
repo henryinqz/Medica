@@ -27,7 +27,7 @@ public class Doctor extends Person {
     public List<String> getAvailableAppointmentIDs() {
         return availableAppointmentIDs;
     }
-    private void addAvailableAppointment(Appointment availableAppt) {
+    public void addAvailableAppointment(Appointment availableAppt) {
         this.availableAppointmentIDs.add(availableAppt.getAppointmentID());
     }
     private void removeAvailableAppointment(Appointment availableAppt) {

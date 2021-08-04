@@ -54,16 +54,20 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day){
         //Setting the birthDateLabel to patient's birthday from DatePicker.
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, day);
+        Calendar birthDateCalendar = Calendar.getInstance();
+        birthDateCalendar.set(Calendar.YEAR, year);
+        birthDateCalendar.set(Calendar.MONTH, month);
+        birthDateCalendar.set(Calendar.DAY_OF_MONTH, day);
+        birthDateCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        birthDateCalendar.set(Calendar.MINUTE, 0);
+        birthDateCalendar.set(Calendar.SECOND, 0);
+        birthDateCalendar.set(Calendar.MILLISECOND, 0);
 
-        String currentDateStr = DateFormat.getDateInstance().format(c.getTime());
+        String currentDateStr = DateFormat.getDateInstance().format(birthDateCalendar.getTime());
         TextView textView = (TextView) findViewById(R.id.txtRegisterPatientBirthdayDate);
         textView.setText(currentDateStr);
 
-        dateOfBirth = c.getTime();
+        dateOfBirth = birthDateCalendar.getTime();
     }
 
     public void onClick(View view) {

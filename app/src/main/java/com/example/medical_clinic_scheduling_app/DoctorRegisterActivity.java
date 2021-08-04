@@ -17,6 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
 import java.util.HashSet;
 
 public class DoctorRegisterActivity extends AppCompatActivity {
@@ -98,7 +99,25 @@ public class DoctorRegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    Person user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
+//                    Person user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
+                    Doctor user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
+
+//                    // TEMP: Add misc appointments to Firebase
+//                    Appointment appt = new Appointment(new Date(System.currentTimeMillis()), (Doctor) user, null);
+//
+//                    FirebaseDatabase.getInstance().getReference("Appointments")
+//                            .child(appt.getAppointmentID())
+//                            .setValue(appt).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()) { // Added appointment
+//                                user.addAvailableAppointment(appt);
+//                            } else { // Failed to add appointment
+//                                Toast.makeText(getApplicationContext(), "Failed to create doctor appt", Toast.LENGTH_LONG).show();
+//                            }
+//                        }
+//                    });
+
 
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(userUid)
