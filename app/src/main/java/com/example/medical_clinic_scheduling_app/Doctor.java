@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class Doctor extends Person implements Observer, Serializable {
+public class Doctor extends Person implements Serializable {
     private List<String> specializations, availableAppointmentIDs, upcomingAppointmentIDs, seenPatientIDs;
 
     Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
@@ -66,10 +66,11 @@ public class Doctor extends Person implements Observer, Serializable {
     public void updatePassing(Appointment appt) {
         this.removeUpcomingAppointment(appt);
         this.addSeenPatient(appt.getPatientID());
+    }
 
     @Override
-    public String toString(){
-        String doctorString = "Dr. " + this.getFirstName() + " " + this.getLastName();
+    public String toString() {
+//        String doctorString = "Dr. " + this.getFirstName() + " " + this.getLastName();
 //        StringBuilder stringBuilder = new StringBuilder();
 //        stringBuilder.append(doctorString);
 //        stringBuilder.append("\n");
@@ -80,6 +81,6 @@ public class Doctor extends Person implements Observer, Serializable {
 //            stringBuilder.append("\n");
 //        }
 //        doctorString = stringBuilder.toString();
-        return  doctorString;
+        return "Dr. " + super.toString();
     }
 }
