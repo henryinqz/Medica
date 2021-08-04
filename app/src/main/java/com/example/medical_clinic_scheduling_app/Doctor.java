@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Doctor extends Person {
-    private List<String> specializations, upcomingAppointmentIDs, seenPatientIDs;
+    private List<String> specializations, availableAppointmentIDs, upcomingAppointmentIDs, seenPatientIDs;
 
     Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR, uid);
@@ -23,6 +23,13 @@ public class Doctor extends Person {
     public void setSpecializations(List<String> specializations) {
         this.specializations = specializations;
     }
+    // availableAppointmentIDs
+    public List<String> getAvailableAppointmentIDs() {
+        return availableAppointmentIDs;
+    }
+    private void addAvailableAppointment(Appointment availableAppt) {
+        this.availableAppointmentIDs.add(availableAppt.getAppointmentID());
+    }
     // upcomingAppointmentIDs
     public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
@@ -34,14 +41,14 @@ public class Doctor extends Person {
     public List<String> getSeenPatientIDs() {
         return this.seenPatientIDs;
     }
-
     private void addSeenPatient(Patient patient) { // TODO: Accessed by observers after appointment passes?
         this.seenPatientIDs.add(patient.getID());
     }
+
+
     public void updateBooking(String appt) {
         this.upcomingAppointmentIDs.add(appt);
     }
-
     public void updatePassing(Appointment appt) {
         this.upcomingAppointmentIDs.remove(appt.hashCode());
         this.seenPatientIDs.add(appt.getPatientID());
