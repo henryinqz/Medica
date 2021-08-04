@@ -53,7 +53,7 @@ public class Patient extends Person implements Subject {
 
 
     public void bookAppointment(Appointment appt) {
-        attach(appt.doctor);
+//        attach(appt.doctor);
 //        this.upcomingAppointmentIDs.add(appt.hashCode());
         addUpcomingAppointment(appt);
         notifyBooking(appt);

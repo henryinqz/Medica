@@ -3,12 +3,13 @@ package com.example.medical_clinic_scheduling_app;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-public class Doctor extends Person implements Observer {
+public class Doctor extends Person implements Observer, Serializable {
     private List<String> specializations;
     private List<Integer> upcomingAppointmentIDs, seenPatientIDs;
 
@@ -52,7 +53,7 @@ public class Doctor extends Person implements Observer {
     @Override
     public void updatePassing(Appointment appt) {
         this.upcomingAppointmentIDs.remove(appt.hashCode());
-        this.seenPatientIDs.add(appt.patient.hashCode());
+//        this.seenPatientIDs.add(appt.patient.hashCode());
     }
 
     @Override

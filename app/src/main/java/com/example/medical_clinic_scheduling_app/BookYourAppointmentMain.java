@@ -36,6 +36,8 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         return true;
     }
 
+    private Doctor selectedDoctor = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
