@@ -27,7 +27,7 @@
     </string-array>
 
     <string-array name="FilterGender">
-        <item>Any</item>
+        <item>Any Gender</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>

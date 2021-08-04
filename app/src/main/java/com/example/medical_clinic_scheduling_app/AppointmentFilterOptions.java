@@ -1,6 +1,5 @@
 package com.example.medical_clinic_scheduling_app;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -39,7 +38,10 @@ public class AppointmentFilterOptions extends AppCompatActivity {
         btnSelectSpecialist.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                MultipleSpecialistSelectionFragment selectionDialog = new MultipleSpecialistSelectionFragment();
+                MultipleSelectionFragment selectionDialog = new MultipleSelectionFragment(
+                        getResources().getStringArray(R.array.SelectSpecialist),
+                        "Filter By Specialization"
+                );
                 selectionDialog.show(getSupportFragmentManager(), "SelectSpecialistDialog");
                 specializations = selectionDialog.getSelectedItems();
             }

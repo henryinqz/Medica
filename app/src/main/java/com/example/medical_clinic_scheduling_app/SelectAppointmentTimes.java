@@ -41,6 +41,18 @@ public class SelectAppointmentTimes extends AppCompatActivity {
         appointments.add("Tuesday Jul 27, 2021\n1:00 pm - 2:00 pm");
         appointments.add("Tuesday Jul 27, 2021\n2:00 pm - 3:00 pm");
         appointments.add("Tuesday Jul 27, 2021\n3:00 pm - 4:00 pm");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 12:00a.m - 1:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 1:00p.m - 2:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 2:00p.m - 3:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 3:00p.m - 4:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 12:00a.m - 1:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 1:00p.m - 2:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 2:00p.m - 3:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 3:00p.m - 4:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 12:00a.m - 1:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 1:00p.m - 2:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 2:00p.m - 3:00p.m");
+//         appointments.add("Date: Tuesday July 27, 2021\nTime: 3:00p.m - 4:00p.m");
 
         //Adding appointments to RadioGroup
         int i = 0;
