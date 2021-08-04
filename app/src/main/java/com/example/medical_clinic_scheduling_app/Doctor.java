@@ -30,6 +30,9 @@ public class Doctor extends Person {
     private void addAvailableAppointment(Appointment availableAppt) {
         this.availableAppointmentIDs.add(availableAppt.getAppointmentID());
     }
+    private void removeAvailableAppointment(Appointment availableAppt) {
+        this.availableAppointmentIDs.remove(availableAppt.getAppointmentID());
+    }
     // upcomingAppointmentIDs
     public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
@@ -37,20 +40,27 @@ public class Doctor extends Person {
     private void addUpcomingAppointment(Appointment upcomingAppt) {
         this.upcomingAppointmentIDs.add(upcomingAppt.getAppointmentID());
     }
+    private void removeUpcomingAppointment(Appointment upcomingAppt) {
+        this.upcomingAppointmentIDs.remove(upcomingAppt.getAppointmentID());
+    }
     // seenPatientIDs
     public List<String> getSeenPatientIDs() {
         return this.seenPatientIDs;
     }
-    private void addSeenPatient(Patient patient) { // TODO: Accessed by observers after appointment passes?
+    private void addSeenPatient(Patient patient) {
         this.seenPatientIDs.add(patient.getID());
     }
+    private void addSeenPatientID(String patientID) {
+        this.seenPatientIDs.add(patientID);
+    }
 
 
-    public void updateBooking(String appt) {
-        this.upcomingAppointmentIDs.add(appt);
+    public void updateBooking(Appointment appt) {
+        this.removeAvailableAppointment(appt);
+        this.addUpcomingAppointment(appt);
     }
     public void updatePassing(Appointment appt) {
-        this.upcomingAppointmentIDs.remove(appt.hashCode());
-        this.seenPatientIDs.add(appt.getPatientID());
+        this.removeUpcomingAppointment(appt);
+        this.addSeenPatientID(appt.getPatientID());
     }
 }

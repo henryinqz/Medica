@@ -87,7 +87,7 @@ public class Patient extends Person {
                     Doctor user = snapshot.getValue(Doctor.class);
 
                     if (user != null) {
-                        user.updateBooking(appt.getAppointmentID());
+                        user.updateBooking(appt);
                     }
                 }
                 @Override
