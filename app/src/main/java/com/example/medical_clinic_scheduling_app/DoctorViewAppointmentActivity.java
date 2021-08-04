@@ -31,13 +31,13 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
         ArrayAdapter doctorAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, appointments);
         appointmentsView.setAdapter(doctorAdapter);
 
-//        appointmentsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(getApplicationContext(), ViewUpcomingAppointmentDetailsActivity.class);
-//                intent.putExtra("Appointment", appointments.get(i));
-//                startActivity(new Intent(getApplicationContext(), SelectAppointmentTimes.class));
-//            }
-//        });
+        appointmentsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentDetailsActivity.class);
+                intent.putExtra("Appointment", appointments.get(i));
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -10,13 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
+            android:name=".DoctorViewAppointmentDetailsActivity"
+            android:parentActivityName=".DoctorViewAppointmentActivity"
+            android:exported="true" />
+        <activity
             android:name=".PatientAppointmentsView"
             android:label="Patient Appointments"
-            android:parentActivityName=".LoginPageActivity"/>
+            android:parentActivityName=".LoginPageActivity" />
         <activity
             android:name=".DoctorViewAppointmentActivity"
-            android:parentActivityName=".LoginPageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".LoginPageActivity" />
         <activity
             android:name=".SelectAppointmentTimes"
             android:label="Doctor Availabilities"
