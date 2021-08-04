@@ -129,6 +129,7 @@ public class Appointment implements Comparable<Appointment> {
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) { // Error: patient doesn't exist
+                            Log.i("appt_error", "Failed to get patient from Firebase");
                         }
                     });
 
@@ -146,6 +147,7 @@ public class Appointment implements Comparable<Appointment> {
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) { // Error: doctor doesn't exist
+                            Log.i("appt_error", "Failed to get patient from Firebase");
                         }
                     });
                 }

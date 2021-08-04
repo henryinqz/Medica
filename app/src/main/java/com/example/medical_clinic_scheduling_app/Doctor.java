@@ -7,6 +7,12 @@ import java.util.List;
 public class Doctor extends Person {
     private List<String> specializations, availableAppointmentIDs, upcomingAppointmentIDs, seenPatientIDs;
 
+    private Doctor() {
+        this.specializations = new ArrayList<String>();
+        this.availableAppointmentIDs = new ArrayList<String>();
+        this.upcomingAppointmentIDs = new ArrayList<String>();
+        this.seenPatientIDs = new ArrayList<String>();
+    }
     Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR, uid);
 
@@ -29,6 +35,9 @@ public class Doctor extends Person {
     public List<String> getAvailableAppointmentIDs() {
         return availableAppointmentIDs;
     }
+    public void setAvailableAppointmentIDs(List<String> availableAppointmentIDs) {
+        this.availableAppointmentIDs = availableAppointmentIDs;
+    }
     public void addAvailableAppointment(String availableApptID) {
         this.availableAppointmentIDs.add(availableApptID);
         // TODO: Add to Firebase
@@ -48,6 +57,9 @@ public class Doctor extends Person {
     public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
+    public void setUpcomingAppointmentIDs(List<String> upcomingAppointmentIDs) {
+        this.upcomingAppointmentIDs = upcomingAppointmentIDs;
+    }
     public void addUpcomingAppointment(String upcomingApptID) {
         this.upcomingAppointmentIDs.add(upcomingApptID);
     }
@@ -63,6 +75,9 @@ public class Doctor extends Person {
     // seenPatientIDs
     public List<String> getSeenPatientIDs() {
         return this.seenPatientIDs;
+    }
+    public void setSeenPatientIDs(List<String> seenPatientIDs) {
+        this.seenPatientIDs = seenPatientIDs;
     }
     public void addSeenPatient(Patient patient) {
         this.seenPatientIDs.add(patient.getID());

@@ -1,7 +1,5 @@
 package com.example.medical_clinic_scheduling_app;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,8 +15,14 @@ import java.util.Date;
 public class Patient extends Person {
     private Date dateOfBirth;
     private List<String> prevAppointmentIDs, upcomingAppointmentIDs, seenDoctorIDs;
-    private List<String> observers;
+//    private List<String> observers;
 
+    private Patient() {
+        this.prevAppointmentIDs = new ArrayList<String>();
+        this.upcomingAppointmentIDs = new ArrayList<String>();
+        this.seenDoctorIDs = new ArrayList<String>();
+//        this.observers = new ArrayList<String>();
+    }
     Patient(String username, String firstname, String lastname, String gender, Date dateOfBirth, String uid) {
         super(username, firstname, lastname, gender, Constants.PERSON_TYPE_PATIENT, uid);
         this.dateOfBirth = dateOfBirth;
@@ -26,7 +30,7 @@ public class Patient extends Person {
         this.prevAppointmentIDs = new ArrayList<String>();
         this.upcomingAppointmentIDs = new ArrayList<String>();
         this.seenDoctorIDs = new ArrayList<String>();
-        this.observers = new ArrayList<String>();
+//        this.observers = new ArrayList<String>();
     }
 
     // Getters/setters:
@@ -41,12 +45,18 @@ public class Patient extends Person {
     public List<String> getPrevAppointmentIDs() {
         return this.prevAppointmentIDs;
     }
+    public void setPrevAppointmentIDs(List<String> prevAppointmentIDs) {
+        this.prevAppointmentIDs = prevAppointmentIDs;
+    }
     public void addPrevAppointment(Appointment prevAppt) {
         this.prevAppointmentIDs.add(prevAppt.getAppointmentID());
     }
     // upcomingAppointmentIDs
     public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
+    }
+    public void setUpcomingAppointmentIDs(List<String> upcomingAppointmentIDs) {
+        this.upcomingAppointmentIDs = upcomingAppointmentIDs;
     }
     public void addUpcomingAppointment(Appointment upcomingAppt) {
         addUpcomingAppointment(upcomingAppt.getAppointmentID());
@@ -61,6 +71,9 @@ public class Patient extends Person {
     public List<String> getSeenDoctorIDs() {
         return seenDoctorIDs;
     }
+    public void setSeenDoctorIDs(List<String> seenDoctorIDs) {
+        this.seenDoctorIDs = seenDoctorIDs;
+    }
     public void addSeenDoctor(Doctor doctor) {
         this.seenDoctorIDs.add(doctor.getID());
     }
@@ -69,41 +82,41 @@ public class Patient extends Person {
     }
 
 
-    public void bookAppointment(Appointment appt) {
-        attach(appt.getDoctorID());
-//        this.upcomingAppointmentIDs.add(appt.hashCode());
-        addUpcomingAppointment(appt);
-        notifyBooking(appt);
-    }
+//    public void bookAppointment(Appointment appt) {
+//        attach(appt.getDoctorID());
+////        this.upcomingAppointmentIDs.add(appt.hashCode());
+//        addUpcomingAppointment(appt);
+//        notifyBooking(appt);
+//    }
 
     // Observers
-    public void attach(String observerID) {
-        this.observers.add(observerID);
-    }
-
-    public void detach(String observerID) {
-        this.observers.remove(observerID);
-    }
-
-    public void notifyBooking(Appointment appt) {
-        for (String observerID : this.observers) {
-            // Access Firebase to get user w/ observerID
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS);
-
-            ref.child(observerID).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Doctor user = snapshot.getValue(Doctor.class);
-
-                    if (user != null) {
-                        user.updateBooking(appt);
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // ERROR: Doctor w/ observerID does not exist
-                }
-            });
-        }
-    }
+//    public void attach(String observerID) {
+//        this.observers.add(observerID);
+//    }
+//
+//    public void detach(String observerID) {
+//        this.observers.remove(observerID);
+//    }
+//
+//    public void notifyBooking(Appointment appt) {
+//        for (String observerID : this.observers) {
+//            // Access Firebase to get user w/ observerID
+//            DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS);
+//
+//            ref.child(observerID).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    Doctor user = snapshot.getValue(Doctor.class);
+//
+//                    if (user != null) {
+//                        user.updateBooking(appt);
+//                    }
+//                }
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//                    // ERROR: Doctor w/ observerID does not exist
+//                }
+//            });
+//        }
+//    }
 }
