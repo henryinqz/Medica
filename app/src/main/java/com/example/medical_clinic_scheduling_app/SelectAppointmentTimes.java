@@ -100,7 +100,8 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
         return apptIDs;
     } */
 
-    public void displayAppointments(ArrayList<String> apptIDs) {
+    /*
+    public void displayAppointments(ArrayList<String> apptIDs) { // Uses appointment IDs instead of object
         if (apptIDs.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Error: no availabilities on that date", Toast.LENGTH_SHORT).show();
         } else {
@@ -118,7 +119,6 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
             }
         }
     }
-
     public void displayAppointmentsOnDate(Date date) {
         ArrayList<String> apptIDs = new ArrayList<>();
 
@@ -142,7 +142,54 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
                 Toast.makeText(getApplicationContext(), "Error: couldn't find appointments", Toast.LENGTH_SHORT).show();
             }
         });
+    }*/
+    public void displayAppointments(ArrayList<Appointment> appts) {
+        if (appts.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Error: no availabilities on that date", Toast.LENGTH_SHORT).show();
+        } else {
+            //Adding appointments to RadioGroup
+            int index = 0;
+            RadioGroup apptGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
+
+            for (Appointment appt : appts) {
+                RadioButton apptRadioBtn = new RadioButton(this);
+//                apptRadioBtn.setText(appt.getDoctorID());
+//                apptRadioBtn.setText("\n");
+                apptRadioBtn.setText(appt.getDate().toString()); // TODO: Instead of showing Doctor and full date here, just make TextViews above the radio group to show doctor name and date (only show time here)
+
+                apptGroup.addView(apptRadioBtn);
+                apptRadioBtn.setId(index);
+                apptRadioBtn.setPadding(0,0,0,16);
+                index++;
+            }
+        }
     }
+    public void displayAppointmentsOnDate(Date date) {
+        ArrayList<Appointment> appts = new ArrayList<>();
+
+        // Access Firebase to get Appointments
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    Appointment appt = child.getValue(Appointment.class);
+                    if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
+                        appts.add(appt);
+                    }
+                }
+
+                displayAppointments(appts);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Error: no appointments found
+                Toast.makeText(getApplicationContext(), "Error: couldn't find appointments", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
     public void onClickedBookAppointmentButton(View view){
         startActivity(new Intent(this, PatientAppointmentsView.class));
