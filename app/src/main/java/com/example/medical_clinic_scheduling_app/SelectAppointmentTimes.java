@@ -43,9 +43,8 @@ public class SelectAppointmentTimes extends AppCompatActivity {
         TextView doctorName = findViewById(R.id.selectDoctorName);
         doctorName.setText(doctor.substring(0, doctor.indexOf("\n")));
 
-        //Setting up firebase appointments
+        //Setting up firebase
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        //ref.child("Appointments").addValueListener()
 
         ArrayList<String> appointments = new ArrayList<>();
         appointments.add("Tuesday Jul 27, 2021\n12:00 am - 1:00 pm");

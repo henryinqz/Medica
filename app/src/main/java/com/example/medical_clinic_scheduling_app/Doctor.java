@@ -17,6 +17,7 @@ public class Doctor extends Person implements Serializable {
         this.specializations = new ArrayList<String>(specializations);
         this.upcomingAppointmentIDs = new ArrayList<String>();
         this.seenPatientIDs = new ArrayList<String>();
+        this.availableAppointmentIDs = new ArrayList<String>();
     }
 
     // Getters/setters:
