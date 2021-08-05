@@ -7,38 +7,27 @@ import androidx.fragment.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 
-public class SelectAppointmentTimes extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class SelectAppointmentTimesActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private Appointment selectedAppointment = null;
     private Map<Integer, Appointment> indexToAppt = new HashMap<>();
     private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MM dd yyyy @hh");
@@ -47,6 +36,8 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_appointment_times);
+        String doctorID = getIntent().getStringExtra("doctorID");
+        System.out.println(doctorID);
 
 //         //Setting up RadioGroup of Appointments
 //         RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
@@ -239,15 +230,13 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
         });
     }
 
-
-
     public void onClickedBookAppointmentButton(View view){
         if (this.selectedAppointment != null) {
             String patientID = FirebaseAuth.getInstance().getCurrentUser().getUid(); // TODO: Pass from previous activities to prevent errors
             Appointment.bookAppointment(this.selectedAppointment, patientID);
 
             Toast.makeText(getApplicationContext(), "Booked appointment", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, PatientAppointmentsView.class));
+            startActivity(new Intent(this, PatientAppointmentsViewActivity.class));
         } else {
             Toast.makeText(getApplicationContext(), "Error: select an appointment", Toast.LENGTH_SHORT).show();
         }

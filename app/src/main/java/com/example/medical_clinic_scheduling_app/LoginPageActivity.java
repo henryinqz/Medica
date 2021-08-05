@@ -80,7 +80,7 @@ public class LoginPageActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Hello patient " + user.getUsername(), Toast.LENGTH_LONG).show();
 
                                     // Redirect to patient page
-                                    Intent intent = new Intent(getApplicationContext(),PatientAppointmentsView.class);
+                                    Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
                                     intent.putExtra("userid", userID);
                                     startActivity(intent);
                                 } else {

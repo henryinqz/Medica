@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -19,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PatientAppointmentsView extends AppCompatActivity {
+public class PatientAppointmentsViewActivity extends AppCompatActivity {
 
     protected static String userID = "";
     @Override
@@ -31,7 +30,6 @@ public class PatientAppointmentsView extends AppCompatActivity {
         ArrayList<String> appointments = new ArrayList<>();
         ListView appointmentsView = (ListView) findViewById(R.id.patientAppointmentListView);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        System.out.println(getIntent().getStringExtra("userid"));
         //Find userID = patientID
         if (getIntent().getStringExtra("userid") != null) {
             userID = getIntent().getStringExtra("userid");
@@ -76,7 +74,7 @@ public class PatientAppointmentsView extends AppCompatActivity {
     }
 
     public void onBookAppBtnClicked (View view){
-        Intent intent = new Intent(this, BookYourAppointmentMain.class);
+        Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
         startActivity(intent);
     }
 }
