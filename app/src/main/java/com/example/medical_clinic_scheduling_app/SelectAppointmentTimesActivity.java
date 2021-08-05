@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
@@ -37,7 +38,7 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_appointment_times);
         String doctorID = getIntent().getStringExtra("doctorID");
-        System.out.println(doctorID);
+        Log.i("select_appt_dr", doctorID);
 
 //         //Setting up RadioGroup of Appointments
 //         RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
@@ -210,23 +211,39 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
         ArrayList<Appointment> appts = new ArrayList<>();
 
         // Access Firebase to get Appointments
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
+        String doctorID = getIntent().getStringExtra("doctorID");
+        DatabaseReference doctorAvailableApptsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                .child(doctorID)
+                .child(Constants.FIREBASE_PATH_USERS_APPTS_AVAILABLE);
+        doctorAvailableApptsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    Appointment appt = child.getValue(Appointment.class);
-                    if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
-                        appts.add(appt);
-                    }
-                }
+                for (DataSnapshot child : snapshot.getChildren()) { // Each availableApptID of the doctor
+                    String availableApptID = child.getValue(String.class);
 
-                displayAppointments(appts);
+                    DatabaseReference apptsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS).child(availableApptID);
+                    apptsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                            Appointment appt = snapshot2.getValue(Appointment.class);
+                            if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
+                                appts.add(appt);
+                            }
+                            displayAppointments(appts);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // Error: available appointment not found
+                            Toast.makeText(getApplicationContext(), "Error: couldn't find available appointment", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Error: no appointments found
-                Toast.makeText(getApplicationContext(), "Error: couldn't find appointments", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error: couldn't find any available appointments", Toast.LENGTH_SHORT).show();
             }
         });
     }
