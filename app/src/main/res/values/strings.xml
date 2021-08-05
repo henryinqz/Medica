@@ -80,6 +80,9 @@
     <!-- UPCOMING ACTIVITIES -->
     <string name="upcoming_appointments">Upcoming Appointments</string>
     <string name="view_your_appointments">View Your Appointments</string>
+    <string name="previous_appointments">Previous Appointments</string>
+    <string name="view_previous_appointments">View Previous Appointments</string>
+    <string name="view_available_time_slots">View Your Available Time Slots</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

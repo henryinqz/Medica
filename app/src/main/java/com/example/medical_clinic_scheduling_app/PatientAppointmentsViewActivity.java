@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PatientAppointmentsView extends AppCompatActivity {
+public class PatientAppointmentsViewActivity extends AppCompatActivity {
 
     protected static String userID = "";
     @Override
@@ -43,21 +42,22 @@ public class PatientAppointmentsView extends AppCompatActivity {
             userID = getIntent().getStringExtra("userid");
         }
         //Find Appointments under that patientID
-        ref.child("Appointments").addValueEventListener(new ValueEventListener() {
+        ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
-                    String patientID = child.child("patientID").getValue(String.class);
-                    String doctorID = child.child("doctorID").getValue(String.class);
-                    Date date = child.child("date").getValue(Date.class);
+                    String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
+                    String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
+                    Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
                     if (patientID.equals(userID)){
-                        ref.child("Users").addValueEventListener(new ValueEventListener() {
+                        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
                             @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot child : snapshot.getChildren()) {
-                                    String childID = child.child("id").getValue(String.class);
-                                    //Get Time of Now
+                                    String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
+                                    if (doctorID.equals(childID)){
+                                     //Get Time of Now
                                     LocalDateTime timeNow = LocalDateTime.now();
                                     Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
 
@@ -87,7 +87,7 @@ public class PatientAppointmentsView extends AppCompatActivity {
     }
 
     public void onBookAppBtnClicked (View view){
-        Intent intent = new Intent(this, BookYourAppointmentMain.class);
+        Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
         startActivity(intent);
     }
 }

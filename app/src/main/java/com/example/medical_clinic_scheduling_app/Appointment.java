@@ -86,7 +86,7 @@ public class Appointment implements Comparable<Appointment> {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) { // Added appointment
-                                doctor.addAvailableAppointment(availableAppt); // TODO: For some reason, this crashes the program :/
+                                doctor.addAvailableAppointment(availableAppt);
 
                                 // Update doctor Firebase
                                 FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
