@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/patientProfileButton"
         android:layout_width="61dp"
         android:layout_height="51dp"
         android:layout_marginTop="8dp"
