@@ -80,7 +80,9 @@ public class LoginPageActivity extends AppCompatActivity {
                                 } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
                                     Toast.makeText(getApplicationContext(), "Hello patient " + user.getUsername(), Toast.LENGTH_LONG).show();
                                     // TODO: Redirect to patient page
-                                    startActivity(new Intent(getApplicationContext(),PatientAppointmentsView.class));
+                                    Intent intent = new Intent(getApplicationContext(),PatientAppointmentsView.class);
+                                    intent.putExtra("userid", userID);
+                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Error: user has no type", Toast.LENGTH_LONG).show();
                                 }

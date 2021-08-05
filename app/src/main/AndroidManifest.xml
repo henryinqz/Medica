@@ -10,19 +10,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
-            android:name=".PatientAppointmentsView"
-            android:parentActivityName=".LoginPageActivity"/>
-        <activity
-            android:name=".DoctorViewAppointmentActivity"
+            android:name=".DoctorViewAppointmentDetailsActivity"
+            android:parentActivityName=".DoctorViewAppointmentActivity"
             android:exported="true" />
         <activity
+            android:name=".PatientAppointmentsView"
+            android:label="Patient Appointments"
+            android:parentActivityName=".LoginPageActivity" />
+        <activity
+            android:name=".DoctorViewAppointmentActivity"
+            android:exported="true"
+            android:parentActivityName=".LoginPageActivity" />
+        <activity
             android:name=".SelectAppointmentTimes"
+            android:label="Doctor Availabilities"
             android:parentActivityName=".BookYourAppointmentMain" />
         <activity
             android:name=".AppointmentFilterOptions"
+            android:label="Filter Doctor By"
             android:parentActivityName=".BookYourAppointmentMain" />
         <activity
             android:name=".BookYourAppointmentMain"
+            android:label="Book Your Appointment"
             android:parentActivityName=".PatientAppointmentsView" />
         <activity
             android:name=".PatientRegisterActivity"

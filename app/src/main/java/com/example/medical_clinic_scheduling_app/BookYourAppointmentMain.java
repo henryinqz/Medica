@@ -39,6 +39,8 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         return true;
     }
 
+    private Doctor selectedDoctor = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +118,9 @@ public class BookYourAppointmentMain extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
                 Toast.makeText(BookYourAppointmentMain.this, "Selected " + doctors.get(index).toString(), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), SelectAppointmentTimes.class));
+                Intent intent = new Intent(getApplicationContext(), SelectAppointmentTimes.class);
+                intent.putExtra("doctor", doctors.get(index).toString());
+                startActivity(intent);
             }
         });
     }
