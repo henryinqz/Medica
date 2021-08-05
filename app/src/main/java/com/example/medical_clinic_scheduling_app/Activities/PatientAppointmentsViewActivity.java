@@ -91,4 +91,8 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
         startActivity(intent);
     }
+    public void onProfileBtnClicked (View view){
+        Intent intent = new Intent(this, PatientProfileViewActivity.class);
+        startActivity(intent);
+    }
 }
