@@ -189,6 +189,7 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
             int index = 0;
             RadioGroup apptGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
 
+            indexToAppt.clear(); // Reset just in case old appts
             for (Appointment appt : appts) {
                 indexToAppt.put(index, appt);
 
