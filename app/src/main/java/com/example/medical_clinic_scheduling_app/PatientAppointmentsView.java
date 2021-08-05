@@ -31,8 +31,9 @@ public class PatientAppointmentsView extends AppCompatActivity {
         ArrayList<String> appointments = new ArrayList<>();
         ListView appointmentsView = (ListView) findViewById(R.id.patientAppointmentListView);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        System.out.println(getIntent().getStringExtra("userid"));
         //Find userID = patientID
-        if (userID == "") {
+        if (getIntent().getStringExtra("userid") != null) {
             userID = getIntent().getStringExtra("userid");
         }
         //Find Appointments under that patientID
@@ -42,20 +43,15 @@ public class PatientAppointmentsView extends AppCompatActivity {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     String patientID = child.child("patientID").getValue(String.class);
                     String doctorID = child.child("doctorID").getValue(String.class);
-                    System.out.println("doctorid" + " " + doctorID + "\n" + "patientID: " + patientID);
                     Date date = child.child("date").getValue(Date.class);
                     if (patientID.equals(userID)){
-                        System.out.println("hi");
                         ref.child("Users").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot child : snapshot.getChildren()) {
                                     String childID = child.child("id").getValue(String.class);
-                                    System.out.println("childID: " + childID);
                                     if (doctorID.equals(childID)){
-                                        System.out.println("hi2");
                                         Person doc = child.getValue(Person.class);
-                                        System.out.println(doc.toString());
                                         appointments.add("Dr. " + doc.toString() + "\n" + date.toString());
                                     }
                                 }
