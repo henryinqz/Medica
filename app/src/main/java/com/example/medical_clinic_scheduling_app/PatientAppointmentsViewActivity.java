@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -19,8 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PatientAppointmentsView extends AppCompatActivity {
+public class PatientAppointmentsViewActivity extends AppCompatActivity {
 
+    protected static String userID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,28 +31,25 @@ public class PatientAppointmentsView extends AppCompatActivity {
         ListView appointmentsView = (ListView) findViewById(R.id.patientAppointmentListView);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         //Find userID = patientID
-        String userID = getIntent().getStringExtra("userid");
+        if (getIntent().getStringExtra("userid") != null) {
+            userID = getIntent().getStringExtra("userid");
+        }
         //Find Appointments under that patientID
-        ref.child("Appointments").addValueEventListener(new ValueEventListener() {
+        ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
-                    String patientID = child.child("patientID").getValue(String.class);
-                    String doctorID = child.child("doctorID").getValue(String.class);
-                    System.out.println("doctorid" + " " + doctorID + "\n" + "patientID: " + patientID);
-                    Date date = child.child("date").getValue(Date.class);
+                    String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
+                    String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
+                    Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
                     if (patientID.equals(userID)){
-                        System.out.println("hi");
-                        ref.child("Users").addValueEventListener(new ValueEventListener() {
+                        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot child : snapshot.getChildren()) {
-                                    String childID = child.child("id").getValue(String.class);
-                                    System.out.println("childID: " + childID);
+                                    String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
                                     if (doctorID.equals(childID)){
-                                        System.out.println("hi2");
                                         Person doc = child.getValue(Person.class);
-                                        System.out.println(doc.toString());
                                         appointments.add("Dr. " + doc.toString() + "\n" + date.toString());
                                     }
                                 }
@@ -77,7 +74,7 @@ public class PatientAppointmentsView extends AppCompatActivity {
     }
 
     public void onBookAppBtnClicked (View view){
-        Intent intent = new Intent(this, BookYourAppointmentMain.class);
+        Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
         startActivity(intent);
     }
 }

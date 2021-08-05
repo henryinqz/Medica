@@ -11,10 +11,17 @@ import java.util.List;
 public class Doctor extends Person implements Serializable {
     private List<String> specializations, availableAppointmentIDs, upcomingAppointmentIDs, seenPatientIDs;
 
+    private Doctor() {
+        this.specializations = new ArrayList<String>();
+        this.availableAppointmentIDs = new ArrayList<String>();
+        this.upcomingAppointmentIDs = new ArrayList<String>();
+        this.seenPatientIDs = new ArrayList<String>();
+    }
     Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR, uid);
 
         this.specializations = new ArrayList<String>(specializations);
+        this.availableAppointmentIDs = new ArrayList<String>();
         this.upcomingAppointmentIDs = new ArrayList<String>();
         this.seenPatientIDs = new ArrayList<String>();
         this.availableAppointmentIDs = new ArrayList<String>();
@@ -28,34 +35,59 @@ public class Doctor extends Person implements Serializable {
     public void setSpecializations(List<String> specializations) {
         this.specializations = specializations;
     }
+
     // availableAppointmentIDs
     public List<String> getAvailableAppointmentIDs() {
         return availableAppointmentIDs;
     }
-    private void addAvailableAppointment(Appointment availableAppt) {
-        this.availableAppointmentIDs.add(availableAppt.getAppointmentID());
+    public void setAvailableAppointmentIDs(List<String> availableAppointmentIDs) {
+        this.availableAppointmentIDs = availableAppointmentIDs;
     }
-    private void removeAvailableAppointment(Appointment availableAppt) {
-        this.availableAppointmentIDs.remove(availableAppt.getAppointmentID());
+    public void addAvailableAppointment(String availableApptID) {
+        this.availableAppointmentIDs.add(availableApptID);
+        // TODO: Add to Firebase
     }
+    public void addAvailableAppointment(Appointment availableAppt) {
+        this.addAvailableAppointment(availableAppt.getAppointmentID());
+    }
+
+    public void removeAvailableAppointment(String availableApptID) {
+        this.availableAppointmentIDs.remove(availableApptID);
+    }
+    public void removeAvailableAppointment(Appointment availableAppt) {
+        this.removeAvailableAppointment(availableAppt.getAppointmentID());
+    }
+
     // upcomingAppointmentIDs
     public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
-    private void addUpcomingAppointment(Appointment upcomingAppt) {
-        this.upcomingAppointmentIDs.add(upcomingAppt.getAppointmentID());
+    public void setUpcomingAppointmentIDs(List<String> upcomingAppointmentIDs) {
+        this.upcomingAppointmentIDs = upcomingAppointmentIDs;
     }
-    private void removeUpcomingAppointment(Appointment upcomingAppt) {
-        this.upcomingAppointmentIDs.remove(upcomingAppt.getAppointmentID());
+    public void addUpcomingAppointment(String upcomingApptID) {
+        this.upcomingAppointmentIDs.add(upcomingApptID);
+    }
+    public void addUpcomingAppointment(Appointment upcomingAppt) {
+        this.addUpcomingAppointment(upcomingAppt.getAppointmentID());
+    }
+    public void removeUpcomingAppointment(String upcomingApptID) {
+        this.upcomingAppointmentIDs.remove(upcomingApptID);
+    }
+    public void removeUpcomingAppointment(Appointment upcomingAppt) {
+        this.removeUpcomingAppointment(upcomingAppt.getAppointmentID());
     }
     // seenPatientIDs
     public List<String> getSeenPatientIDs() {
         return this.seenPatientIDs;
     }
-    private void addSeenPatient(Patient patient) {
+    public void setSeenPatientIDs(List<String> seenPatientIDs) {
+        this.seenPatientIDs = seenPatientIDs;
+    }
+    public void addSeenPatient(Patient patient) {
         this.seenPatientIDs.add(patient.getID());
     }
-    private void addSeenPatient(String patientID) {
+    public void addSeenPatient(String patientID) {
         this.seenPatientIDs.add(patientID);
     }
 

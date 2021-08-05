@@ -64,7 +64,7 @@ public class LoginPageActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_LONG).show();
 
                     String userID = auth.getCurrentUser().getUid();
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS);
 
                     ref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -75,12 +75,12 @@ public class LoginPageActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), user.getType(), Toast.LENGTH_LONG).show();
                                 if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
                                     Toast.makeText(getApplicationContext(), "Hello doctor " + user.getUsername(), Toast.LENGTH_LONG).show();
-                                    // TODO: Redirect to doctor page
-                                    startActivity(new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class));
+                                    startActivity(new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class)); // Redirect to doctor page
                                 } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
                                     Toast.makeText(getApplicationContext(), "Hello patient " + user.getUsername(), Toast.LENGTH_LONG).show();
-                                    // TODO: Redirect to patient page
-                                    Intent intent = new Intent(getApplicationContext(),PatientAppointmentsView.class);
+
+                                    // Redirect to patient page
+                                    Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
                                     intent.putExtra("userid", userID);
                                     startActivity(intent);
                                 } else {

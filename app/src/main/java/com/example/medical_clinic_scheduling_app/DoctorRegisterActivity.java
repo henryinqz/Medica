@@ -17,6 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
 import java.util.HashSet;
 
 public class DoctorRegisterActivity extends AppCompatActivity {
@@ -74,7 +75,6 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         String gender = genderSpinner.getSelectedItem().toString();
 
         // Errors
-        // TODO: Gender, specialization error checks (?) (Shouldn't be errors but maybe check if the strings match something expected input?)
         if(firstName.isEmpty()) {
             firstNameEditText.setError("Empty first name");
             return;
@@ -98,9 +98,11 @@ public class DoctorRegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    Person user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
+                    Doctor user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
 
-                    FirebaseDatabase.getInstance().getReference("Users")
+                    Appointment.generateAvailableAppointment(new Date(System.currentTimeMillis()), user); // TODO: Broken (in method)
+
+                    FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                             .child(userUid)
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

@@ -22,7 +22,7 @@
             android:exported="true"
             android:parentActivityName=".DoctorViewAppointmentActivity" />
         <activity
-            android:name=".PatientAppointmentsView"
+            android:name=".PatientAppointmentsViewActivity"
             android:label="Patient Appointments"
             android:parentActivityName=".LoginPageActivity" />
         <activity
@@ -30,17 +30,17 @@
             android:exported="true"
             android:parentActivityName=".LoginPageActivity" />
         <activity
-            android:name=".SelectAppointmentTimes"
+            android:name=".SelectAppointmentTimesActivity"
             android:label="Doctor Availabilities"
-            android:parentActivityName=".BookYourAppointmentMain" />
+            android:parentActivityName=".BookYourAppointmentMainActivity" />
         <activity
-            android:name=".AppointmentFilterOptions"
+            android:name=".AppointmentFilterOptionsActivity"
             android:label="Filter Doctor By"
-            android:parentActivityName=".BookYourAppointmentMain" />
+            android:parentActivityName=".BookYourAppointmentMainActivity" />
         <activity
-            android:name=".BookYourAppointmentMain"
+            android:name=".BookYourAppointmentMainActivity"
             android:label="Book Your Appointment"
-            android:parentActivityName=".PatientAppointmentsView" />
+            android:parentActivityName=".PatientAppointmentsViewActivity" />
         <activity
             android:name=".PatientRegisterActivity"
             android:label="@string/register_patient_title"
