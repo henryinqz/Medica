@@ -1,9 +1,11 @@
 package com.example.medical_clinic_scheduling_app;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,7 +38,6 @@ public class PatientAppointmentsView extends AppCompatActivity {
         ArrayList<String> appointments = new ArrayList<>();
         ListView appointmentsView = (ListView) findViewById(R.id.patientAppointmentListView);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        System.out.println(getIntent().getStringExtra("userid"));
         //Find userID = patientID
         if (getIntent().getStringExtra("userid") != null) {
             userID = getIntent().getStringExtra("userid");
@@ -46,11 +52,16 @@ public class PatientAppointmentsView extends AppCompatActivity {
                     Date date = child.child("date").getValue(Date.class);
                     if (patientID.equals(userID)){
                         ref.child("Users").addValueEventListener(new ValueEventListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot child : snapshot.getChildren()) {
                                     String childID = child.child("id").getValue(String.class);
-                                    if (doctorID.equals(childID)){
+                                    //Get Time of Now
+                                    LocalDateTime timeNow = LocalDateTime.now();
+                                    Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
+
+                                    if (doctorID.equals(childID) && !date.before(today) ){
                                         Person doc = child.getValue(Person.class);
                                         appointments.add("Dr. " + doc.toString() + "\n" + date.toString());
                                     }
