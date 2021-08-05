@@ -35,19 +35,19 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
             userID = getIntent().getStringExtra("userid");
         }
         //Find Appointments under that patientID
-        ref.child("Appointments").addValueEventListener(new ValueEventListener() {
+        ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
-                    String patientID = child.child("patientID").getValue(String.class);
-                    String doctorID = child.child("doctorID").getValue(String.class);
-                    Date date = child.child("date").getValue(Date.class);
+                    String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
+                    String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
+                    Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
                     if (patientID.equals(userID)){
-                        ref.child("Users").addValueEventListener(new ValueEventListener() {
+                        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot child : snapshot.getChildren()) {
-                                    String childID = child.child("id").getValue(String.class);
+                                    String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
                                     if (doctorID.equals(childID)){
                                         Person doc = child.getValue(Person.class);
                                         appointments.add("Dr. " + doc.toString() + "\n" + date.toString());

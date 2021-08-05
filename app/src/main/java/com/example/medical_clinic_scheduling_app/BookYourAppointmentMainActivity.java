@@ -68,28 +68,28 @@ public class BookYourAppointmentMainActivity extends AppCompatActivity {
         filterOptions.setText(genderText + "\n" + specializationText.toString());
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("Users").addValueEventListener(new ValueEventListener() {
+        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
-                    String type = child.child("type").getValue(String.class);
-                    String userGender = child.child("gender").getValue(String.class);
+                    String type = child.child(Constants.FIREBASE_PATH_USERS_TYPE).getValue(String.class);
+                    String userGender = child.child(Constants.FIREBASE_PATH_USERS_GENDER).getValue(String.class);
                     List<String> userSpecialization = (List<String>) child.child("specializations").getValue();
 
-                    if (type.equals("DOCTOR") &&
+                    if (type.equals(Constants.PERSON_TYPE_DOCTOR) &&
                             (gender == null || (gender != null && (userGender.equals(gender) || gender.equals("Any Gender"))))
                             && (specialization == null ||
                             (specialization != null && userSpecialization != null
                                     && checkSpecializations(userSpecialization, specialization)))) {
                         StringBuilder stringBuilder = new StringBuilder();
                         stringBuilder.append("Dr. ");
-                        stringBuilder.append(child.child("firstName").getValue(String.class));
+                        stringBuilder.append(child.child(Constants.FIREBASE_PATH_USERS_FIRST_NAME).getValue(String.class));
                         stringBuilder.append(" ");
-                        stringBuilder.append(child.child("lastName").getValue(String.class));
+                        stringBuilder.append(child.child(Constants.FIREBASE_PATH_USERS_LAST_NAME).getValue(String.class));
                         stringBuilder.append("\n");
-                        stringBuilder.append(child.child("gender").getValue(String.class));
+                        stringBuilder.append(child.child(Constants.FIREBASE_PATH_USERS_GENDER).getValue(String.class));
                         stringBuilder.append("\n");
-                        Iterable<DataSnapshot> specializations = child.child("specializations").getChildren();
+                        Iterable<DataSnapshot> specializations = child.child(Constants.FIREBASE_PATH_DOCTORS_SPECIALIZATIONS).getChildren();
                         for (DataSnapshot specialist : specializations) {
                             stringBuilder.append(specialist.getValue(String.class));
                             stringBuilder.append("\n");
