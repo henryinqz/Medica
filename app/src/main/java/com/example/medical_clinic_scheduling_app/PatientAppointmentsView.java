@@ -21,6 +21,7 @@ import java.util.Date;
 
 public class PatientAppointmentsView extends AppCompatActivity {
 
+    protected static String userID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,9 @@ public class PatientAppointmentsView extends AppCompatActivity {
         ListView appointmentsView = (ListView) findViewById(R.id.patientAppointmentListView);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         //Find userID = patientID
-        String userID = getIntent().getStringExtra("userid");
+        if (userID == "") {
+            userID = getIntent().getStringExtra("userid");
+        }
         //Find Appointments under that patientID
         ref.child("Appointments").addValueEventListener(new ValueEventListener() {
             @Override
