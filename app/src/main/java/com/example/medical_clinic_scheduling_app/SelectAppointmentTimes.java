@@ -33,11 +33,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class SelectAppointmentTimes extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private Appointment selectedAppointment = null;
+    private Map<Integer, Appointment> indexToAppt = new HashMap<>();
     private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MM dd yyyy @hh");
 
     @Override
@@ -89,10 +92,12 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
         RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
         appointmentGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton selected = (RadioButton) appointmentGroup.getChildAt(i);
+            public void onCheckedChanged(RadioGroup radioGroup, int index) {
+                RadioButton selected = (RadioButton) appointmentGroup.getChildAt(index);
                 Toast.makeText(getApplicationContext(),"Selected: " + selected.getText(),
                         Toast.LENGTH_SHORT).show();
+
+                selectedAppointment = indexToAppt.get(selected.getId());
             }
         });
 
@@ -194,6 +199,8 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
             RadioGroup apptGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
 
             for (Appointment appt : appts) {
+                indexToAppt.put(index, appt);
+
                 RadioButton apptRadioBtn = new RadioButton(this);
 //                apptRadioBtn.setText(appt.getDoctorID());
 //                apptRadioBtn.setText("\n");
@@ -201,6 +208,7 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
 
                 apptGroup.addView(apptRadioBtn);
                 apptRadioBtn.setId(index);
+//                apptRadioBtn.setId(Integer.parseInt(appt.getAppointmentID())); // TODO: weird way to pass apptID
                 apptRadioBtn.setPadding(0,0,0,16);
                 index++;
             }
@@ -234,6 +242,14 @@ public class SelectAppointmentTimes extends AppCompatActivity implements DatePic
 
 
     public void onClickedBookAppointmentButton(View view){
-        startActivity(new Intent(this, PatientAppointmentsView.class));
+        if (this.selectedAppointment != null) {
+            String patientID = FirebaseAuth.getInstance().getCurrentUser().getUid(); // TODO: Pass from previous activities to prevent errors
+            Appointment.bookAppointment(this.selectedAppointment, patientID);
+
+            Toast.makeText(getApplicationContext(), "Booked appointment", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, PatientAppointmentsView.class));
+        } else {
+            Toast.makeText(getApplicationContext(), "Error: select an appointment", Toast.LENGTH_SHORT).show();
+        }
     }
 }

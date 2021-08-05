@@ -75,11 +75,11 @@ public class LoginPageActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), user.getType(), Toast.LENGTH_LONG).show();
                                 if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
                                     Toast.makeText(getApplicationContext(), "Hello doctor " + user.getUsername(), Toast.LENGTH_LONG).show();
-                                    // TODO: Redirect to doctor page
-                                    startActivity(new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class));
+                                    startActivity(new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class)); // Redirect to doctor page
                                 } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
                                     Toast.makeText(getApplicationContext(), "Hello patient " + user.getUsername(), Toast.LENGTH_LONG).show();
-                                    // TODO: Redirect to patient page
+
+                                    // Redirect to patient page
                                     Intent intent = new Intent(getApplicationContext(),PatientAppointmentsView.class);
                                     intent.putExtra("userid", userID);
                                     startActivity(intent);
