@@ -30,15 +30,4 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    /* // Login button
-    public void to_login(View view) {
-        Intent intent = new Intent(this, LoginPageActivity.class);
-        startActivity(intent);
-    }
-
-    //Register button
-    public void to_register(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-    } */
 }

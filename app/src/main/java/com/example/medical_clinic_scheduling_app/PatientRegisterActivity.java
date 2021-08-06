@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -119,8 +124,9 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
             return;
         }
 
+        String emailUsername = username + Constants.USERNAME_EMAIL_DOMAIN;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(username + "@example.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(emailUsername, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -133,8 +139,14 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) { // Created user
-                                        Toast.makeText(getApplicationContext(), "Created patient user", Toast.LENGTH_LONG).show();
-                                        // TODO: Login & go to next intent
+                                        Toast.makeText(getApplicationContext(), "Registered patient", Toast.LENGTH_LONG).show();
+
+                                        // Login (User is authenticated already (?))
+                                        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        // Redirect to patient page
+                                        Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
+                                        intent.putExtra("userid", userID);
+                                        startActivity(intent);
                                     } else { // Failed to create user
                                         Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
                                     }
@@ -146,5 +158,4 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
             }
         });
     }
-
 }

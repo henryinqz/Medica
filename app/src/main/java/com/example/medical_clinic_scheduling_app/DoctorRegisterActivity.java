@@ -3,6 +3,7 @@ package com.example.medical_clinic_scheduling_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -92,8 +93,9 @@ public class DoctorRegisterActivity extends AppCompatActivity {
             return;
         }
 
+        String emailUsername = username + Constants.USERNAME_EMAIL_DOMAIN;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(username + "@example.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(emailUsername, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -108,10 +110,16 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) { // Created user
-                                        Toast.makeText(getApplicationContext(), "Created doctor user", Toast.LENGTH_LONG).show();
-                                        // TODO: Login & go to next intent
+                                        Toast.makeText(getApplicationContext(), "Registered doctor", Toast.LENGTH_LONG).show();
+
+                                        // Login (User is authenticated already (?))
+                                        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        // Redirect to doctor page
+                                        Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class);
+                                        intent.putExtra("userid", userID);
+                                        startActivity(intent);
                                     } else { // Failed to create user
-                                        Toast.makeText(getApplicationContext(), "Failed to create doctor", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Failed to register doctor", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });

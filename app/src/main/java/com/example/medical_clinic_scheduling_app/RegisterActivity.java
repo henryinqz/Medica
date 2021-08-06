@@ -25,14 +25,4 @@ public class RegisterActivity extends AppCompatActivity {
                 break;
         }
     }
-
-    /* public void navigateToDoctorRegister(View view) {
-        Intent intent = new Intent(this, DoctorRegisterActivity.class);
-        startActivity(intent);
-    }
-
-    public void navigateToPatientRegister(View view){
-        Intent intent = new Intent(this, PatientRegisterActivity.class);
-        startActivity(intent);
-    } */
 }
