@@ -107,7 +107,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Doctor user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
 
-                    Appointment.generateAvailableAppointment(new Date(System.currentTimeMillis()), user); // TODO: Broken (in method)
+                    Appointment.generateAvailableAppointment(new Date(System.currentTimeMillis() + 600000), user); // TODO: Broken (in method)
 
                     FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                             .child(userUid)

@@ -73,6 +73,10 @@ public class Appointment implements Comparable<Appointment> {
         return !this.patientID.isEmpty();
     }
 
+    public boolean isPassed() {
+        return this.date.compareTo(new Date(System.currentTimeMillis())) < 0;
+    }
+
     // Static methods:
     public static Appointment generateAvailableAppointment(Date date, Doctor doctor) {
         if (date != null && doctor != null) {
