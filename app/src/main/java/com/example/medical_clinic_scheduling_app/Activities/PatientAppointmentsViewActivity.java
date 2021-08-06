@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -91,8 +94,20 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
         startActivity(intent);
     }
-    public void onProfileBtnClicked (View view){
-        Intent intent = new Intent(this, PatientProfileViewActivity.class);
-        startActivity(intent);
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.profile_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.profile_icon:
+                startActivity(new Intent(getApplicationContext(), PatientProfileViewActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
