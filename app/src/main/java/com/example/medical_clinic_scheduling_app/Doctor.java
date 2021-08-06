@@ -1,27 +1,26 @@
 package com.example.medical_clinic_scheduling_app;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class Doctor extends Person implements Serializable {
-    private List<String> specializations, availableAppointmentIDs, upcomingAppointmentIDs, seenPatientIDs;
+    private List<String> specializations, availableAppointmentIDs, prevAppointmentIDs, upcomingAppointmentIDs, seenPatientIDs;
 
     private Doctor() {
         this.specializations = new ArrayList<String>();
         this.availableAppointmentIDs = new ArrayList<String>();
+        this.prevAppointmentIDs = new ArrayList<String>();
         this.upcomingAppointmentIDs = new ArrayList<String>();
         this.seenPatientIDs = new ArrayList<String>();
     }
-    Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
+    public Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR, uid);
 
         this.specializations = new ArrayList<String>(specializations);
         this.availableAppointmentIDs = new ArrayList<String>();
+        this.prevAppointmentIDs = new ArrayList<String>();
         this.upcomingAppointmentIDs = new ArrayList<String>();
         this.seenPatientIDs = new ArrayList<String>();
         this.availableAppointmentIDs = new ArrayList<String>();
@@ -45,7 +44,6 @@ public class Doctor extends Person implements Serializable {
     }
     public void addAvailableAppointment(String availableApptID) {
         this.availableAppointmentIDs.add(availableApptID);
-        // TODO: Add to Firebase
     }
     public void addAvailableAppointment(Appointment availableAppt) {
         this.addAvailableAppointment(availableAppt.getAppointmentID());
@@ -56,6 +54,17 @@ public class Doctor extends Person implements Serializable {
     }
     public void removeAvailableAppointment(Appointment availableAppt) {
         this.removeAvailableAppointment(availableAppt.getAppointmentID());
+    }
+
+    // prevAppointmentIDs
+    public List<String> getPrevAppointmentIDs() {
+        return this.prevAppointmentIDs;
+    }
+    public void setPrevAppointmentIDs(List<String> prevAppointmentIDs) {
+        this.prevAppointmentIDs = prevAppointmentIDs;
+    }
+    public void addPrevAppointment(Appointment prevAppt) {
+        this.prevAppointmentIDs.add(prevAppt.getAppointmentID());
     }
 
     // upcomingAppointmentIDs
@@ -92,28 +101,17 @@ public class Doctor extends Person implements Serializable {
     }
 
 
-    public void updateBooking(Appointment appt) {
-        this.removeAvailableAppointment(appt);
-        this.addUpcomingAppointment(appt);
-    }
-    public void updatePassing(Appointment appt) {
-        this.removeUpcomingAppointment(appt);
-        this.addSeenPatient(appt.getPatientID());
-    }
+//    public void updateBooking(Appointment appt) {
+//        this.removeAvailableAppointment(appt);
+//        this.addUpcomingAppointment(appt);
+//    }
+//    public void updatePassing(Appointment appt) {
+//        this.removeUpcomingAppointment(appt);
+//        this.addSeenPatient(appt.getPatientID());
+//    }
 
     @Override
     public String toString() {
-//        String doctorString = "Dr. " + this.getFirstName() + " " + this.getLastName();
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append(doctorString);
-//        stringBuilder.append("\n");
-//        stringBuilder.append(this.getGender());
-//        stringBuilder.append("\n");
-//        for(String specialist: specializations){
-//            stringBuilder.append(specialist);
-//            stringBuilder.append("\n");
-//        }
-//        doctorString = stringBuilder.toString();
         return "Dr. " + super.toString();
     }
 }
