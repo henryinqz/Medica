@@ -23,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -122,6 +123,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                                         // Redirect to home page
                                         Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
                                         intent.putExtra("userid", userID);
+                                        createAppointments(user);
                                         startActivity(intent);
                                     } else { // Failed to create user
                                         Toast.makeText(getApplicationContext(), "Failed to register doctor", Toast.LENGTH_LONG).show();
@@ -133,5 +135,19 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void createAppointments(Doctor user){
+        Calendar c = Calendar.getInstance();
+        for (int i = 0; i < 14; i++) { //Generating 2 week's worth of appts.
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            c.set(Calendar.HOUR_OF_DAY, 9);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            for (int j = 0; j < 9; j++) { //Generating the day's appts 9-5
+                Appointment.generateAvailableAppointment(c.getTime(), user);
+                System.out.println(c.getTime().toString());
+                c.add(Calendar.HOUR_OF_DAY, 1);
+            }
+        }
     }
 }
