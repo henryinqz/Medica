@@ -17,13 +17,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/List_of_Previous_Appointments"
+    <ScrollView
         android:layout_width="343dp"
         android:layout_height="571dp"
         android:layout_marginTop="30dp"
+        android:id="@+id/prevApptScrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Previous_Appointments" />
+        app:layout_constraintTop_toBottomOf="@+id/Previous_Appointments">
+        <ListView
+            android:id="@+id/List_of_Previous_Appointments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
