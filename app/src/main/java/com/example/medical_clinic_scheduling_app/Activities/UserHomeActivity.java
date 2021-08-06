@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -99,6 +101,10 @@ public class UserHomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.profile_menu, menu);
+
+        MenuItem action_profile = menu.findItem(R.id.profile_icon);
+        action_profile.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP); //
+
         return true;
     }
     @Override

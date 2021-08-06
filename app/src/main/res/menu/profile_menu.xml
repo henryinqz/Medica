@@ -3,17 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/profile_icon"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/ic_action_profile"
         android:title="Profile"
-        app:showAsAction="ifRoom">
-        <!--
-        <menu>
-            <item
-                android:title="Subitem"
-                android:id="@+id/subitem">
-            </item>
-        </menu>
-        -->
-    </item>
-    
+        app:showAsAction="ifRoom"></item>
 </menu>
