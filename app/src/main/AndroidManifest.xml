@@ -15,6 +15,7 @@
             android:parentActivityName=".Activities.LoginPageActivity"/>
         <activity
             android:name=".Activities.ProfileViewActivity"
+            android:label="Profile"
             android:parentActivityName=".Activities.PatientAppointmentsViewActivity"
             />
         <activity
