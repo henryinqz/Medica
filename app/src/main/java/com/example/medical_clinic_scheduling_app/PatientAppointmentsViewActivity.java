@@ -56,14 +56,15 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot child : snapshot.getChildren()) {
                                     String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
-                                    if (doctorID.equals(childID)){
-                                     //Get Time of Now
-                                    LocalDateTime timeNow = LocalDateTime.now();
-                                    Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
+                                    if (doctorID.equals(childID)) {
+                                        //Get Time of Now
+                                        LocalDateTime timeNow = LocalDateTime.now();
+                                        Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
 
-                                    if (doctorID.equals(childID) && !date.before(today) ){
-                                        Person doc = child.getValue(Person.class);
-                                        appointments.add("Dr. " + doc.toString() + "\n" + date.toString());
+                                        if (doctorID.equals(childID) && !date.before(today)) {
+                                            Person doc = child.getValue(Person.class);
+                                            appointments.add("Dr. " + doc.toString() + "\n" + date.toString());
+                                        }
                                     }
                                 }
                                 ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);

@@ -78,7 +78,7 @@ public class LoginPageActivity extends AppCompatActivity {
                                     // TODO: Redirect to doctor page
                                     Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class);
                                     intent.putExtra("userid", userID);
-                                    startActivity(new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class));
+                                    startActivity(intent);
                                 } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
                                     Toast.makeText(getApplicationContext(), "Hello patient " + user.getUsername(), Toast.LENGTH_LONG).show();
 
