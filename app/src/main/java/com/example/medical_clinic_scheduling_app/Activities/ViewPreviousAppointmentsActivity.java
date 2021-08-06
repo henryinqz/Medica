@@ -35,15 +35,8 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_previous_appointments);
 
-//        ListView previousAppointmentsView = (ListView) findViewById(R.id.List_of_Previous_Appointments);
-//        ArrayList<String> previousAppointments = new ArrayList<String>();
-//        previousAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        previousAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        previousAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        ArrayAdapter previousAppointmentsAdaptor = new ArrayAdapter(this, android.R.layout.simple_list_item_1, previousAppointments);
-//        previousAppointmentsView.setAdapter(previousAppointmentsAdaptor);
-
         ArrayList<String> appointments = new ArrayList<>();
+        ArrayList<String> appointmentIDs = new ArrayList<String>();
         ListView appointmentsView = (ListView) findViewById(R.id.List_of_Previous_Appointments);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         //Find userID = doctorID
@@ -57,6 +50,7 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
                     String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
+                    String appointmentID = child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class);
                     Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
                     if (doctorID.equals(userID)) {
                         ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
@@ -71,6 +65,7 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                                     if (patientID.equals(childID) && date.before(today)) {
                                         Person patient = child.getValue(Person.class);
                                         appointments.add("Patient " + patient.toString() + "\n" + date.toString());
+                                        appointmentIDs.add(appointmentID);
                                     }
                                 }
                                 ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
@@ -95,6 +90,7 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                                     if (doctorID.equals(childID) && date.before(today)) {
                                         Person doc = child.getValue(Person.class);
                                         appointments.add("Dr " + doc.toString() + "\n" + date.toString());
+                                        appointmentIDs.add(appointmentID);
                                     }
                                 }
                                 ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
@@ -120,7 +116,7 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentDetailsActivity.class);
-                intent.putExtra("Appointment", appointments.get(i));
+                intent.putExtra("Appointment", appointmentIDs.get(i));
                 startActivity(intent);
             }
         });

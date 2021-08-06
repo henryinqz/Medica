@@ -20,4 +20,6 @@ public class Constants {
     public static final String FIREBASE_PATH_APPOINTMENTS_DATE = "date";
     public static final String FIREBASE_PATH_APPOINTMENTS_PATIENT_ID = "patientID";
     public static final String FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID = "doctorID";
+
+    public static final String FIREBASE_PATH_APPOINTMENT_ID = "appointmentID";
 }
