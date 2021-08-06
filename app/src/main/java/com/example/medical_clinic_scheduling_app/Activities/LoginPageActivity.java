@@ -77,19 +77,6 @@ public class LoginPageActivity extends AppCompatActivity {
                                 Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
                                 intent.putExtra("userid", userID);
                                 startActivity(intent);
-//                                if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
-//                                    // Redirect to doctor page
-//                                    Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class);
-//                                    intent.putExtra("userid", userID);
-//                                    startActivity(intent);
-//                                } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
-//                                    // Redirect to patient page
-//                                    Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
-//                                    intent.putExtra("userid", userID);
-//                                    startActivity(intent);
-//                                } else {
-//                                    Toast.makeText(getApplicationContext(), "Error: user has no type", Toast.LENGTH_LONG).show();
-//                                }
                             } else {
                                 Toast.makeText(getApplicationContext(), "Error: user is null", Toast.LENGTH_LONG).show();
                             }
