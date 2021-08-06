@@ -17,22 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <ListView
+        android:id="@+id/List_of_Available_Time_Slots"
         android:layout_width="348dp"
         android:layout_height="585dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Currently_Available_Time_Slots">
-        <ListView
-            android:id="@+id/List_of_Available_Time_Slots"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Currently_Available_Time_Slots" />
-    </ScrollView>
-
+        app:layout_constraintTop_toBottomOf="@+id/Currently_Available_Time_Slots"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

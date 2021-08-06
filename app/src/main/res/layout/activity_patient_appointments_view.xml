@@ -6,23 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".Activities.PatientAppointmentsViewActivity">
 
-    <ScrollView
+    <ListView
+        android:id="@+id/patientAppointmentListView"
         android:layout_width="307dp"
         android:layout_height="480dp"
         android:layout_marginTop="12dp"
-        android:id="@+id/patientBookApptScrollView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patientBookAppBtn">
-        <ListView
-            android:id="@+id/patientAppointmentListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/patientBookAppBtn" />
 
     <Button
         android:id="@+id/patientBookAppBtn"
