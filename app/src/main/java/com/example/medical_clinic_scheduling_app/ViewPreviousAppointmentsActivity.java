@@ -23,35 +23,30 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DoctorViewAppointmentActivity extends AppCompatActivity {
+public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
 
     protected static String userID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctor_view_appointment);
+        setContentView(R.layout.activity_view_previous_appointments);
 
-////        //Setting up ListView of Appointments
-//        ListView upcomingAppointmentsView = (ListView) findViewById(R.id.AppointmentListView);
-//        ArrayList<String> upcomingAppointments = new ArrayList<String>();
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        ArrayAdapter upcomingAppointmentsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, upcomingAppointments);
-//        upcomingAppointmentsView.setAdapter(upcomingAppointmentsAdapter);
+//        ListView previousAppointmentsView = (ListView) findViewById(R.id.List_of_Previous_Appointments);
+//        ArrayList<String> previousAppointments = new ArrayList<String>();
+//        previousAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
+//        previousAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
+//        previousAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
+//        ArrayAdapter previousAppointmentsAdaptor = new ArrayAdapter(this, android.R.layout.simple_list_item_1, previousAppointments);
+//        previousAppointmentsView.setAdapter(previousAppointmentsAdaptor);
 
-        //Setting up ListView of Appointments
         ArrayList<String> appointments = new ArrayList<>();
-        ListView appointmentsView = (ListView) findViewById(R.id.AppointmentListView);
+        ListView appointmentsView = (ListView) findViewById(R.id.List_of_Previous_Appointments);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         //Find userID = doctorID
         if (getIntent().getStringExtra("userid") != null) {
             userID = getIntent().getStringExtra("userid");
         }
-
         //Find Appointments under that doctorID
         ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,8 +65,7 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
                                     //Get Time of Now
                                     LocalDateTime timeNow = LocalDateTime.now();
                                     Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
-
-                                    if (patientID.equals(childID) && !date.before(today)) {
+                                    if (patientID.equals(childID) && date.before(today)) {
                                         Person patient = child.getValue(Person.class);
                                         appointments.add("Patient " + patient.toString() + "\n" + date.toString());
                                     }
@@ -95,27 +89,13 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
             }
         });
 
-        if(appointmentsView != null) {
-            appointmentsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentDetailsActivity.class);
-                    intent.putExtra("Appointment", appointments.get(i));
-                    startActivity(intent);
-                }
-            });
-        }
-    }
-
-    public void gotoViewPreviousAppointmentsPage(View view){
-        Intent intent = new Intent(getApplicationContext(), ViewPreviousAppointmentsActivity.class);
-        intent.putExtra("userid", userID);
-        startActivity(intent);
-    }
-
-    public void gotoViewAvailableTimeSlotsPage(View view){
-        Intent intent = new Intent(getApplicationContext(), DoctorViewAvailableTimeSlotsActivity.class);
-        intent.putExtra("userid", userID);
-        startActivity(intent);
+        appointmentsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentDetailsActivity.class);
+                intent.putExtra("Appointment", appointments.get(i));
+                startActivity(intent);
+            }
+        });
     }
 }

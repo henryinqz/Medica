@@ -54,9 +54,8 @@ public class LoginPageActivity extends AppCompatActivity {
             return;
         }
 
-        String emailUsername = username + "@example.com";
+        String emailUsername = username + Constants.USERNAME_EMAIL_DOMAIN;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-
         auth.signInWithEmailAndPassword(emailUsername, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -64,7 +63,7 @@ public class LoginPageActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_LONG).show();
 
                     String userID = auth.getCurrentUser().getUid();
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS);
 
                     ref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -72,15 +71,17 @@ public class LoginPageActivity extends AppCompatActivity {
                             Person user = snapshot.getValue(Person.class);
 
                             if (user != null) {
-                                Toast.makeText(getApplicationContext(), user.getType(), Toast.LENGTH_LONG).show();
+//                                Toast.makeText(getApplicationContext(), user.getType(), Toast.LENGTH_LONG).show();
                                 if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
-                                    Toast.makeText(getApplicationContext(), "Hello doctor " + user.getUsername(), Toast.LENGTH_LONG).show();
-                                    // TODO: Redirect to doctor page
-                                    startActivity(new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class));
+                                    // Redirect to doctor page
+                                    Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class);
+                                    intent.putExtra("userid", userID);
+                                    startActivity(intent);
                                 } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
-                                    Toast.makeText(getApplicationContext(), "Hello patient " + user.getUsername(), Toast.LENGTH_LONG).show();
-                                    // TODO: Redirect to patient page
-                                    startActivity(new Intent(getApplicationContext(),PatientAppointmentsView.class));
+                                    // Redirect to patient page
+                                    Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
+                                    intent.putExtra("userid", userID);
+                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Error: user has no type", Toast.LENGTH_LONG).show();
                                 }

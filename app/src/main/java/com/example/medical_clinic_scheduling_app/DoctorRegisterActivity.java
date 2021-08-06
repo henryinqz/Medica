@@ -3,6 +3,7 @@ package com.example.medical_clinic_scheduling_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
 import java.util.HashSet;
 
 public class DoctorRegisterActivity extends AppCompatActivity {
@@ -74,7 +76,6 @@ public class DoctorRegisterActivity extends AppCompatActivity {
         String gender = genderSpinner.getSelectedItem().toString();
 
         // Errors
-        // TODO: Gender, specialization error checks (?) (Shouldn't be errors but maybe check if the strings match something expected input?)
         if(firstName.isEmpty()) {
             firstNameEditText.setError("Empty first name");
             return;
@@ -92,24 +93,33 @@ public class DoctorRegisterActivity extends AppCompatActivity {
             return;
         }
 
+        String emailUsername = username + Constants.USERNAME_EMAIL_DOMAIN;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(username + "@example.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(emailUsername, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    Person user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
+                    Doctor user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
 
-                    FirebaseDatabase.getInstance().getReference("Users")
+                    Appointment.generateAvailableAppointment(new Date(System.currentTimeMillis()), user); // TODO: Broken (in method)
+
+                    FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                             .child(userUid)
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) { // Created user
-                                        Toast.makeText(getApplicationContext(), "Created doctor user", Toast.LENGTH_LONG).show();
-                                        // TODO: Login & go to next intent
+                                        Toast.makeText(getApplicationContext(), "Registered doctor", Toast.LENGTH_LONG).show();
+
+                                        // Login (User is authenticated already (?))
+                                        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        // Redirect to doctor page
+                                        Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class);
+                                        intent.putExtra("userid", userID);
+                                        startActivity(intent);
                                     } else { // Failed to create user
-                                        Toast.makeText(getApplicationContext(), "Failed to create doctor", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Failed to register doctor", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });

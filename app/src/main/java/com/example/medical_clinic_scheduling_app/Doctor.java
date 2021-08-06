@@ -1,22 +1,29 @@
 package com.example.medical_clinic_scheduling_app;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class Doctor extends Person implements Serializable {
-    private List<String> specializations, availableAppointmentIDs, upcomingAppointmentIDs, seenPatientIDs;
+    private List<String> specializations, availableAppointmentIDs, prevAppointmentIDs, upcomingAppointmentIDs, seenPatientIDs;
 
-    Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
+    private Doctor() {
+        this.specializations = new ArrayList<String>();
+        this.availableAppointmentIDs = new ArrayList<String>();
+        this.prevAppointmentIDs = new ArrayList<String>();
+        this.upcomingAppointmentIDs = new ArrayList<String>();
+        this.seenPatientIDs = new ArrayList<String>();
+    }
+    public Doctor(String username, String firstName, String lastName, String gender, HashSet<String> specializations, String uid) {
         super(username, firstName, lastName, gender, Constants.PERSON_TYPE_DOCTOR, uid);
 
         this.specializations = new ArrayList<String>(specializations);
+        this.availableAppointmentIDs = new ArrayList<String>();
+        this.prevAppointmentIDs = new ArrayList<String>();
         this.upcomingAppointmentIDs = new ArrayList<String>();
         this.seenPatientIDs = new ArrayList<String>();
+        this.availableAppointmentIDs = new ArrayList<String>();
     }
 
     // Getters/setters:
@@ -27,60 +34,84 @@ public class Doctor extends Person implements Serializable {
     public void setSpecializations(List<String> specializations) {
         this.specializations = specializations;
     }
+
     // availableAppointmentIDs
     public List<String> getAvailableAppointmentIDs() {
         return availableAppointmentIDs;
     }
-    private void addAvailableAppointment(Appointment availableAppt) {
-        this.availableAppointmentIDs.add(availableAppt.getAppointmentID());
+    public void setAvailableAppointmentIDs(List<String> availableAppointmentIDs) {
+        this.availableAppointmentIDs = availableAppointmentIDs;
     }
-    private void removeAvailableAppointment(Appointment availableAppt) {
-        this.availableAppointmentIDs.remove(availableAppt.getAppointmentID());
+    public void addAvailableAppointment(String availableApptID) {
+        this.availableAppointmentIDs.add(availableApptID);
     }
+    public void addAvailableAppointment(Appointment availableAppt) {
+        this.addAvailableAppointment(availableAppt.getAppointmentID());
+    }
+
+    public void removeAvailableAppointment(String availableApptID) {
+        this.availableAppointmentIDs.remove(availableApptID);
+    }
+    public void removeAvailableAppointment(Appointment availableAppt) {
+        this.removeAvailableAppointment(availableAppt.getAppointmentID());
+    }
+
+    // prevAppointmentIDs
+    public List<String> getPrevAppointmentIDs() {
+        return this.prevAppointmentIDs;
+    }
+    public void setPrevAppointmentIDs(List<String> prevAppointmentIDs) {
+        this.prevAppointmentIDs = prevAppointmentIDs;
+    }
+    public void addPrevAppointment(Appointment prevAppt) {
+        this.prevAppointmentIDs.add(prevAppt.getAppointmentID());
+    }
+
     // upcomingAppointmentIDs
     public List<String> getUpcomingAppointmentIDs() {
         return this.upcomingAppointmentIDs;
     }
-    private void addUpcomingAppointment(Appointment upcomingAppt) {
-        this.upcomingAppointmentIDs.add(upcomingAppt.getAppointmentID());
+    public void setUpcomingAppointmentIDs(List<String> upcomingAppointmentIDs) {
+        this.upcomingAppointmentIDs = upcomingAppointmentIDs;
     }
-    private void removeUpcomingAppointment(Appointment upcomingAppt) {
-        this.upcomingAppointmentIDs.remove(upcomingAppt.getAppointmentID());
+    public void addUpcomingAppointment(String upcomingApptID) {
+        this.upcomingAppointmentIDs.add(upcomingApptID);
+    }
+    public void addUpcomingAppointment(Appointment upcomingAppt) {
+        this.addUpcomingAppointment(upcomingAppt.getAppointmentID());
+    }
+    public void removeUpcomingAppointment(String upcomingApptID) {
+        this.upcomingAppointmentIDs.remove(upcomingApptID);
+    }
+    public void removeUpcomingAppointment(Appointment upcomingAppt) {
+        this.removeUpcomingAppointment(upcomingAppt.getAppointmentID());
     }
     // seenPatientIDs
     public List<String> getSeenPatientIDs() {
         return this.seenPatientIDs;
     }
-    private void addSeenPatient(Patient patient) {
+    public void setSeenPatientIDs(List<String> seenPatientIDs) {
+        this.seenPatientIDs = seenPatientIDs;
+    }
+    public void addSeenPatient(Patient patient) {
         this.seenPatientIDs.add(patient.getID());
     }
-    private void addSeenPatient(String patientID) {
+    public void addSeenPatient(String patientID) {
         this.seenPatientIDs.add(patientID);
     }
 
 
-    public void updateBooking(Appointment appt) {
-        this.removeAvailableAppointment(appt);
-        this.addUpcomingAppointment(appt);
-    }
-    public void updatePassing(Appointment appt) {
-        this.removeUpcomingAppointment(appt);
-        this.addSeenPatient(appt.getPatientID());
-    }
+//    public void updateBooking(Appointment appt) {
+//        this.removeAvailableAppointment(appt);
+//        this.addUpcomingAppointment(appt);
+//    }
+//    public void updatePassing(Appointment appt) {
+//        this.removeUpcomingAppointment(appt);
+//        this.addSeenPatient(appt.getPatientID());
+//    }
 
     @Override
     public String toString() {
-//        String doctorString = "Dr. " + this.getFirstName() + " " + this.getLastName();
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append(doctorString);
-//        stringBuilder.append("\n");
-//        stringBuilder.append(this.getGender());
-//        stringBuilder.append("\n");
-//        for(String specialist: specializations){
-//            stringBuilder.append(specialist);
-//            stringBuilder.append("\n");
-//        }
-//        doctorString = stringBuilder.toString();
         return "Dr. " + super.toString();
     }
 }

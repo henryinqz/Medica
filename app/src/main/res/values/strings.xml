@@ -67,9 +67,10 @@
     <string name="filter_specialist_button">Filter Specialist</string>
 
     <!-- SELECT APPOINTMENT TIMES STRINGS -->
-    <string name="SAT_title">Doctor Availability Times</string>
+    <string name="SAT_title">Availability Times</string>
     <string name="SAT_book_button">BOOK</string>
-    <string name="title_activity_doctor_after_login">Doctor_After_Login_Activity</string>
+    <string name="title_activity_doctor_after_login">Doctor_After_Login_Activity</string>-
+    <string name="none">None</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -79,9 +80,21 @@
     <!-- UPCOMING ACTIVITIES -->
     <string name="upcoming_appointments">Upcoming Appointments</string>
     <string name="view_your_appointments">View Your Appointments</string>
+    <string name="previous_appointments">Previous Appointments</string>
+    <string name="view_previous_appointments">View Previous Appointments</string>
+    <string name="view_available_time_slots">View Your Available Time Slots</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- View Appointment Details -->
+    <string name="appointment_details">Appointment Details</string>
+    <string name="appointment_time">Appointment Time</string>
+    <string name="appointment_id">Appointment ID</string>
+    <string name="doctor_name">Doctor Name</string>
+    <string name="patient_name">Patient Name</string>
+    <string name="patient_details">Patient Details</string>
+    <string name="patient_previous_doctors">Patient Previous Doctors</string>
 
     <string name="book_appointment">Book Appointment</string>
 </resources>

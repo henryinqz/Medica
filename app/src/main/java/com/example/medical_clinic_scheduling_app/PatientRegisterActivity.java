@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -54,16 +59,20 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day){
         //Setting the birthDateLabel to patient's birthday from DatePicker.
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, day);
+        Calendar birthDateCalendar = Calendar.getInstance();
+        birthDateCalendar.set(Calendar.YEAR, year);
+        birthDateCalendar.set(Calendar.MONTH, month);
+        birthDateCalendar.set(Calendar.DAY_OF_MONTH, day);
+        birthDateCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        birthDateCalendar.set(Calendar.MINUTE, 0);
+        birthDateCalendar.set(Calendar.SECOND, 0);
+        birthDateCalendar.set(Calendar.MILLISECOND, 0);
 
-        String currentDateStr = DateFormat.getDateInstance().format(c.getTime());
+        String currentDateStr = DateFormat.getDateInstance().format(birthDateCalendar.getTime());
         TextView textView = (TextView) findViewById(R.id.txtRegisterPatientBirthdayDate);
         textView.setText(currentDateStr);
 
-        dateOfBirth = c.getTime();
+        dateOfBirth = birthDateCalendar.getTime();
     }
 
     public void onClick(View view) {
@@ -115,22 +124,29 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
             return;
         }
 
+        String emailUsername = username + Constants.USERNAME_EMAIL_DOMAIN;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(username + "@example.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(emailUsername, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Person user = new Patient(username, firstName, lastName, gender, dateOfBirth, userUid);
 
-                    FirebaseDatabase.getInstance().getReference("Users")
+                    FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                             .child(userUid)
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) { // Created user
-                                        Toast.makeText(getApplicationContext(), "Created patient user", Toast.LENGTH_LONG).show();
-                                        // TODO: Login & go to next intent
+                                        Toast.makeText(getApplicationContext(), "Registered patient", Toast.LENGTH_LONG).show();
+
+                                        // Login (User is authenticated already (?))
+                                        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        // Redirect to patient page
+                                        Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
+                                        intent.putExtra("userid", userID);
+                                        startActivity(intent);
                                     } else { // Failed to create user
                                         Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
                                     }
@@ -142,5 +158,4 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
             }
         });
     }
-
 }

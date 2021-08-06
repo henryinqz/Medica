@@ -9,16 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class AppointmentFilterOptions extends AppCompatActivity {
+public class AppointmentFilterOptionsActivity extends AppCompatActivity {
     private HashSet<String> specializations = new HashSet<String>();
 
     @Override
@@ -28,7 +22,7 @@ public class AppointmentFilterOptions extends AppCompatActivity {
 
         //Setting up the Gender Dropdown List
         Spinner genderSpinner = (Spinner)findViewById(R.id.filterByGenderSpinner);
-        ArrayAdapter<String> genderSpinnerAdapter = new ArrayAdapter<>(AppointmentFilterOptions.this,
+        ArrayAdapter<String> genderSpinnerAdapter = new ArrayAdapter<>(AppointmentFilterOptionsActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.FilterGender));
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderSpinnerAdapter);
@@ -51,7 +45,7 @@ public class AppointmentFilterOptions extends AppCompatActivity {
     public void onFilterButtonClicked (View view){
         //TODO: filter database w/ selected options and return result to MAIN APPOINTMENT page
         //Note: BookYourAppointmentMain is not the main appointment page.
-        Intent intent = new Intent(this, BookYourAppointmentMain.class);
+        Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
         Spinner genderSpinner = (Spinner) findViewById(R.id.filterByGenderSpinner);
         String gender = genderSpinner.getSelectedItem().toString();
         intent.putExtra("gender", gender);

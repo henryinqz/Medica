@@ -1,13 +1,10 @@
 package com.example.medical_clinic_scheduling_app;
 
-import static com.google.android.material.internal.ContextUtils.getActivity;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,14 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 
-public class BookYourAppointmentMain extends AppCompatActivity {
+public class BookYourAppointmentMainActivity extends AppCompatActivity {
 
     protected boolean checkSpecializations (List<String> a, List<String> b){
         for (String s: b){
@@ -48,8 +41,9 @@ public class BookYourAppointmentMain extends AppCompatActivity {
 
         //Setting up ListView of Doctors
         ListView doctorView = (ListView) findViewById(R.id.doctorListView);
-        final ArrayList<String> doctors = new ArrayList<String>();
-        final ArrayAdapter doctorAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, doctors);
+        final ArrayList<String> printDoctors = new ArrayList<String>();
+        final ArrayList<Person> doctors = new ArrayList<Person>();
+        final ArrayAdapter doctorAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, printDoctors);
         //The format can be: "Dr. NAME\nGENDER\nSPECIALIZATION"
 //        doctors.add("Dr. Eric Zhou\nMale\nCardiology");
 
@@ -74,33 +68,34 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         filterOptions.setText(genderText + "\n" + specializationText.toString());
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("Users").addValueEventListener(new ValueEventListener() {
+        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
-                    String type = child.child("type").getValue(String.class);
-                    String userGender = child.child("gender").getValue(String.class);
+                    String type = child.child(Constants.FIREBASE_PATH_USERS_TYPE).getValue(String.class);
+                    String userGender = child.child(Constants.FIREBASE_PATH_USERS_GENDER).getValue(String.class);
                     List<String> userSpecialization = (List<String>) child.child("specializations").getValue();
 
-                    if (type.equals("DOCTOR") &&
+                    if (type.equals(Constants.PERSON_TYPE_DOCTOR) &&
                             (gender == null || (gender != null && (userGender.equals(gender) || gender.equals("Any Gender"))))
                             && (specialization == null ||
                             (specialization != null && userSpecialization != null
                                     && checkSpecializations(userSpecialization, specialization)))) {
                         StringBuilder stringBuilder = new StringBuilder();
                         stringBuilder.append("Dr. ");
-                        stringBuilder.append(child.child("firstName").getValue(String.class));
+                        stringBuilder.append(child.child(Constants.FIREBASE_PATH_USERS_FIRST_NAME).getValue(String.class));
                         stringBuilder.append(" ");
-                        stringBuilder.append(child.child("lastName").getValue(String.class));
+                        stringBuilder.append(child.child(Constants.FIREBASE_PATH_USERS_LAST_NAME).getValue(String.class));
                         stringBuilder.append("\n");
-                        stringBuilder.append(child.child("gender").getValue(String.class));
+                        stringBuilder.append(child.child(Constants.FIREBASE_PATH_USERS_GENDER).getValue(String.class));
                         stringBuilder.append("\n");
-                        Iterable<DataSnapshot> specializations = child.child("specializations").getChildren();
+                        Iterable<DataSnapshot> specializations = child.child(Constants.FIREBASE_PATH_DOCTORS_SPECIALIZATIONS).getChildren();
                         for (DataSnapshot specialist : specializations) {
                             stringBuilder.append(specialist.getValue(String.class));
                             stringBuilder.append("\n");
                         }
-                        doctors.add(stringBuilder.toString());
+                        printDoctors.add(stringBuilder.toString());
+                        doctors.add(child.getValue(Person.class));
                     }
                 }
                 doctorView.setAdapter(doctorAdapter);
@@ -116,9 +111,12 @@ public class BookYourAppointmentMain extends AppCompatActivity {
         //Setting up listener for when item is clicked.
         doctorView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(BookYourAppointmentMain.this, "Selected Doctors: " + doctors.get(i).toString(), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), SelectAppointmentTimes.class));
+            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                Toast.makeText(BookYourAppointmentMainActivity.this, "Selected Dr. " + doctors.get(index).toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), SelectAppointmentTimesActivity.class);
+                intent.putExtra("doctor", printDoctors.get(index).toString());
+                intent.putExtra("doctorID", doctors.get(index).getID());
+                startActivity(intent);
             }
         });
     }
@@ -126,7 +124,7 @@ public class BookYourAppointmentMain extends AppCompatActivity {
     public void onFilterStartButtonClicked (View view){
         //TODO: filter database w/ selected options and return result to main page
 
-        Intent intent = new Intent(this, AppointmentFilterOptions.class);
+        Intent intent = new Intent(this, AppointmentFilterOptionsActivity.class);
         startActivity(intent);
     }
 }

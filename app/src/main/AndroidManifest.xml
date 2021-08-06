@@ -10,21 +10,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
-            android:name=".PatientAppointmentsView"
-            android:parentActivityName=".LoginPageActivity"/>
-        <activity
-            android:name=".DoctorViewAppointmentActivity"
-            android:parentActivityName=".LoginPageActivity"
+            android:name=".PatientProfileViewActivity"
             android:exported="true" />
         <activity
-            android:name=".SelectAppointmentTimes"
-            android:parentActivityName=".BookYourAppointmentMain" />
+            android:name=".DoctorViewAvailableTimeSlotsActivity"
+            android:exported="true"
+            android:parentActivityName=".DoctorViewAppointmentActivity" />
         <activity
-            android:name=".AppointmentFilterOptions"
-            android:parentActivityName=".BookYourAppointmentMain" />
+            android:name=".ViewPreviousAppointmentsActivity"
+            android:exported="true"
+            android:parentActivityName=".DoctorViewAppointmentActivity" />
         <activity
-            android:name=".BookYourAppointmentMain"
-            android:parentActivityName=".PatientAppointmentsView" />
+            android:name=".DoctorViewAppointmentDetailsActivity"
+            android:exported="true"
+            android:parentActivityName=".DoctorViewAppointmentActivity" />
+        <activity
+            android:name=".PatientAppointmentsViewActivity"
+            android:label="Patient Appointments"
+            android:parentActivityName=".LoginPageActivity" />
+        <activity
+            android:name=".DoctorViewAppointmentActivity"
+            android:exported="true"
+            android:parentActivityName=".LoginPageActivity" />
+        <activity
+            android:name=".SelectAppointmentTimesActivity"
+            android:label="Doctor Availabilities"
+            android:parentActivityName=".BookYourAppointmentMainActivity" />
+        <activity
+            android:name=".AppointmentFilterOptionsActivity"
+            android:label="Filter Doctor By"
+            android:parentActivityName=".BookYourAppointmentMainActivity" />
+        <activity
+            android:name=".BookYourAppointmentMainActivity"
+            android:label="Book Your Appointment"
+            android:parentActivityName=".PatientAppointmentsViewActivity" />
         <activity
             android:name=".PatientRegisterActivity"
             android:label="@string/register_patient_title"
