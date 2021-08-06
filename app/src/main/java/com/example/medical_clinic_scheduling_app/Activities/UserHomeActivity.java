@@ -40,13 +40,16 @@ public class UserHomeActivity extends AppCompatActivity {
                         if (user != null) {
                             Button btnTop = (Button) findViewById(R.id.btnHomeBookOrSchedule);
                             TextView txtWelcome1 = (TextView) findViewById(R.id.txtHomeWelcome1);
-                            txtWelcome1.setText(getResources().getString(R.string.user_home_welcome1) + " " + user.toString());
+                            txtWelcome1.setText(getResources().getString(R.string.user_home_welcome1));
 
                             if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
                                 btnTop.setText(getResources().getString(R.string.user_home_schedule)); // Set top button to "View/edit schedule"
+                                txtWelcome1.append(" Dr. ");
                             } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
                                 btnTop.setText(getResources().getString(R.string.user_home_book_appt));
                             }
+
+                            txtWelcome1.append(user.toString());
                         } else {
                             Toast.makeText(getApplicationContext(), "Error: user is null", Toast.LENGTH_LONG).show();
                         }
