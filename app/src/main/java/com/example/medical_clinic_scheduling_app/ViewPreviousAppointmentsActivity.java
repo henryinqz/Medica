@@ -23,7 +23,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ViewPreviousAppointments extends AppCompatActivity {
+public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
 
     protected static String userID = "";
 

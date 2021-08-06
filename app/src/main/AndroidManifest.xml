@@ -17,7 +17,7 @@
             android:exported="true"
             android:parentActivityName=".DoctorViewAppointmentActivity" />
         <activity
-            android:name=".ViewPreviousAppointments"
+            android:name=".ViewPreviousAppointmentsActivity"
             android:exported="true"
             android:parentActivityName=".DoctorViewAppointmentActivity" />
         <activity
