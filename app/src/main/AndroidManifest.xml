@@ -15,7 +15,7 @@
             android:parentActivityName=".Activities.LoginPageActivity"/>
         <activity
             android:name=".Activities.PatientProfileViewActivity"
-            android:exported="true" />
+            android:parentActivityName=".Activities.PatientProfileViewActivity" />
         <activity
             android:name=".Activities.DoctorViewAvailableTimeSlotsActivity"
             android:exported="true"
