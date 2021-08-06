@@ -3,20 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_book_your_appointment_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_doctor_view_appointment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_doctor_view_appointment_details.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_patient_appointments_view.xml" value="0.33" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_patient_profile_view.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_patient_register.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_select_appointment_times.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_user_home.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/layout/activity_view_previous_appointments.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/menu/profile_menu.xml" value="0.5" />
-        <entry key="..\:/Users/Henry/OneDrive - University of Toronto/Coursework/Summer 2021/CSCB07 (Software Design)/Assignments/Project/medica/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.25625" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_appointment_filter_options.xml" value="0.2375" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_book_your_appointment_main.xml" value="0.33" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_doctor_register.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_doctor_view_appointment.xml" value="0.2375" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_doctor_view_appointment_details.xml" value="0.19375" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_doctor_view_available_time_slots.xml" value="0.24270833333333333" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_login_page.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_patient_appointments_view.xml" value="0.25" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_patient_profile_view.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_patient_register.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_profile_view.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_register.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_select_appointment_times.xml" value="0.19375" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_user_home.xml" value="0.2375" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/layout/activity_view_previous_appointments.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/eric_/AndroidStudioProjects/Medica/app/src/main/res/menu/profile_menu.xml" value="0.2324074074074074" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Medical-Clinic-Scheduling-App/app/src/main/res/layout/activity_doctor_view_appointment.xml" value="0.7333333333333334" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Medical-Clinic-Scheduling-App/app/src/main/res/layout/activity_view_appointment_details.xml" value="0.6666666666666666" />
       </map>
