@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
+            android:name=".Activities.UserHomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activities.PatientProfileViewActivity"
             android:exported="true" />
         <activity
