@@ -1,9 +1,11 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ListView;
+
+import com.example.medical_clinic_scheduling_app.R;
 
 public class PatientProfileViewActivity extends AppCompatActivity {
 

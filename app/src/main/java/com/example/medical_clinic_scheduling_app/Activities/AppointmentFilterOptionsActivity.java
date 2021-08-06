@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import com.example.medical_clinic_scheduling_app.Fragments.MultipleSelectionFragment;
+import com.example.medical_clinic_scheduling_app.R;
 
 import java.util.ArrayList;
 import java.util.HashSet;

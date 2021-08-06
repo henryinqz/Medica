@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.medical_clinic_scheduling_app.Objects.Appointment;
+import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.Objects.Doctor;
+import com.example.medical_clinic_scheduling_app.Fragments.MultipleSelectionFragment;
+import com.example.medical_clinic_scheduling_app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

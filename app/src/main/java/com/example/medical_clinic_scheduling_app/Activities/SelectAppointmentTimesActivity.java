@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.medical_clinic_scheduling_app.Objects.Appointment;
+import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.DateUtility;
+import com.example.medical_clinic_scheduling_app.Fragments.DatePickerFragment;
+import com.example.medical_clinic_scheduling_app.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

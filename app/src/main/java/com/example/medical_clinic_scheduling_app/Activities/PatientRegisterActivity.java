@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,15 +16,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.Fragments.DatePickerFragment;
+import com.example.medical_clinic_scheduling_app.Objects.Patient;
+import com.example.medical_clinic_scheduling_app.Objects.Person;
+import com.example.medical_clinic_scheduling_app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Calendar;

@@ -1,11 +1,12 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+
+import com.example.medical_clinic_scheduling_app.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

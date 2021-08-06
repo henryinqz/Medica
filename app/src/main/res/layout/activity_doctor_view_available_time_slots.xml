@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DoctorViewAvailableTimeSlotsActivity">
+    tools:context=".Activities.DoctorViewAvailableTimeSlotsActivity">
 
     <TextView
         android:id="@+id/Currently_Available_Time_Slots"
