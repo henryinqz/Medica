@@ -5,19 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medical_clinic_scheduling_app.Constants;
-import com.example.medical_clinic_scheduling_app.Objects.Doctor;
 import com.example.medical_clinic_scheduling_app.Objects.Person;
 import com.example.medical_clinic_scheduling_app.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -93,5 +94,20 @@ public class UserHomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.profile_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.profile_icon:
+                startActivity(new Intent(getApplicationContext(), ProfileViewActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -105,7 +105,7 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.profile_icon:
-                startActivity(new Intent(getApplicationContext(), PatientProfileViewActivity.class));
+                startActivity(new Intent(getApplicationContext(), ProfileViewActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);
