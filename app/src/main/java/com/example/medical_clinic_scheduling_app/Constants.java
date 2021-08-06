@@ -13,6 +13,7 @@ public class Constants {
     public static final String FIREBASE_PATH_USERS_TYPE = "type";
     public static final String FIREBASE_PATH_USERS_GENDER = "gender";
     public static final String FIREBASE_PATH_USERS_APPTS_AVAILABLE = "availableAppointmentIDs";
+    public static final String FIREBASE_PATH_USERS_DATE_OF_BIRTH = "dateOfBirth";
 
     public static final String FIREBASE_PATH_DOCTORS_SPECIALIZATIONS = "specializations";
 

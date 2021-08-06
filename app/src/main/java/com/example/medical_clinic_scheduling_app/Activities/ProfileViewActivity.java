@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.Objects.Doctor;
+import com.example.medical_clinic_scheduling_app.Objects.Patient;
 import com.example.medical_clinic_scheduling_app.Objects.Person;
 import com.example.medical_clinic_scheduling_app.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +19,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class ProfileViewActivity extends AppCompatActivity {
     private Person user;
@@ -27,6 +33,7 @@ public class ProfileViewActivity extends AppCompatActivity {
 
         TextView profileName = findViewById(R.id.profileName);
         TextView profileGender = findViewById(R.id.profileGender);
+        TextView profileBDorSpec = findViewById(R.id.profileBDorSpec);
 
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
@@ -39,9 +46,18 @@ public class ProfileViewActivity extends AppCompatActivity {
                             profileName.setText(user.toString());
                             profileGender.setText(user.getGender());
                             if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)){
-                                    //TODO: show birthdate
+                                String pattern = "yyyy-MM-dd";
+                                SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+                                String birthDate = dateFormat.format(
+                                        snapshot.child(Constants.FIREBASE_PATH_USERS_DATE_OF_BIRTH).getValue(Date.class));
+                                profileBDorSpec.setText(birthDate);
                             } else if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)){
-                                    //TODO: show specializations
+                                List<String> specializations = (List<String>) snapshot.child(Constants.FIREBASE_PATH_DOCTORS_SPECIALIZATIONS).getValue();
+                                StringBuilder specText = new StringBuilder();
+                                for (String specialization: specializations){
+                                    specText.append(specialization + "\n");
+                                }
+                                profileBDorSpec.setText(specText.toString());
                             }
                         }
                     }
