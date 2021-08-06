@@ -60,12 +60,14 @@ public class UserHomeActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
+        String userID = getIntent().getStringExtra("userid");
         switch (view.getId()) {
             case R.id.btnHomeBookOrSchedule: // Top button (Book (Patient) OR schedule (Doctor))
                 if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
-                    // TODO: Start Doctor scheduling activity
-                } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) {// Patient
-                    // TODO: Start Patient book appointment
+                    Intent intent = new Intent(getApplicationContext(), DoctorViewAvailableTimeSlotsActivity.class);
+                    intent.putExtra("userid", userID);
+                    startActivity(intent);
+                } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
                     Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
                     startActivity(intent);
                 }
@@ -77,18 +79,15 @@ public class UserHomeActivity extends AppCompatActivity {
                     intent.putExtra("userid", getIntent().getStringExtra("userid"));
                     startActivity(intent);
                 } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) {// Patient
-                    // Redirect to patient page
                     Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
-                    intent.putExtra("userid", getIntent().getStringExtra("userid"));
+                    intent.putExtra("userid", userID);
                     startActivity(intent);
                 }
                 break;
             case R.id.btnHomePrevAppt: // View previous appointments
-                if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
-                    // TODO: Start Doctor view prev appts
-                } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) {// Patient
-                    // TODO: Start Patient view prev appts
-                }
+                Intent intent = new Intent(getApplicationContext(), ViewPreviousAppointmentsActivity.class);
+                intent.putExtra("userid", userID);
+                startActivity(intent);
                 break;
         }
     }
