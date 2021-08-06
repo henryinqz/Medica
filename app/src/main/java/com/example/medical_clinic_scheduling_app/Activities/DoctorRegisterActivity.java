@@ -119,8 +119,8 @@ public class DoctorRegisterActivity extends AppCompatActivity {
 
                                         // Login (User is authenticated already (?))
                                         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                        // Redirect to doctor page
-                                        Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class);
+                                        // Redirect to home page
+                                        Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
                                         intent.putExtra("userid", userID);
                                         startActivity(intent);
                                     } else { // Failed to create user

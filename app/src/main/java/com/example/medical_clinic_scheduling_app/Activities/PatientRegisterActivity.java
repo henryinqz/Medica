@@ -144,8 +144,8 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
 
                                         // Login (User is authenticated already (?))
                                         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                        // Redirect to patient page
-                                        Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
+                                        // Redirect to home page
+                                        Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
                                         intent.putExtra("userid", userID);
                                         startActivity(intent);
                                     } else { // Failed to create user

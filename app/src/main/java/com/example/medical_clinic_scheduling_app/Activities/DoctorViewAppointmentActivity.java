@@ -109,16 +109,4 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
             });
         }
     }
-
-    public void gotoViewPreviousAppointmentsPage(View view){
-        Intent intent = new Intent(getApplicationContext(), ViewPreviousAppointmentsActivity.class);
-        intent.putExtra("userid", userID);
-        startActivity(intent);
-    }
-
-    public void gotoViewAvailableTimeSlotsPage(View view){
-        Intent intent = new Intent(getApplicationContext(), DoctorViewAvailableTimeSlotsActivity.class);
-        intent.putExtra("userid", userID);
-        startActivity(intent);
-    }
 }

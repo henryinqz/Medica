@@ -58,7 +58,7 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                     String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
                     String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
                     Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
-                    if (doctorID.equals(userID)){
+                    if (doctorID.equals(userID)) {
                         ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
                             @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
@@ -71,6 +71,30 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                                     if (patientID.equals(childID) && date.before(today)) {
                                         Person patient = child.getValue(Person.class);
                                         appointments.add("Patient " + patient.toString() + "\n" + date.toString());
+                                    }
+                                }
+                                ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
+                                appointmentsView.setAdapter(appointmentAdapter);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }else if (patientID.equals(userID)){
+                        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.O)
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot child : snapshot.getChildren()) {
+                                    String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
+                                    //Get Time of Now
+                                    LocalDateTime timeNow = LocalDateTime.now();
+                                    Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
+                                    if (doctorID.equals(childID) && date.before(today)) {
+                                        Person doc = child.getValue(Person.class);
+                                        appointments.add("Dr " + doc.toString() + "\n" + date.toString());
                                     }
                                 }
                                 ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);

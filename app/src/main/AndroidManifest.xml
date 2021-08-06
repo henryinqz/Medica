@@ -10,16 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
+            android:name=".Activities.UserHomeActivity"
+            android:exported="true"
+            android:parentActivityName=".Activities.LoginPageActivity"/>
+        <activity
             android:name=".Activities.PatientProfileViewActivity"
             android:parentActivityName=".Activities.PatientProfileViewActivity" />
         <activity
             android:name=".Activities.DoctorViewAvailableTimeSlotsActivity"
             android:exported="true"
-            android:parentActivityName=".Activities.DoctorViewAppointmentActivity" />
+            android:parentActivityName=".Activities.UserHomeActivity" />
         <activity
             android:name=".Activities.ViewPreviousAppointmentsActivity"
+            android:label="Previous Appointments"
             android:exported="true"
-            android:parentActivityName=".Activities.DoctorViewAppointmentActivity" />
+            android:parentActivityName=".Activities.UserHomeActivity" />
         <activity
             android:name=".Activities.DoctorViewAppointmentDetailsActivity"
             android:exported="true"
@@ -27,11 +32,11 @@
         <activity
             android:name=".Activities.PatientAppointmentsViewActivity"
             android:label="Patient Appointments"
-            android:parentActivityName=".Activities.LoginPageActivity" />
+            android:parentActivityName=".Activities.UserHomeActivity" />
         <activity
             android:name=".Activities.DoctorViewAppointmentActivity"
             android:exported="true"
-            android:parentActivityName=".Activities.LoginPageActivity" />
+            android:parentActivityName=".Activities.UserHomeActivity" />
         <activity
             android:name=".Activities.SelectAppointmentTimesActivity"
             android:label="Doctor Availabilities"
