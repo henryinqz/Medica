@@ -1,4 +1,6 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Objects;
+
+import com.example.medical_clinic_scheduling_app.Constants;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +12,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.medical_clinic_scheduling_app.Objects.Appointment;
+import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.Objects.Doctor;
+import com.example.medical_clinic_scheduling_app.Fragments.MultipleSelectionFragment;
+import com.example.medical_clinic_scheduling_app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -102,7 +108,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Doctor user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
 
-                    Appointment.generateAvailableAppointment(new Date(System.currentTimeMillis()), user); // TODO: Broken (in method)
+                    Appointment.generateAvailableAppointment(new Date(System.currentTimeMillis() + 600000), user); // TODO: Broken (in method)
 
                     FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                             .child(userUid)
@@ -114,9 +120,10 @@ public class DoctorRegisterActivity extends AppCompatActivity {
 
                                         // Login (User is authenticated already (?))
                                         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                        // Redirect to doctor page
-                                        Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class);
+                                        // Redirect to home page
+                                        Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
                                         intent.putExtra("userid", userID);
+                                        createAppointments(user);
                                         startActivity(intent);
                                     } else { // Failed to create user
                                         Toast.makeText(getApplicationContext(), "Failed to register doctor", Toast.LENGTH_LONG).show();
@@ -128,5 +135,19 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void createAppointments(Doctor user){
+        Calendar c = Calendar.getInstance();
+        for (int i = 0; i < 2; i++) { //Generating 2 week's worth of appts.
+            c.set(Calendar.HOUR_OF_DAY, 9);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            for (int j = 0; j < 9; j++) { //Generating the day's appts 9-5
+                Appointment.generateAvailableAppointment(c.getTime(), user);
+                System.out.println(c.getTime().toString());
+                c.add(Calendar.HOUR_OF_DAY, 1);
+            }
+            c.add(Calendar.DAY_OF_MONTH, 1);
+        }
     }
 }

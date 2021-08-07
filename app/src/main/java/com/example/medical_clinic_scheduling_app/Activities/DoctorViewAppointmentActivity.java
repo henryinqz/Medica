@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -12,6 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.Objects.Person;
+import com.example.medical_clinic_scheduling_app.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,17 +34,6 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_view_appointment);
-
-////        //Setting up ListView of Appointments
-//        ListView upcomingAppointmentsView = (ListView) findViewById(R.id.AppointmentListView);
-//        ArrayList<String> upcomingAppointments = new ArrayList<String>();
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        ArrayAdapter upcomingAppointmentsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, upcomingAppointments);
-//        upcomingAppointmentsView.setAdapter(upcomingAppointmentsAdapter);
 
         //Setting up ListView of Appointments
         ArrayList<String> appointments = new ArrayList<>();
@@ -105,17 +97,5 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    public void gotoViewPreviousAppointmentsPage(View view){
-        Intent intent = new Intent(getApplicationContext(), ViewPreviousAppointmentsActivity.class);
-        intent.putExtra("userid", userID);
-        startActivity(intent);
-    }
-
-    public void gotoViewAvailableTimeSlotsPage(View view){
-        Intent intent = new Intent(getApplicationContext(), DoctorViewAvailableTimeSlotsActivity.class);
-        intent.putExtra("userid", userID);
-        startActivity(intent);
     }
 }

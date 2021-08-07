@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -7,27 +7,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.Objects.Person;
+import com.example.medical_clinic_scheduling_app.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class PatientAppointmentsViewActivity extends AppCompatActivity {
-
-    protected static String userID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +40,7 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
         ListView appointmentsView = (ListView) findViewById(R.id.patientAppointmentListView);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         //Find userID = patientID
-        if (getIntent().getStringExtra("userid") != null) {
-            userID = getIntent().getStringExtra("userid");
-        }
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         //Find Appointments under that patientID
         ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
             @Override
@@ -49,7 +49,9 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
                     String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
                     String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
                     Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
-                    if (patientID.equals(userID)){
+                    boolean passed = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PASSED).getValue(Boolean.class);
+                    boolean booked = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_BOOKED).getValue(Boolean.class);
+                    if (patientID != null && patientID.equals(userID) && !passed && booked){
                         ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
                             @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
@@ -85,10 +87,5 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    public void onBookAppBtnClicked (View view){
-        Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
-        startActivity(intent);
     }
 }

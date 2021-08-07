@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.Objects.Doctor;
+import com.example.medical_clinic_scheduling_app.Objects.Person;
+import com.example.medical_clinic_scheduling_app.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,7 +78,7 @@ public class BookYourAppointmentMainActivity extends AppCompatActivity {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     String type = child.child(Constants.FIREBASE_PATH_USERS_TYPE).getValue(String.class);
                     String userGender = child.child(Constants.FIREBASE_PATH_USERS_GENDER).getValue(String.class);
-                    List<String> userSpecialization = (List<String>) child.child("specializations").getValue();
+                    List<String> userSpecialization = (List<String>) child.child(Constants.FIREBASE_PATH_DOCTORS_SPECIALIZATIONS).getValue();
 
                     if (type.equals(Constants.PERSON_TYPE_DOCTOR) &&
                             (gender == null || (gender != null && (userGender.equals(gender) || gender.equals("Any Gender"))))

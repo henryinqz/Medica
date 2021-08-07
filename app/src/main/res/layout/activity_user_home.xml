@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.UserHomeActivity">
+
+    <TextView
+        android:id="@+id/txtHomeWelcome2"
+        android:layout_width="362dp"
+        android:layout_height="61dp"
+        android:text="@string/user_home_welcome2"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHomeWelcome1"></TextView>
+
+    <TextView
+        android:id="@+id/txtHomeWelcome1"
+        android:layout_width="351dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="32dp"
+        android:gravity="bottom"
+        android:text="@string/user_home_welcome1"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <Button
+        android:id="@+id/btnHomeBookOrSchedule"
+        android:layout_width="338dp"
+        android:layout_height="65dp"
+        android:onClick="onClick"
+        android:text="@string/user_home_book_appt"
+        android:textSize="19sp"
+        app:backgroundTint="#2EB9EC"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnHomeUpcomingAppt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHomeWelcome2"
+        app:layout_constraintVertical_chainStyle="packed"></Button>
+
+    <Button
+        android:id="@+id/btnHomePrevAppt"
+        android:layout_width="337dp"
+        android:layout_height="64dp"
+        android:onClick="onClick"
+        android:text="@string/user_home_view_prev_appt"
+        android:textSize="19sp"
+        app:backgroundTint="#2EB9EC"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHomeUpcomingAppt"></Button>
+
+    <Button
+        android:id="@+id/btnHomeUpcomingAppt"
+        android:layout_width="339dp"
+        android:layout_height="66dp"
+        android:onClick="onClick"
+        android:text="@string/user_home_view_upcomming_appt"
+        android:textSize="19sp"
+        app:backgroundTint="#2EB9EC"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnHomePrevAppt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHomeBookOrSchedule"></Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

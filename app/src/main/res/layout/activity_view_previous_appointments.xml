@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewPreviousAppointmentsActivity">
+    tools:context=".Activities.ViewPreviousAppointmentsActivity">
 
     <TextView
         android:id="@+id/Previous_Appointments"
@@ -22,10 +22,10 @@
         android:layout_width="343dp"
         android:layout_height="571dp"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Previous_Appointments" />
+        app:layout_constraintTop_toBottomOf="@+id/Previous_Appointments"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

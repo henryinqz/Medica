@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectAppointmentTimesActivity">
+    tools:context=".Activities.SelectAppointmentTimesActivity">
 
     <TextView
         android:id="@+id/availability"
@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectDoctorName" />
+        app:layout_constraintTop_toBottomOf="@+id/selectApptTitle" />
 
     <Button
         android:id="@+id/bookAppointmentButton"
@@ -52,10 +52,11 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/selectDoctorName"
+        android:id="@+id/selectApptTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center"
         android:text="@string/none"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

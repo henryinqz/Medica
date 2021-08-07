@@ -1,10 +1,13 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Objects;
 
+import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
+import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.DateUtility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -13,7 +16,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 public class Appointment implements Comparable<Appointment> {
@@ -33,7 +41,7 @@ public class Appointment implements Comparable<Appointment> {
             this.setPatientID(patient.getID());
         }
 
-        this.appointmentID = hashCode() + ""; // TODO: Make a better ID?
+        this.appointmentID = hashCode() + "";
     }
 
     // Getters/setters:
@@ -73,6 +81,10 @@ public class Appointment implements Comparable<Appointment> {
         return !this.patientID.isEmpty();
     }
 
+    public boolean isPassed() {
+        return this.date.compareTo(new Date(System.currentTimeMillis())) < 0;
+    }
+
     // Static methods:
     public static Appointment generateAvailableAppointment(Date date, Doctor doctor) {
         if (date != null && doctor != null) {
@@ -103,6 +115,66 @@ public class Appointment implements Comparable<Appointment> {
             return null;
         }
 
+    }
+
+    public static void generateAvailableAppointmentsAllDoctors(Date generateApptsDate) { // Generates one day of appointments for all doctors (9am, 11am, 1pm, 3pm)
+        FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot usersSnapshot) {
+                        for (DataSnapshot userChild : usersSnapshot.getChildren()) {
+                            String type = userChild.child(Constants.FIREBASE_PATH_USERS_TYPE).getValue(String.class);
+
+                            //If the user is a doctor, fetch then call generateAvailableAppointment for available time slots
+                            if (type.equals(Constants.PERSON_TYPE_DOCTOR)){
+                                Doctor doctor = userChild.getValue(Doctor.class);
+
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                                int day = DateUtility.getDay(generateApptsDate);
+                                int month = DateUtility.getMonth(generateApptsDate);
+                                int year = DateUtility.getYear(generateApptsDate);
+
+                                // TODO: Check if appointment being generated will be a duplicate?
+                                String datestring = DateUtility.simpleDateFormater(day, month, year, 9, 0, 0);
+                                try { // New available appointment: 9am
+                                    Date shift1 = format.parse(datestring);
+                                    generateAvailableAppointment(shift1, doctor);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                datestring = DateUtility.simpleDateFormater(day, month, year, 11, 0, 0);
+                                try { // New available appointment: 11am
+                                    Date shift2 = format.parse(datestring);
+                                    generateAvailableAppointment(shift2, doctor);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                datestring = DateUtility.simpleDateFormater(day, month, year, 13, 0, 0);
+                                try { // New available appointment: 1pm
+                                    Date shift3 = format.parse(datestring);
+                                    generateAvailableAppointment(shift3, doctor);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                datestring = DateUtility.simpleDateFormater(day, month, year, 15, 0, 0);
+                                try { // New available appointment: 3pm
+                                    Date shift4 = format.parse(datestring);
+                                    generateAvailableAppointment(shift4, doctor);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.i("appt_error", "Failed to get Doctor info from Firebase");
+                    }
+                });
     }
 
     public static void bookAppointment(String appointmentID, String patientID) {
@@ -176,6 +248,8 @@ public class Appointment implements Comparable<Appointment> {
         return getDate().equals(that.getDate()) && getDoctorID().equals(that.getDoctorID()) && getPatientID().equals(that.getPatientID()) && getAppointmentID().equals(that.getAppointmentID());
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
         return Objects.hash(getDate(), getDoctorID(), getPatientID());

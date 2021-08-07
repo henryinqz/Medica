@@ -1,11 +1,11 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Objects;
 
 public class Person {
     private String username, firstName, lastName, gender, type, id;
 
-    Person() {
+    public Person() {
     }
-    Person(String username, String firstname, String lastname, String gender, String type, String id) {
+    public Person(String username, String firstname, String lastname, String gender, String type, String id) {
         this.username = username;
         this.firstName = firstname;
         this.lastName = lastname;

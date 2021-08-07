@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.Objects.Person;
+import com.example.medical_clinic_scheduling_app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -71,20 +74,9 @@ public class LoginPageActivity extends AppCompatActivity {
                             Person user = snapshot.getValue(Person.class);
 
                             if (user != null) {
-//                                Toast.makeText(getApplicationContext(), user.getType(), Toast.LENGTH_LONG).show();
-                                if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
-                                    // Redirect to doctor page
-                                    Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class);
-                                    intent.putExtra("userid", userID);
-                                    startActivity(intent);
-                                } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
-                                    // Redirect to patient page
-                                    Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
-                                    intent.putExtra("userid", userID);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Error: user has no type", Toast.LENGTH_LONG).show();
-                                }
+                                Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
+                                intent.putExtra("userid", userID);
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), "Error: user is null", Toast.LENGTH_LONG).show();
                             }

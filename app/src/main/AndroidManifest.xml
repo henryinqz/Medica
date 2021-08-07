@@ -10,63 +10,70 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalClinicSchedulingApp">
         <activity
-            android:name=".PatientProfileViewActivity"
-            android:exported="true" />
-        <activity
-            android:name=".DoctorViewAvailableTimeSlotsActivity"
+            android:name=".Activities.UserHomeActivity"
             android:exported="true"
-            android:parentActivityName=".DoctorViewAppointmentActivity" />
+            android:parentActivityName=".Activities.LoginPageActivity"/>
         <activity
-            android:name=".ViewPreviousAppointmentsActivity"
+            android:name=".Activities.ProfileViewActivity"
+            android:label="Profile"
+            android:parentActivityName=".Activities.PatientAppointmentsViewActivity"
+            />
+        <activity
+            android:name=".Activities.DoctorViewAvailableTimeSlotsActivity"
             android:exported="true"
-            android:parentActivityName=".DoctorViewAppointmentActivity" />
+            android:parentActivityName=".Activities.UserHomeActivity" />
         <activity
-            android:name=".DoctorViewAppointmentDetailsActivity"
+            android:name=".Activities.ViewPreviousAppointmentsActivity"
+            android:label="Previous Appointments"
             android:exported="true"
-            android:parentActivityName=".DoctorViewAppointmentActivity" />
+            android:parentActivityName=".Activities.UserHomeActivity" />
         <activity
-            android:name=".PatientAppointmentsViewActivity"
+            android:name=".Activities.DoctorViewAppointmentDetailsActivity"
+            android:exported="true"
+            android:parentActivityName=".Activities.DoctorViewAppointmentActivity" />
+        <activity
+            android:name=".Activities.PatientAppointmentsViewActivity"
             android:label="Patient Appointments"
-            android:parentActivityName=".LoginPageActivity" />
+            android:parentActivityName=".Activities.UserHomeActivity" />
         <activity
-            android:name=".DoctorViewAppointmentActivity"
+            android:name=".Activities.DoctorViewAppointmentActivity"
             android:exported="true"
-            android:parentActivityName=".LoginPageActivity" />
+            android:parentActivityName=".Activities.UserHomeActivity" />
         <activity
-            android:name=".SelectAppointmentTimesActivity"
+            android:name=".Activities.SelectAppointmentTimesActivity"
             android:label="Doctor Availabilities"
-            android:parentActivityName=".BookYourAppointmentMainActivity" />
+            android:parentActivityName=".Activities.BookYourAppointmentMainActivity" />
         <activity
-            android:name=".AppointmentFilterOptionsActivity"
+            android:name=".Activities.AppointmentFilterOptionsActivity"
             android:label="Filter Doctor By"
-            android:parentActivityName=".BookYourAppointmentMainActivity" />
+            android:parentActivityName=".Activities.BookYourAppointmentMainActivity" />
         <activity
-            android:name=".BookYourAppointmentMainActivity"
+            android:name=".Activities.BookYourAppointmentMainActivity"
             android:label="Book Your Appointment"
-            android:parentActivityName=".PatientAppointmentsViewActivity" />
+            android:parentActivityName=".Activities.PatientAppointmentsViewActivity" />
         <activity
-            android:name=".PatientRegisterActivity"
+            android:name=".Activities.PatientRegisterActivity"
             android:label="@string/register_patient_title"
-            android:parentActivityName=".RegisterActivity" />
+            android:parentActivityName=".Activities.RegisterActivity" />
         <activity
-            android:name=".DoctorRegisterActivity"
+            android:name=".Activities.DoctorRegisterActivity"
             android:label="@string/register_doctor_title"
-            android:parentActivityName=".RegisterActivity" />
+            android:parentActivityName=".Activities.RegisterActivity" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:label="@string/register_title"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
-            android:name=".LoginPageActivity"
+            android:name=".Activities.LoginPageActivity"
             android:label="@string/login_title"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".Activities.MainActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Activities.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

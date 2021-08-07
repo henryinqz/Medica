@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PatientProfileViewActivity">
+    tools:context=".Activities.ProfileViewActivity">
 
     <TextView
-        android:id="@+id/patientProfileName"
+        android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/patient_name"
+        android:layout_marginTop="24dp"
+        android:text="@string/name"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -19,27 +19,39 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/patientProfileBirthDate"
+        android:id="@+id/profileGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/date_of_birth"
+        android:layout_marginTop="16dp"
+        android:text="@string/gender"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patientProfileName" />
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
-    <ScrollView
-        android:layout_width="341dp"
-        android:layout_height="477dp"
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:onClick="onClick"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileBDorSpec" />
+
+    <TextView
+        android:id="@+id/profileBDorSpec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:text="BDorSpec"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patientProfileBirthDate">
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/patientProfileListView"/>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/profileGender" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

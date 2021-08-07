@@ -1,4 +1,4 @@
-package com.example.medical_clinic_scheduling_app;
+package com.example.medical_clinic_scheduling_app.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
