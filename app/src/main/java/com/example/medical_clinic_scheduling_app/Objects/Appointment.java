@@ -251,7 +251,7 @@ public class Appointment implements Comparable<Appointment> {
                             child.getRef().removeValue();
                         } else {
                             ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).
-                                    child(Constants.FIREBASE_PATH_APPOINTMENT_ID).child(Constants.
+                                    child(child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class)).child(Constants.
                                     FIREBASE_PATH_APPOINTMENTS_PASSED).
                                     setValue(true);
                         }
