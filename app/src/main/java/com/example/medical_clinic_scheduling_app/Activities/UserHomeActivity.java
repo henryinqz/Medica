@@ -65,7 +65,7 @@ public class UserHomeActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         switch (view.getId()) {
             case R.id.btnHomeBookOrSchedule: // Top button (Book (Patient) OR schedule (Doctor))
                 if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor

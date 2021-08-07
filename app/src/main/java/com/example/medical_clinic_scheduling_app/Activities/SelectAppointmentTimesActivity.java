@@ -44,8 +44,6 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO: Make TextViews at top of page to show doctor name and date
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_appointment_times);
         String doctorID = getIntent().getStringExtra("doctorID");

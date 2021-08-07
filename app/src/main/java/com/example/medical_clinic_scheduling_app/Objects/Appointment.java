@@ -117,77 +117,65 @@ public class Appointment implements Comparable<Appointment> {
 
     }
 
+    // TODO: Add Date parameter, which will be the day that all these appointments will be generated on
+    public static void generateAvailableAppointmentsAllDoctors() { // Generates one day of appointments for all doctors (9am, 11am, 1pm, 3pm)
+        FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot usersSnapshot) {
+                        for (DataSnapshot userChild : usersSnapshot.getChildren()) {
+                            String type = userChild.child(Constants.FIREBASE_PATH_USERS_TYPE).getValue(String.class);
 
-    //Call to add/refresh appointments to all doctors
-    public static void addAllAvailableAppointments(){
-        List<Doctor> doctorList = new ArrayList<Doctor>();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date currentDate = new Date(System.currentTimeMillis());
-        int day = DateUtility.getCurrentDay();
-        int month = DateUtility.getCurrentMonth();
-        int year = DateUtility.getCurrentYear();
+                            //If the user is a doctor, fetch then call generateAvailableAppointment for available time slots
+                            if (type.equals(Constants.PERSON_TYPE_DOCTOR)){
+                                Doctor doctor = userChild.getValue(Doctor.class);
 
-        DatabaseReference userref = FirebaseDatabase.getInstance().getReference();
-        userref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    String type = child.child(Constants.FIREBASE_PATH_USERS_TYPE).getValue(String.class);
-                    //If the user is a doctor, fetch then call generateAvailableAppointment for available time slots
-                    if (type.equals(Constants.PERSON_TYPE_DOCTOR)){
-                        String username = child.child(Constants.FIREBASE_PATH_USERS_USERNAME).getValue(String.class);
-                        String firstName = child.child(Constants.FIREBASE_PATH_USERS_FIRST_NAME).getValue(String.class);
-                        String lastName = child.child(Constants.FIREBASE_PATH_USERS_LAST_NAME).getValue(String.class);
-                        String gender = child.child(Constants.FIREBASE_PATH_USERS_GENDER).getValue(String.class);
-                        HashSet<String> specializations = (HashSet<String>) child.child("specializations").getValue();
-                        String uid = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                                int day = DateUtility.getCurrentDay();
+                                int month = DateUtility.getCurrentMonth();
+                                int year = DateUtility.getCurrentYear();
 
-                        Doctor doc = new Doctor(username, firstName, lastName, gender, specializations, uid);
+                                // TODO: Check if appointment being generated will be a duplicate?
+                                String datestring = DateUtility.simpleDateFormater(day, month, year, 9, 0, 0);
+                                try { // New available appointment: 9am
+                                    Date shift1 = format.parse(datestring);
+                                    generateAvailableAppointment(shift1, doctor);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
 
-                        String datestring = DateUtility.simpleDateFormater(day, month, year, 9, 0, 0);
-                        try {
-                            Date shift1 = format.parse(datestring);
-                            generateAvailableAppointment(shift1, doc);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                                datestring = DateUtility.simpleDateFormater(day, month, year, 11, 0, 0);
+                                try { // New available appointment: 11am
+                                    Date shift2 = format.parse(datestring);
+                                    generateAvailableAppointment(shift2, doctor);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                datestring = DateUtility.simpleDateFormater(day, month, year, 13, 0, 0);
+                                try { // New available appointment: 1pm
+                                    Date shift3 = format.parse(datestring);
+                                    generateAvailableAppointment(shift3, doctor);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                datestring = DateUtility.simpleDateFormater(day, month, year, 15, 0, 0);
+                                try { // New available appointment: 3pm
+                                    Date shift4 = format.parse(datestring);
+                                    generateAvailableAppointment(shift4, doctor);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
-
-                        datestring = DateUtility.simpleDateFormater(day, month, year, 11, 0, 0);
-                        try {
-                            Date shift2 = format.parse(datestring);
-                            generateAvailableAppointment(shift2, doc);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-
-                        datestring = DateUtility.simpleDateFormater(day, month, year, 13, 0, 0);
-                        try {
-                            Date shift3 = format.parse(datestring);
-                            generateAvailableAppointment(shift3, doc);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-
-                        datestring = DateUtility.simpleDateFormater(day, month, year, 15, 0, 0);
-                        try {
-                            Date shift4 = format.parse(datestring);
-                            generateAvailableAppointment(shift4, doc);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-
-
                     }
 
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.i("appt_error", "Failed to get Doctor info from Firebase");
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.i("appt_error", "Failed to get Doctor info from Firebase");
+                    }
+                });
     }
 
     public static void bookAppointment(String appointmentID, String patientID) {
