@@ -40,51 +40,13 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO: Make TextViews at top of page to show doctor name and date
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_appointment_times);
         String doctorID = getIntent().getStringExtra("doctorID");
-        Log.i("select_appt_dr", doctorID);
+        Log.i("select_appt_dr", doctorID); // TODO: Delete?
 
-//         //Setting up RadioGroup of Appointments
-//         RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
-
-//         //Setting up textView (doctor name)
-//         String doctor = getIntent().getStringExtra("doctor");
-//         TextView doctorName = findViewById(R.id.selectDoctorName);
-//         doctorName.setText(doctor.substring(0, doctor.indexOf("\n")));
-
-//         //Setting up firebase
-//         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-
-//         ArrayList<String> appointments = new ArrayList<>();
-//         appointments.add("Tuesday Jul 27, 2021\n12:00 am - 1:00 pm");
-//         appointments.add("Tuesday Jul 27, 2021\n1:00 pm - 2:00 pm");
-//         appointments.add("Tuesday Jul 27, 2021\n2:00 pm - 3:00 pm");
-//         appointments.add("Tuesday Jul 27, 2021\n3:00 pm - 4:00 pm");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 12:00a.m - 1:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 1:00p.m - 2:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 2:00p.m - 3:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 3:00p.m - 4:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 12:00a.m - 1:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 1:00p.m - 2:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 2:00p.m - 3:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 3:00p.m - 4:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 12:00a.m - 1:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 1:00p.m - 2:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 2:00p.m - 3:00p.m");
-// //         appointments.add("Date: Tuesday July 27, 2021\nTime: 3:00p.m - 4:00p.m");
-
-//         //Adding appointments to RadioGroup
-//         int i = 0;
-//         RadioButton appointment;
-//         for (String s: appointments) {
-//             appointment = new RadioButton(this);
-//             appointment.setText(s);
-//             appointmentGroup.addView(appointment);
-//             appointment.setId(i);
-//             appointment.setPadding(0,0,0,16);
-//             i++;
-//         }
         //Setting up onCheckedChangeListener & showing selected appointment when clicked.
         RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
         appointmentGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -100,7 +62,7 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
 
         // Open DatePicker
         DialogFragment datePicker = new DatePickerFragment(System.currentTimeMillis(), -1); // Disables selecting appointments in the past
-        datePicker.show(getSupportFragmentManager(), "Appointment date");
+        datePicker.show(getSupportFragmentManager(), "Appointment date"); // onDateSet() controls which appointments are shown
     }
 
     @Override
@@ -114,79 +76,9 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
         apptDateCalendar.set(Calendar.SECOND, 0);
         apptDateCalendar.set(Calendar.MILLISECOND, 0);
 
-//        displayAppointments(getAppointmentIDsOnDate(apptDateCalendar.getTime()));
         displayAppointmentsOnDate(apptDateCalendar.getTime());
     }
 
-    /*
-    public ArrayList<String> getAppointmentIDsOnDate(Date date) { // Doesn't wait for Firebase to get data before returning, hence creation of displayAppointmentsonDate()
-        ArrayList<String> apptIDs = new ArrayList<>();
-
-        // Access Firebase to get Appointments
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    Appointment appt = child.getValue(Appointment.class);
-                    if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
-                        apptIDs.add(appt.getAppointmentID());
-                    }
-                }
-                Log.i("appt_id", apptIDs.size() + " size1");
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Error: no appointments found
-            }
-        });
-
-        return apptIDs;
-    } */
-
-    /*
-    public void displayAppointments(ArrayList<String> apptIDs) { // Uses appointment IDs instead of object
-        if (apptIDs.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Error: no availabilities on that date", Toast.LENGTH_SHORT).show();
-        } else {
-            //Adding appointments to RadioGroup
-            int index = 0;
-            RadioGroup apptGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
-
-            for (String apptID : apptIDs) {
-                RadioButton appt = new RadioButton(this);
-                appt.setText(apptID); // TODO: Instead of showing appointmentID, show data from the appointment
-                apptGroup.addView(appt);
-                appt.setId(index);
-                appt.setPadding(0,0,0,16);
-                index++;
-            }
-        }
-    }
-    public void displayAppointmentsOnDate(Date date) {
-        ArrayList<String> apptIDs = new ArrayList<>();
-
-        // Access Firebase to get Appointments
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    Appointment appt = child.getValue(Appointment.class);
-                    if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
-                        apptIDs.add(appt.getAppointmentID());
-                    }
-                }
-
-                displayAppointments(apptIDs);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Error: no appointments found
-                Toast.makeText(getApplicationContext(), "Error: couldn't find appointments", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
     public void displayAppointments(ArrayList<Appointment> appts) {
         if (appts.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Error: no availabilities on that date", Toast.LENGTH_SHORT).show();
@@ -200,57 +92,54 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
                 indexToAppt.put(index, appt);
 
                 RadioButton apptRadioBtn = new RadioButton(this);
-//                apptRadioBtn.setText(appt.getDoctorID());
-//                apptRadioBtn.setText("\n");
-                apptRadioBtn.setText(appt.getDate().toString()); // TODO: Instead of showing Doctor and full date here, just make TextViews above the radio group to show doctor name and date (only show time here)
+                apptRadioBtn.setText(appt.getDate().toString());
 
                 apptGroup.addView(apptRadioBtn);
                 apptRadioBtn.setId(index);
-//                apptRadioBtn.setId(Integer.parseInt(appt.getAppointmentID())); // TODO: weird way to pass apptID
                 apptRadioBtn.setPadding(0,0,0,16);
                 index++;
             }
         }
     }
-    public void displayAppointmentsOnDate(Date date) { // TODO: Change to only show availabilities from Doctor that is passed from BookYourAppointmentsMain
+    public void displayAppointmentsOnDate(Date date) { // Only show availabilities from Doctor that is passed from BookYourAppointmentsMain
         ArrayList<Appointment> appts = new ArrayList<>();
-
-        // Access Firebase to get Appointments
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
         String doctorID = getIntent().getStringExtra("doctorID");
-        DatabaseReference doctorAvailableApptsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
-                .child(doctorID)
-                .child(Constants.FIREBASE_PATH_USERS_APPTS_AVAILABLE);
-        doctorAvailableApptsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) { // Each availableApptID of the doctor
-                    String availableApptID = child.getValue(String.class);
 
-                    DatabaseReference apptsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS).child(availableApptID);
-                    apptsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                            Appointment appt = snapshot2.getValue(Appointment.class);
-                            if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
-                                appts.add(appt);
-                            }
-                            displayAppointments(appts);
+        // Get doctor's availableAppointmentIDs
+        FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                .child(doctorID)
+                .child(Constants.FIREBASE_PATH_USERS_APPTS_AVAILABLE)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot availableApptIDsSnapshot) {
+                        for (DataSnapshot availableApptIDChild : availableApptIDsSnapshot.getChildren()) { // Loop through all of doctor's availableApptIDs
+                            String availableApptID = availableApptIDChild.getValue(String.class);
+
+                            // For each availableAppointmentID, get the Appointment object
+                            FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS)
+                                    .child(availableApptID)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot availableApptSnapshot) {
+                                            Appointment appt = availableApptSnapshot.getValue(Appointment.class);
+
+                                            if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
+                                                appts.add(appt);
+                                            }
+                                            displayAppointments(appts);
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) { // Error: Appointment associated w/ availableAppointmentID not found
+                                            Toast.makeText(getApplicationContext(), "Error: Couldn't find available appointment", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                         }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            // Error: available appointment not found
-                            Toast.makeText(getApplicationContext(), "Error: couldn't find available appointment", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Error: no appointments found
-                Toast.makeText(getApplicationContext(), "Error: couldn't find any available appointments", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { // Error: No availableAppointmentIDs found
+                        Toast.makeText(getApplicationContext(), "Error: No available appointments", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     public void onClickedBookAppointmentButton(View view){

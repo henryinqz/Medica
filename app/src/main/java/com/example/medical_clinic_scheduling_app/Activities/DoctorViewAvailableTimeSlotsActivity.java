@@ -41,7 +41,8 @@ public class DoctorViewAvailableTimeSlotsActivity extends AppCompatActivity {
         String doctorID = getIntent().getStringExtra("userid");
 
         // Access Users > doctorID > availableAppointmentIDs
-        FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS).child(doctorID)
+        FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                .child(doctorID)
                 .child(Constants.FIREBASE_PATH_USERS_APPTS_AVAILABLE)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
