@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.Objects.Appointment;
 import com.example.medical_clinic_scheduling_app.Objects.Person;
 import com.example.medical_clinic_scheduling_app.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,12 +25,21 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 public class UserHomeActivity extends AppCompatActivity {
     private Person user;
+    private final int HOUR_IN_MILLISECOND = 36000000;
+    private static Calendar lastUpdated = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
+        if (lastUpdated == null || Calendar.getInstance().getTimeInMillis() - lastUpdated.getTimeInMillis() >= HOUR_IN_MILLISECOND){
+            lastUpdated=Calendar.getInstance();
+            Appointment.expireAppointments();
+        }
 
         // Get logged in user info
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();

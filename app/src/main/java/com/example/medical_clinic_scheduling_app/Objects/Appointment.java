@@ -244,15 +244,14 @@ public class Appointment implements Comparable<Appointment> {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot){
                 for (DataSnapshot child: snapshot.getChildren()){
-                    Appointment apptDate = (Appointment) child.getValue();
+                    Appointment apptDate = child.getValue(Appointment.class);
                     if (apptDate.isPassed()){
-                        if (apptDate.isBooked()){
+                        if (!apptDate.isBooked()){
                             //Removed appt if passed & not booked
-                            ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).
-                                    child(child.getKey()).removeValue();
+                            child.getRef().removeValue();
                         } else {
                             ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).
-                                    child(child.getKey()).child(Constants.
+                                    child(Constants.FIREBASE_PATH_APPOINTMENT_ID).child(Constants.
                                     FIREBASE_PATH_APPOINTMENTS_PASSED).
                                     setValue(true);
                         }
