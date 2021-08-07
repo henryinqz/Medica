@@ -67,7 +67,9 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
         });
 
         // Open DatePicker
-        DialogFragment datePicker = new DatePickerFragment(System.currentTimeMillis(), -1); // Disables selecting appointments in the past
+        final long ONE_WEEK_AS_MILLISECONDS = 604800000;
+        DialogFragment datePicker = new DatePickerFragment(System.currentTimeMillis(), System.currentTimeMillis()+ONE_WEEK_AS_MILLISECONDS); // Disables selecting appointments in the past; week into future
+//        DialogFragment datePicker = new DatePickerFragment(System.currentTimeMillis(), -1); // Disables selecting appointments in the past; unlimited in future
         datePicker.show(getSupportFragmentManager(), "Appointment date"); // onDateSet() controls which appointments are shown
     }
 

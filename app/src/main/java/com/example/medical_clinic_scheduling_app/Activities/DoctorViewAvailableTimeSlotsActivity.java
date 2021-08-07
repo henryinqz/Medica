@@ -33,7 +33,6 @@ public class DoctorViewAvailableTimeSlotsActivity extends AppCompatActivity {
 
         ListView availableTimesView = (ListView) findViewById(R.id.List_of_Available_Time_Slots);
         ArrayList<String> availableApptTimes = new ArrayList<String>();
-        ArrayAdapter availableTimesAdaptor = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, availableApptTimes);
 
         String doctorID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -74,17 +73,5 @@ public class DoctorViewAvailableTimeSlotsActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Error: No available appointments", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-//        ArrayAdapter availableTimesAdaptor = new ArrayAdapter(this, android.R.layout.simple_list_item_1, availableApptTimes);
-//        availableTimesView.setAdapter(availableTimesAdaptor);
-
-//        availableTimesView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-////                Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentDetailsActivity.class);
-////                intent.putExtra("Appointment", availableTimes.get(i));
-////                startActivity(intent);
-//            }
-//        });
     }
 }
