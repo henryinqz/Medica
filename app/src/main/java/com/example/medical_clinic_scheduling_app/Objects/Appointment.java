@@ -245,7 +245,7 @@ public class Appointment implements Comparable<Appointment> {
             public void onDataChange(@NonNull DataSnapshot snapshot){
                 for (DataSnapshot child: snapshot.getChildren()){
                     Appointment apptDate = child.getValue(Appointment.class);
-                    if (apptDate.isPassed()){
+                    if (apptDate != null && apptDate.date != null && apptDate.isPassed()){
                         if (!apptDate.isBooked()){
                             //Removed appt if passed & not booked
                             child.getRef().removeValue();
