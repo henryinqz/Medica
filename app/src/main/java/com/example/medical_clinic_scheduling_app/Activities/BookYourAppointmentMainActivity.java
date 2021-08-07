@@ -78,7 +78,7 @@ public class BookYourAppointmentMainActivity extends AppCompatActivity {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     String type = child.child(Constants.FIREBASE_PATH_USERS_TYPE).getValue(String.class);
                     String userGender = child.child(Constants.FIREBASE_PATH_USERS_GENDER).getValue(String.class);
-                    List<String> userSpecialization = (List<String>) child.child("specializations").getValue();
+                    List<String> userSpecialization = (List<String>) child.child(Constants.FIREBASE_PATH_DOCTORS_SPECIALIZATIONS).getValue();
 
                     if (type.equals(Constants.PERSON_TYPE_DOCTOR) &&
                             (gender == null || (gender != null && (userGender.equals(gender) || gender.equals("Any Gender"))))

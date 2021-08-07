@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.example.medical_clinic_scheduling_app.Constants;
 import com.example.medical_clinic_scheduling_app.Objects.Person;
 import com.example.medical_clinic_scheduling_app.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,9 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
-
-    protected static String userID = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +38,7 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
         ListView appointmentsView = (ListView) findViewById(R.id.List_of_Previous_Appointments);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         //Find userID = doctorID
-        if (getIntent().getStringExtra("userid") != null) {
-            userID = getIntent().getStringExtra("userid");
-        }
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         //Find Appointments under that doctorID
         ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
             @Override
