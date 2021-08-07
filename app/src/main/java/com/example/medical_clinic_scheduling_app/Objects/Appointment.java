@@ -117,8 +117,7 @@ public class Appointment implements Comparable<Appointment> {
 
     }
 
-    // TODO: Add Date parameter, which will be the day that all these appointments will be generated on
-    public static void generateAvailableAppointmentsAllDoctors() { // Generates one day of appointments for all doctors (9am, 11am, 1pm, 3pm)
+    public static void generateAvailableAppointmentsAllDoctors(Date generateApptsDate) { // Generates one day of appointments for all doctors (9am, 11am, 1pm, 3pm)
         FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -131,9 +130,9 @@ public class Appointment implements Comparable<Appointment> {
                                 Doctor doctor = userChild.getValue(Doctor.class);
 
                                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                                int day = DateUtility.getCurrentDay();
-                                int month = DateUtility.getCurrentMonth();
-                                int year = DateUtility.getCurrentYear();
+                                int day = DateUtility.getDay(generateApptsDate);
+                                int month = DateUtility.getMonth(generateApptsDate);
+                                int year = DateUtility.getYear(generateApptsDate);
 
                                 // TODO: Check if appointment being generated will be a duplicate?
                                 String datestring = DateUtility.simpleDateFormater(day, month, year, 9, 0, 0);

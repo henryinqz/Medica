@@ -13,16 +13,35 @@ public class DateUtility {
         return (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
     }
 
-    public static int getCurrentDay(){
-        return (Calendar.getInstance().get(Calendar.DATE));
-    }
+//    public static int getCurrentDay(){
+//        return (Calendar.getInstance().get(Calendar.DATE));
+//    }
+//
+//    public static int getCurrentMonth(){
+//        return (Calendar.getInstance().get(Calendar.MONTH));
+//    }
+//
+//    public static int getCurrentYear(){
+//        return (Calendar.getInstance().get(Calendar.YEAR));
+//    }
 
-    public static int getCurrentMonth(){
-        return (Calendar.getInstance().get(Calendar.MONTH));
-    }
+    public static int getDay(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
 
-    public static int getCurrentYear(){
-        return (Calendar.getInstance().get(Calendar.YEAR));
+        return cal.get(Calendar.DATE);
+    }
+    public static int getMonth(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        return cal.get(Calendar.MONTH);
+    }
+    public static int getYear(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        return cal.get(Calendar.YEAR);
     }
 
     public static String simpleDateFormater(int day, int month, int year, int hour, int minute, int second){
