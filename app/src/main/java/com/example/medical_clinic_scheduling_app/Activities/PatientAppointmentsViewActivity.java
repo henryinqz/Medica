@@ -52,7 +52,7 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
                     String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
                     String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
                     Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
-                    if (patientID.equals(userID)){
+                    if (patientID != null && patientID.equals(userID)){
                         ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
                             @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override

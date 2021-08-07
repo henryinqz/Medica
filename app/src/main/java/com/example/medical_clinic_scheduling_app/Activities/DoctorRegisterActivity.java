@@ -138,8 +138,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
     }
     private void createAppointments(Doctor user){
         Calendar c = Calendar.getInstance();
-        for (int i = 0; i < 14; i++) { //Generating 2 week's worth of appts.
-            c.add(Calendar.DAY_OF_MONTH, 1);
+        for (int i = 0; i < 2; i++) { //Generating 2 week's worth of appts.
             c.set(Calendar.HOUR_OF_DAY, 9);
             c.set(Calendar.MINUTE, 0);
             c.set(Calendar.SECOND, 0);
@@ -148,6 +147,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                 System.out.println(c.getTime().toString());
                 c.add(Calendar.HOUR_OF_DAY, 1);
             }
+            c.add(Calendar.DAY_OF_MONTH, 1);
         }
     }
 }
