@@ -130,7 +130,7 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot availableApptSnapshot) {
                                             Appointment appt = availableApptSnapshot.getValue(Appointment.class);
-                                            if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
+                                            if (!appt.isBooked() && !appt.isPassed() && DateUtility.isSameDay(appt.getDate(), date)) {
                                                 appts.add(appt);
                                                 displayAppointments(appts);
                                             }
