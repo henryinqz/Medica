@@ -89,9 +89,4 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
             }
         });
     }
-
-//    public void onBookAppBtnClicked (View view){
-//        Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
-//        startActivity(intent);
-//    }
 }
