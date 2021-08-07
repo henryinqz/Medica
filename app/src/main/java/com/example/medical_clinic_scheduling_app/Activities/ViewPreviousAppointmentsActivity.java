@@ -11,8 +11,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.medical_clinic_scheduling_app.Constants;
+import com.example.medical_clinic_scheduling_app.DateUtility;
+import com.example.medical_clinic_scheduling_app.Objects.Appointment;
 import com.example.medical_clinic_scheduling_app.Objects.Person;
 import com.example.medical_clinic_scheduling_app.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
+    private boolean isDoctor = true; // Default, doesn't hurt
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,85 +40,102 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
 
         ArrayList<String> appointments = new ArrayList<>();
         ArrayList<String> appointmentIDs = new ArrayList<String>();
-        ListView appointmentsView = (ListView) findViewById(R.id.List_of_Previous_Appointments);
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        //Find userID = doctorID
+
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //Find Appointments under that doctorID
-        ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
-                    String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
-                    String appointmentID = child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class);
-                    Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
-                    boolean booked = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_BOOKED).getValue(Boolean.class);
-                    boolean passed = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PASSED).getValue(Boolean.class);
-                    if (doctorID.equals(userID)) {
-                        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.O)
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot child : snapshot.getChildren()) {
-                                    String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
-                                    //Get Time of Now
-                                    LocalDateTime timeNow = LocalDateTime.now();
-                                    Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
-                                    if (patientID.equals(childID) && date.before(today)) {
-                                        Person patient = child.getValue(Person.class);
-                                        appointments.add("Patient " + patient.toString() + "\n" + date.toString());
-                                        appointmentIDs.add(appointmentID);
-                                    }
-                                }
-                                ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
-                                appointmentsView.setAdapter(appointmentAdapter);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                    }else if (patientID != null && patientID.equals(userID) && booked && passed){
-                        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.O)
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot child : snapshot.getChildren()) {
-                                    String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
-                                    if (doctorID.equals(childID)) {
-                                        Person doc = child.getValue(Person.class);
-                                        appointments.add("Dr " + doc.toString() + "\n" + date.toString());
-                                        appointmentIDs.add(appointmentID);
-                                    }
-                                }
-                                ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
-                                appointmentsView.setAdapter(appointmentAdapter);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+        FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                .child(userID)
+                .child(Constants.FIREBASE_PATH_USERS_TYPE)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String userType = snapshot.getValue(String.class);
+                        isDoctor = userType.equals(Constants.PERSON_TYPE_DOCTOR);
                     }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+
+        ListView prevApptsView = (ListView) findViewById(R.id.List_of_Previous_Appointments);
+        prevApptsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                if (isDoctor) { // Only goes to details if doctor
+                    Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentDetailsActivity.class);
+                    intent.putExtra("Appointment", appointmentIDs.get(index)); // TODO: Change string name to appointmentID
+                    startActivity(intent);
                 }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
 
-        appointmentsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentDetailsActivity.class);
-                intent.putExtra("Appointment", appointmentIDs.get(i));
-                startActivity(intent);
-            }
-        });
+        // Get prevAppointmentIDs from user
+        FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                .child(userID)
+                .child(Constants.FIREBASE_PATH_USERS_APPTS_PREV)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot prevApptIDsSnapshot) {
+                        for (DataSnapshot prevApptIDChild : prevApptIDsSnapshot.getChildren()) { // Loop through all of users's prevApptIDs
+                            String prevApptID = prevApptIDChild.getValue(String.class);
+
+                            // For each prevApptID, get the Appointment object
+                            FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS)
+                                    .child(prevApptID)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot prevApptSnapshot) {
+                                            // For each appointment, add the name of opposite user + date.toString() to prevApptsView
+                                            Appointment appt = prevApptSnapshot.getValue(Appointment.class);
+                                            String oppositeUserID;
+                                            if (isDoctor) { // Opposite user is patient
+                                                oppositeUserID = appt.getPatientID();
+                                            } else { // Opposite user is doctor
+                                                oppositeUserID = appt.getDoctorID();
+                                            }
+
+                                            FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                                                    .child(oppositeUserID)
+                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot oppositeUserSnapshot) {
+                                                            Person user = oppositeUserSnapshot.getValue(Person.class);
+
+                                                            // Generate string to add
+                                                            String prevApptInfoToShow;
+                                                            if (isDoctor)
+                                                                prevApptInfoToShow = "Doctor: ";
+                                                            else
+                                                                prevApptInfoToShow = "Patient: ";
+                                                            prevApptInfoToShow += user.toString() + "\n" + appt.getDate().toString();
+
+                                                            appointments.add(prevApptInfoToShow);
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) { // Error: Opposite user doesn't exist
+                                                            // Generate string to add
+                                                            String prevApptInfoToShow;
+                                                            if (isDoctor)
+                                                                prevApptInfoToShow = "Doctor: ";
+                                                            else
+                                                                prevApptInfoToShow = "Patient: ";
+                                                            prevApptInfoToShow += "N/A" + "\n" + appt.getDate().toString();
+
+                                                            appointments.add(prevApptInfoToShow);
+                                                        }
+                                                    });
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) { // Error: appointment not found
+                                            Toast.makeText(getApplicationContext(), "Error: Couldn't find appointment", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { // Error: no previous appointments
+                        Toast.makeText(getApplicationContext(), "Error: No previous appointments", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

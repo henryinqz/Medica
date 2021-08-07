@@ -12,12 +12,14 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medical_clinic_scheduling_app.Objects.Appointment;
 import com.example.medical_clinic_scheduling_app.Constants;
 import com.example.medical_clinic_scheduling_app.DateUtility;
 import com.example.medical_clinic_scheduling_app.Fragments.DatePickerFragment;
+import com.example.medical_clinic_scheduling_app.Objects.Person;
 import com.example.medical_clinic_scheduling_app.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +38,9 @@ import java.util.Map;
 public class SelectAppointmentTimesActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private Appointment selectedAppointment = null;
     private Map<Integer, Appointment> indexToAppt = new HashMap<>();
-    private SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MM dd yyyy @hh");
+    private SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+    private SimpleDateFormat titleFormat = new SimpleDateFormat("EEE, MMM dd yyyy");
+    private static String doctor = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,9 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_appointment_times);
         String doctorID = getIntent().getStringExtra("doctorID");
+        if (getIntent().getStringExtra("doctor") != null){
+            doctor = getIntent().getStringExtra("doctor");
+        }
 
         //Setting up onCheckedChangeListener & showing selected appointment when clicked.
         RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
@@ -60,12 +67,15 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
         });
 
         // Open DatePicker
-        DialogFragment datePicker = new DatePickerFragment(System.currentTimeMillis(), -1); // Disables selecting appointments in the past
+        final long ONE_WEEK_AS_MILLISECONDS = 604800000;
+        DialogFragment datePicker = new DatePickerFragment(System.currentTimeMillis(), System.currentTimeMillis()+ONE_WEEK_AS_MILLISECONDS); // Disables selecting appointments in the past; week into future
+//        DialogFragment datePicker = new DatePickerFragment(System.currentTimeMillis(), -1); // Disables selecting appointments in the past; unlimited in future
         datePicker.show(getSupportFragmentManager(), "Appointment date"); // onDateSet() controls which appointments are shown
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day){
+        TextView title = findViewById(R.id.selectApptTitle);
         Calendar apptDateCalendar = Calendar.getInstance();
         apptDateCalendar.set(Calendar.YEAR, year);
         apptDateCalendar.set(Calendar.MONTH, month);
@@ -74,7 +84,7 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
         apptDateCalendar.set(Calendar.MINUTE, 0);
         apptDateCalendar.set(Calendar.SECOND, 0);
         apptDateCalendar.set(Calendar.MILLISECOND, 0);
-
+        title.setText(doctor.substring(0, doctor.indexOf("\n")) + "'s available\nappointments on\n" + titleFormat.format(apptDateCalendar.getTime()));
         displayAppointmentsOnDate(apptDateCalendar.getTime());
     }
 
@@ -92,7 +102,7 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
                 indexToAppt.put(index, appt);
 
                 RadioButton apptRadioBtn = new RadioButton(this);
-                apptRadioBtn.setText(appt.getDate().toString());
+                apptRadioBtn.setText(sdf.format(appt.getDate()));
 
                 apptGroup.addView(apptRadioBtn);
                 apptRadioBtn.setId(index);
