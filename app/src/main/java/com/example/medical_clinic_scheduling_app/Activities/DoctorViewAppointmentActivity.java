@@ -35,17 +35,6 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_view_appointment);
 
-////        //Setting up ListView of Appointments
-//        ListView upcomingAppointmentsView = (ListView) findViewById(R.id.AppointmentListView);
-//        ArrayList<String> upcomingAppointments = new ArrayList<String>();
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        upcomingAppointments.add("patient\n Aug 7, 2021 @ 1pm-3pm");
-//        ArrayAdapter upcomingAppointmentsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, upcomingAppointments);
-//        upcomingAppointmentsView.setAdapter(upcomingAppointmentsAdapter);
-
         //Setting up ListView of Appointments
         ArrayList<String> appointments = new ArrayList<>();
         ListView appointmentsView = (ListView) findViewById(R.id.AppointmentListView);
