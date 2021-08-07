@@ -33,7 +33,7 @@ public class Appointment implements Comparable<Appointment> {
             this.setPatientID(patient.getID());
         }
 
-        this.appointmentID = hashCode() + ""; // TODO: Make a better ID?
+        this.appointmentID = hashCode() + "";
     }
 
     // Getters/setters:

@@ -90,24 +90,8 @@ public class PatientAppointmentsViewActivity extends AppCompatActivity {
         });
     }
 
-    public void onBookAppBtnClicked (View view){
-        Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.profile_menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.profile_icon:
-                startActivity(new Intent(getApplicationContext(), ProfileViewActivity.class));
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    public void onBookAppBtnClicked (View view){
+//        Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
+//        startActivity(intent);
+//    }
 }
