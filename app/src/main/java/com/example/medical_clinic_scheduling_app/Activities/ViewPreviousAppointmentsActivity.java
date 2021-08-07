@@ -52,6 +52,8 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                     String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
                     String appointmentID = child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class);
                     Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
+                    boolean booked = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_BOOKED).getValue(Boolean.class);
+                    boolean passed = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PASSED).getValue(Boolean.class);
                     if (doctorID.equals(userID)) {
                         ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
                             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -77,17 +79,14 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
 
                             }
                         });
-                    }else if (patientID.equals(userID)){
+                    }else if (patientID != null && patientID.equals(userID) && booked && passed){
                         ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
                             @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot child : snapshot.getChildren()) {
                                     String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
-                                    //Get Time of Now
-                                    LocalDateTime timeNow = LocalDateTime.now();
-                                    Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
-                                    if (doctorID.equals(childID) && date.before(today)) {
+                                    if (doctorID.equals(childID)) {
                                         Person doc = child.getValue(Person.class);
                                         appointments.add("Dr " + doc.toString() + "\n" + date.toString());
                                         appointmentIDs.add(appointmentID);
