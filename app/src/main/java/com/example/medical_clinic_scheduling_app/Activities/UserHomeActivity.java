@@ -26,7 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UserHomeActivity extends AppCompatActivity {
     private Person user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +65,11 @@ public class UserHomeActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        String userID = getIntent().getStringExtra("userid");
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         switch (view.getId()) {
             case R.id.btnHomeBookOrSchedule: // Top button (Book (Patient) OR schedule (Doctor))
                 if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
                     Intent intent = new Intent(getApplicationContext(), DoctorViewAvailableTimeSlotsActivity.class);
-                    intent.putExtra("userid", userID);
                     startActivity(intent);
                 } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) { // Patient
                     Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
@@ -82,17 +80,14 @@ public class UserHomeActivity extends AppCompatActivity {
                 if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) { // Doctor
                     // Redirect to doctor page
                     Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentActivity.class);
-                    intent.putExtra("userid", getIntent().getStringExtra("userid"));
                     startActivity(intent);
                 } else if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)) {// Patient
                     Intent intent = new Intent(getApplicationContext(), PatientAppointmentsViewActivity.class);
-                    intent.putExtra("userid", userID);
                     startActivity(intent);
                 }
                 break;
             case R.id.btnHomePrevAppt: // View previous appointments
                 Intent intent = new Intent(getApplicationContext(), ViewPreviousAppointmentsActivity.class);
-                intent.putExtra("userid", userID);
                 startActivity(intent);
                 break;
         }
