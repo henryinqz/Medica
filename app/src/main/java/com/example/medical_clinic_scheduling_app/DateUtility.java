@@ -12,5 +12,22 @@ public class DateUtility {
 
         return (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
     }
+
+    public static int getCurrentDay(){
+        return (Calendar.getInstance().get(Calendar.DATE));
+    }
+
+    public static int getCurrentMonth(){
+        return (Calendar.getInstance().get(Calendar.MONTH));
+    }
+
+    public static int getCurrentYear(){
+        return (Calendar.getInstance().get(Calendar.YEAR));
+    }
+
+    public static String simpleDateFormater(int day, int month, int year, int hour, int minute, int second){
+        //Strings are formatted in "yyyy/MM/dd HH:mm:ss"
+        return year + "/" + month + "/" + day + "/" + " " + hour + ":" + minute + ":" + second;
+    }
 }
 
