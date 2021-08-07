@@ -16,6 +16,7 @@ import com.example.medical_clinic_scheduling_app.Constants;
 import com.example.medical_clinic_scheduling_app.DateUtility;
 import com.example.medical_clinic_scheduling_app.Objects.Appointment;
 import com.example.medical_clinic_scheduling_app.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,12 +34,8 @@ public class DoctorViewAvailableTimeSlotsActivity extends AppCompatActivity {
         ListView availableTimesView = (ListView) findViewById(R.id.List_of_Available_Time_Slots);
         ArrayList<String> availableApptTimes = new ArrayList<String>();
         ArrayAdapter availableTimesAdaptor = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, availableApptTimes);
-//        availableTimes.add("Aug 9, 2021 @ 1pm-3pm");
-//        availableTimes.add("Aug 9, 2021 @ 1pm-3pm");
-//        availableTimes.add("Aug 9, 2021 @ 1pm-3pm");
-//        availableTimes.add("Aug 9, 2021 @ 1pm-3pm");
 
-        String doctorID = getIntent().getStringExtra("userid");
+        String doctorID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // Access Users > doctorID > availableAppointmentIDs
         FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
