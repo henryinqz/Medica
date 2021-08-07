@@ -45,7 +45,6 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_appointment_times);
         String doctorID = getIntent().getStringExtra("doctorID");
-        Log.i("select_appt_dr", doctorID); // TODO: Delete?
 
         //Setting up onCheckedChangeListener & showing selected appointment when clicked.
         RadioGroup appointmentGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
@@ -86,6 +85,7 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
             //Adding appointments to RadioGroup
             int index = 0;
             RadioGroup apptGroup = (RadioGroup) findViewById(R.id.appointmentRadioGroup);
+            apptGroup.removeAllViews();
 
             indexToAppt.clear(); // Reset just in case old appts
             for (Appointment appt : appts) {
@@ -122,11 +122,10 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot availableApptSnapshot) {
                                             Appointment appt = availableApptSnapshot.getValue(Appointment.class);
-
                                             if (!appt.isBooked() && DateUtility.isSameDay(appt.getDate(), date)) {
                                                 appts.add(appt);
+                                                displayAppointments(appts);
                                             }
-                                            displayAppointments(appts);
                                         }
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) { // Error: Appointment associated w/ availableAppointmentID not found
