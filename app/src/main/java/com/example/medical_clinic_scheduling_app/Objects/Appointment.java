@@ -238,7 +238,33 @@ public class Appointment implements Comparable<Appointment> {
     public static void bookAppointment(Appointment appt, String patientID) {
         bookAppointment(appt.getAppointmentID(), patientID);
     }
+    public static void expireAppointments(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot){
+                for (DataSnapshot child: snapshot.getChildren()){
+                    Appointment apptDate = (Appointment) child.getValue();
+                    if (apptDate.isPassed()){
+                        if (apptDate.isBooked()){
+                            //Removed appt if passed & not booked
+                            ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).
+                                    child(child.getKey()).removeValue();
+                        } else {
+                            ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).
+                                    child(child.getKey()).child(Constants.
+                                    FIREBASE_PATH_APPOINTMENTS_PASSED).
+                                    setValue(true);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
 
     @Override
     public boolean equals(Object o) {
