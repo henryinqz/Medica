@@ -49,6 +49,7 @@ public class DoctorViewAppointmentDetailsActivity extends AppCompatActivity {
         TextView appointmentIDView = findViewById(R.id.Appointment_ID_Box);
         TextView appointmentDateView = findViewById(R.id.Appointment_Time_Box);
         TextView patientNameView = findViewById(R.id.Patient_Name_Box);
+        TextView patientBirthDayView = findViewById(R.id.Patient_Birthday_Box);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
@@ -79,8 +80,10 @@ public class DoctorViewAppointmentDetailsActivity extends AppCompatActivity {
                                         thisPatientId = patientID;
                                         thisPatientName = child.child(Constants.FIREBASE_PATH_USERS_FIRST_NAME).getValue(String.class) + " " + child.child(Constants.FIREBASE_PATH_USERS_LAST_NAME).getValue(String.class);
                                         thisPatientGender = child.child(Constants.FIREBASE_PATH_USERS_GENDER).getValue(String.class);
+                                        thisPatientBirthday = child.child(Constants.FIREBASE_PATH_USERS_DATE_OF_BIRTH).getValue(Date.class);
                                         patientGenderView.setText(thisPatientGender);
                                         patientNameView.setText(thisPatientName);
+                                        patientBirthDayView.setText(thisPatientBirthday.toString());
 //                                        thisPatientBirthday = child.child(Constants.FIREBASE_PATH) // TODO: Birthday
 
                                     }else if(doctorID.equals(childID)){

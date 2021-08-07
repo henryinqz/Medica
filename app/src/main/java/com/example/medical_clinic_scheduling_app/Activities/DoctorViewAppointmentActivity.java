@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.example.medical_clinic_scheduling_app.Constants;
 import com.example.medical_clinic_scheduling_app.Objects.Person;
 import com.example.medical_clinic_scheduling_app.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,21 +29,17 @@ import java.util.Date;
 
 public class DoctorViewAppointmentActivity extends AppCompatActivity {
 
-    protected static String userID = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_view_appointment);
 
         //Setting up ListView of Appointments
-        ArrayList<String> appointments = new ArrayList<>();
+        ArrayList<String> appointments = new ArrayList<String>();
+        ArrayList<String> appointmentIDs = new ArrayList<String>();
         ListView appointmentsView = (ListView) findViewById(R.id.AppointmentListView);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        //Find userID = doctorID
-        if (getIntent().getStringExtra("userid") != null) {
-            userID = getIntent().getStringExtra("userid");
-        }
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //Find Appointments under that doctorID
         ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
@@ -66,6 +63,7 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
                                     if (patientID.equals(childID) && !date.before(today)) {
                                         Person patient = child.getValue(Person.class);
                                         appointments.add("Patient " + patient.toString() + "\n" + date.toString());
+                                        appointmentIDs.add(child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class));
                                     }
                                 }
                                 ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
@@ -92,7 +90,7 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentDetailsActivity.class);
-                    intent.putExtra("Appointment", appointments.get(i));
+                    intent.putExtra("Appointment", appointmentIDs.get(i));
                     startActivity(intent);
                 }
             });
