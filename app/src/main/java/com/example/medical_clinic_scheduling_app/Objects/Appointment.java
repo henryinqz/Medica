@@ -246,9 +246,23 @@ public class Appointment implements Comparable<Appointment> {
                 for (DataSnapshot child: snapshot.getChildren()){
                     Appointment apptDate = child.getValue(Appointment.class);
                     if (apptDate != null && apptDate.date != null && apptDate.isPassed()){
-                        if (!apptDate.isBooked()){
-                            //Removed appt if passed & not booked
-                            child.getRef().removeValue();
+                        if (!apptDate.isBooked()) { // Appointment has passed but not been booked
+                            child.getRef().removeValue(); // Remove appt from Firebase
+
+                            FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                                    .child(apptDate.getDoctorID())
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Doctor doctor = snapshot2.getValue(Doctor.class);
+                                            if (doctor != null) {
+                                                doctor.removeAvailableAppointment(apptDate); // Remove appt from doctor.availableAppointmentIDs
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error2) {
+                                        }
+                                    });
                         } else {
                             ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).
                                     child(child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class)).child(Constants.
@@ -260,7 +274,6 @@ public class Appointment implements Comparable<Appointment> {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
