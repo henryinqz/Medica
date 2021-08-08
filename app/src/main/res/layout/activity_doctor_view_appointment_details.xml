@@ -148,17 +148,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Patient_Birthday" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/List_Previous_Doctors"
-        android:layout_width="351dp"
-        android:layout_height="315dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Patient_Previous_Doctors" />
-
     <TextView
         android:id="@+id/Patient_Birthday_Box"
         android:layout_width="wrap_content"
@@ -167,5 +156,17 @@
         android:text="Aug 4, 2021"
         app:layout_constraintBaseline_toBaselineOf="@+id/Patient_Birthday"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ListView
+        android:id="@+id/List_Previous_Doctors"
+        android:layout_width="354dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Patient_Previous_Doctors" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
