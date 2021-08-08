@@ -54,7 +54,7 @@ public class DoctorViewAvailableTimeSlotsActivity extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot apptSnapshot) {
                                             // For each appointment, add the date.toString() to availableTimes
                                             Appointment appt = apptSnapshot.getValue(Appointment.class);
-                                            if (!appt.isBooked()) { // Ensure available
+                                            if (appt != null && !appt.isBooked() && !appt.isPassed()) { // Ensure available
                                                 availableApptTimes.add(appt.getDate().toString());
                                             }
                                             ArrayAdapter availableTimesAdaptor = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, availableApptTimes);
