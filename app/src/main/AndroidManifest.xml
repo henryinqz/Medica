@@ -12,7 +12,7 @@
         <activity
             android:name=".Activities.UserHomeActivity"
             android:exported="true"
-            android:parentActivityName=".Activities.LoginPageActivity"/>
+            android:parentActivityName=".Activities.Login.LoginViewActivity"/>
         <activity
             android:name=".Activities.ProfileViewActivity"
             android:label="Profile"
@@ -64,7 +64,7 @@
             android:label="@string/register_title"
             android:parentActivityName=".Activities.MainActivity" />
         <activity
-            android:name=".Activities.LoginPageActivity"
+            android:name=".Activities.Login.LoginViewActivity"
             android:label="@string/login_title"
             android:parentActivityName=".Activities.MainActivity">
 

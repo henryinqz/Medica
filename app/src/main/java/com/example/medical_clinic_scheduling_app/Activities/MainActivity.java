@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.medical_clinic_scheduling_app.Activities.Login.LoginViewActivity;
 import com.example.medical_clinic_scheduling_app.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnMainLogin: // Login button
-                startActivity(new Intent(this, LoginPageActivity.class));
+                startActivity(new Intent(this, LoginViewActivity.class));
                 break;
             case R.id.btnMainRegister: // Register button
                 startActivity(new Intent(this, RegisterActivity.class));
