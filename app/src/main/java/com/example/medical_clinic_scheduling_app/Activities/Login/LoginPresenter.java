@@ -86,9 +86,6 @@ public class LoginPresenter {
                                 view.displayMessage("Error: Could not connect to the server");
                                 break;
                         }
-
-                        Log.i("login_fail", task.getException().getMessage());
-                        Log.i("login_fail", task.getException().getLocalizedMessage());
                     } catch (NullPointerException e) {
                         view.displayMessage("Error: Failed to login");
                     }
