@@ -239,8 +239,8 @@ public class Appointment implements Comparable<Appointment> {
         bookAppointment(appt.getAppointmentID(), patientID);
     }
     public static void expireAppointments(){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot){
                 for (DataSnapshot child: snapshot.getChildren()){
@@ -264,10 +264,9 @@ public class Appointment implements Comparable<Appointment> {
                                         }
                                     });
                         } else {
-                            ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).
-                                    child(child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class)).child(Constants.
-                                    FIREBASE_PATH_APPOINTMENTS_PASSED).
-                                    setValue(true);
+                            FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS)
+                                    .child(apptDate.getAppointmentID())
+                                    .setValue(apptDate);
                         }
                     }
                 }
