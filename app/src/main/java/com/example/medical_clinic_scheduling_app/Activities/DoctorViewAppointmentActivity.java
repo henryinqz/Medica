@@ -41,34 +41,104 @@ public class DoctorViewAppointmentActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        //Find Appointments under that doctorID
-        ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
+//        //Find Appointments under that doctorID
+//        ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot child : snapshot.getChildren()) {
+//                    String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
+//                    String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
+//                    String appointmentID = child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class);
+//                    Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
+//                    if (doctorID.equals(userID)){
+//                        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
+//                            @RequiresApi(api = Build.VERSION_CODES.O)
+//                            @Override
+//                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                for (DataSnapshot child : snapshot.getChildren()) {
+//                                    String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
+//                                    //Get Time of Now
+//                                    LocalDateTime timeNow = LocalDateTime.now();
+//                                    Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
+//
+//                                    if (patientID.equals(childID) && !date.before(today)) {
+//                                        Person patient = child.getValue(Person.class);
+//                                        appointments.add("Patient " + patient.toString() + "\n" + date.toString());
+//                                        appointmentIDs.add(appointmentID);
+//                                    }
+//                                }
+//                                ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
+//                                appointmentsView.setAdapter(appointmentAdapter);
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(@NonNull DatabaseError error) {
+//
+//                            }
+//                        });
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
-                    String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
-                    String appointmentID = child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class);
-                    Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
-                    if (doctorID.equals(userID)){
-                        ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.O)
+                for(DataSnapshot child: snapshot.getChildren()){
+                    String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
+                    if(childID.equals(userID)){
+                        ArrayList<String> appointmentIDsList = new ArrayList<String>();
+                        ref.child(Constants.FIREBASE_PATH_USERS).child(userID).child(Constants.FIREBASE_PATH_USERS_APPTS_UPCOMING).
+                                addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot child : snapshot.getChildren()) {
-                                    String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
-                                    //Get Time of Now
-                                    LocalDateTime timeNow = LocalDateTime.now();
-                                    Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
-
-                                    if (patientID.equals(childID) && !date.before(today)) {
-                                        Person patient = child.getValue(Person.class);
-                                        appointments.add("Patient " + patient.toString() + "\n" + date.toString());
-                                        appointmentIDs.add(appointmentID);
-                                    }
+                                for(DataSnapshot child: snapshot.getChildren()){
+                                    String appointmentID = child.getValue(String.class);
+                                    appointmentIDsList.add(appointmentID);
+                                    appointmentIDs.add(appointmentID);
                                 }
-                                ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
-                                appointmentsView.setAdapter(appointmentAdapter);
+                                ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {// Find the Appointments
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for(DataSnapshot child: snapshot.getChildren()){
+                                            String childID = child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class);
+                                            String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
+                                            Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
+                                            if(appointmentIDsList.contains(childID)){
+                                                ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {//Find the UserName
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        for(DataSnapshot child: snapshot.getChildren()){
+                                                            String childID = child.child(Constants.FIREBASE_PATH_USERS_ID).getValue(String.class);
+                                                            String firstName = child.child(Constants.FIREBASE_PATH_USERS_FIRST_NAME).getValue(String.class);
+                                                            String lastName = child.child(Constants.FIREBASE_PATH_USERS_LAST_NAME).getValue(String.class);
+                                                            if(childID.equals(patientID)){
+                                                                appointments.add(firstName + " " + lastName + "\n" + date.toString());
+                                                            }
+                                                        }
+                                                        ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
+                                                        appointmentsView.setAdapter(appointmentAdapter);
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
 
                             @Override
