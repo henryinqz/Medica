@@ -100,7 +100,7 @@
     <string name="user_home_welcome1">Hello</string>
     <string name="user_home_welcome2">What would you like to do today?</string>
     <string name="user_home_book_appt">Book a new appointment</string>
-    <string name="user_home_schedule">View/edit schedule</string>
+    <string name="user_home_schedule">View schedule</string>
     <string name="user_home_view_prev_appt">View previous appointments</string>
     <string name="user_home_view_upcomming_appt">View upcoming appointments</string>
 

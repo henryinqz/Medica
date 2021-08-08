@@ -30,17 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:onClick="onClick"
-        android:text="Logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileBDorSpec" />
 
     <TextView
         android:id="@+id/profileBDorSpec"
@@ -53,5 +42,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileGender" />
 
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="164dp"
+        android:onClick="onClick"
+        android:text="Logout"
+        android:textSize="26sp"
+        app:backgroundTint="#2EB9EC"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/leaveClinic"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="onClick"
+        android:text="Leave clinic"
+        android:textSize="26sp"
+        app:backgroundTint="#E91E63"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoutButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

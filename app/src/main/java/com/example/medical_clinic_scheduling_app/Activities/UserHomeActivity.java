@@ -36,10 +36,7 @@ public class UserHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
-//        if (lastUpdated == null || Calendar.getInstance().getTimeInMillis() - lastUpdated.getTimeInMillis() >= HOUR_IN_MILLISECOND){
-//            lastUpdated=Calendar.getInstance();
-            Appointment.expireAppointments();
-//        }
+        Appointment.expireAppointments();
 
         // Get logged in user info
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
