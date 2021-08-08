@@ -109,6 +109,7 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                                                             prevApptInfoToShow += oppositeUser.toString() + "\n" + appt.getDate().toString();
 
                                                             appointments.add(prevApptInfoToShow);
+                                                            appointmentIDs.add(prevApptID);
                                                             ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
                                                             prevApptsView.setAdapter(appointmentAdapter);
                                                         }
