@@ -21,7 +21,7 @@ public class LoginViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        this.presenter = new LoginPresenter(this);
+        this.presenter = new LoginPresenter(this); // LoginModel is defined in LoginPresenter constructor so the LoginModel can listen to this.presenter (which implements LoginListener)
     }
 
     public void onClick(View view) {
