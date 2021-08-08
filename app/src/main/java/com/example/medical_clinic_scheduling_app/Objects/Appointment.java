@@ -219,7 +219,7 @@ public class Appointment implements Comparable<Appointment> {
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) { // Error: doctor doesn't exist
-                            Log.i("appt_error", "Failed to get patient from Firebase");
+                            Log.i("appt_error", "Failed to get doctor from Firebase");
                         }
                     });
                 }
@@ -239,37 +239,93 @@ public class Appointment implements Comparable<Appointment> {
         bookAppointment(appt.getAppointmentID(), patientID);
     }
     public static void expireAppointments(){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot){
-                for (DataSnapshot child: snapshot.getChildren()){
-                    Appointment apptDate = child.getValue(Appointment.class);
-                    if (apptDate != null && apptDate.date != null && apptDate.isPassed()){
-                        if (!apptDate.isBooked()) { // Appointment has passed but not been booked
-                            child.getRef().removeValue(); // Remove appt from Firebase
+                for (DataSnapshot child : snapshot.getChildren()){
+                    Appointment appt = child.getValue(Appointment.class);
 
-                            FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
-                                    .child(apptDate.getDoctorID())
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                            Doctor doctor = snapshot2.getValue(Doctor.class);
-                                            if (doctor != null) {
-                                                doctor.removeAvailableAppointment(apptDate); // Remove appt from doctor.availableAppointmentIDs
+                    FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS)
+                            .child(appt.getAppointmentID())
+                            .child(Constants.FIREBASE_PATH_APPOINTMENTS_PASSED)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot passedSnapshot) {
+                                    if (!passedSnapshot.getValue(boolean.class)) { // Not expired already
+                                        if (appt != null && appt.date != null && appt.isPassed()){
+                                            if (!appt.isBooked()) { // Appointment has passed but not been booked
+                                                child.getRef().removeValue(); // Remove appt from Firebase
+
+                                                FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
+                                                        .child(appt.getDoctorID())
+                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                                                Doctor doctor = snapshot2.getValue(Doctor.class);
+                                                                if (doctor != null) {
+                                                                    doctor.removeAvailableAppointment(appt); // Remove appt from doctor.availableAppointmentIDs
+                                                                }
+                                                            }
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError error2) {
+                                                            }
+                                                        });
+                                            } else {
+                                                String patientID = appt.getPatientID();
+                                                String doctorID = appt.getDoctorID();
+                                                String apptID = appt.getAppointmentID();
+
+                                                // Update appointment (ie. update isPassed())
+                                                FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_APPOINTMENTS)
+                                                        .child(apptID)
+                                                        .setValue(appt);
+
+                                                // Get patient
+                                                DatabaseReference patientRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS).child(patientID);
+                                                patientRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        Patient patient = snapshot.getValue(Patient.class);
+                                                        if (patient != null) {
+                                                            patient.removeUpcomingAppointment(appt); // Remove appointment from patient upcoming
+                                                            patient.addPrevAppointment(appt); // Add appointment to patient prev
+                                                            patient.addSeenDoctor(doctorID); // Add seenDoctor to patient
+                                                            patientRef.setValue(patient); // Send back to Firebase
+                                                        }
+                                                    }
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) { // Error: patient doesn't exist
+                                                        Log.i("appt_error", "Failed to get patient from Firebase");
+                                                    }
+                                                });
+
+                                                // Get doctor
+                                                DatabaseReference doctorRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS).child(appt.getDoctorID());
+                                                doctorRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        Doctor doctor = snapshot.getValue(Doctor.class);
+                                                        if (doctor != null) {
+                                                            doctor.removeUpcomingAppointment(appt); // Remove appointment from doctor upcoming
+                                                            doctor.addPrevAppointment(appt); // Add appointment to doctor prev
+                                                            doctor.addSeenPatient(patientID); // Add seenPatient to doctor
+                                                            doctorRef.setValue(doctor); // Send back to Firebase
+                                                        }
+                                                    }
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) { // Error: doctor doesn't exist
+                                                        Log.i("appt_error", "Failed to get doctor from Firebase");
+                                                    }
+                                                });
                                             }
                                         }
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error2) {
-                                        }
-                                    });
-                        } else {
-                            ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).
-                                    child(child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class)).child(Constants.
-                                    FIREBASE_PATH_APPOINTMENTS_PASSED).
-                                    setValue(true);
-                        }
-                    }
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                }
+                            });
                 }
             }
             @Override

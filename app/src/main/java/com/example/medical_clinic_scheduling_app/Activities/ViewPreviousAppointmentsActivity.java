@@ -98,17 +98,19 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                                         @Override
                                                         public void onDataChange(@NonNull DataSnapshot oppositeUserSnapshot) {
-                                                            Person user = oppositeUserSnapshot.getValue(Person.class);
+                                                            Person oppositeUser = oppositeUserSnapshot.getValue(Person.class);
 
                                                             // Generate string to add
                                                             String prevApptInfoToShow;
-                                                            if (isDoctor)
-                                                                prevApptInfoToShow = "Doctor: ";
-                                                            else
+                                                            if (isDoctor) // Opposite user is patient
                                                                 prevApptInfoToShow = "Patient: ";
-                                                            prevApptInfoToShow += user.toString() + "\n" + appt.getDate().toString();
+                                                            else // Opposite user is doctor
+                                                                prevApptInfoToShow = "Doctor: ";
+                                                            prevApptInfoToShow += oppositeUser.toString() + "\n" + appt.getDate().toString();
 
                                                             appointments.add(prevApptInfoToShow);
+                                                            ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
+                                                            prevApptsView.setAdapter(appointmentAdapter);
                                                         }
 
                                                         @Override
@@ -122,6 +124,8 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                                                             prevApptInfoToShow += "N/A" + "\n" + appt.getDate().toString();
 
                                                             appointments.add(prevApptInfoToShow);
+                                                            ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
+                                                            prevApptsView.setAdapter(appointmentAdapter);
                                                         }
                                                     });
                                         }
