@@ -106,7 +106,12 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                                                                 prevApptInfoToShow = "Patient: ";
                                                             else // Opposite user is doctor
                                                                 prevApptInfoToShow = "Doctor: ";
-                                                            prevApptInfoToShow += oppositeUser.toString() + "\n" + appt.getDate().toString();
+
+                                                            if (oppositeUser != null) {
+                                                                prevApptInfoToShow += oppositeUser.toString() + "\n" + appt.getDate().toString();
+                                                            } else { // Deleted user
+                                                                prevApptInfoToShow += "N/A (deleted)" + "\n" + appt.getDate().toString();
+                                                            }
 
                                                             appointments.add(prevApptInfoToShow);
                                                             appointmentIDs.add(prevApptID);
@@ -125,6 +130,7 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
                                                             prevApptInfoToShow += "N/A" + "\n" + appt.getDate().toString();
 
                                                             appointments.add(prevApptInfoToShow);
+                                                            appointmentIDs.add(prevApptID);
                                                             ArrayAdapter appointmentAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, appointments);
                                                             prevApptsView.setAdapter(appointmentAdapter);
                                                         }
