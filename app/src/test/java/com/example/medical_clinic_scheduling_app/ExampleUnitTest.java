@@ -35,6 +35,7 @@ public class ExampleUnitTest {
     @Mock
     LoginViewActivity view;
 
+    // checkCredentials()
     @Test
     public void testPresenterCheckCredentialsEmptyUsername() {
         when(view.getUsername()).thenReturn(EMPTY);
@@ -52,4 +53,52 @@ public class ExampleUnitTest {
         presenter.checkCredentials();
         verify(view).displayError("Password cannot be empty", (TextView) view.findViewById(R.id.editTextLoginPassword));
     }
+    @Test
+    public void testPresenterCheckCredentialsSuccessful() {
+        when(view.getUsername()).thenReturn(USERNAME_PATIENT);
+        when(view.getPassword()).thenReturn(PASSWORD);
+        LoginPresenter presenter = new LoginPresenter(view);
+
+        assertTrue(presenter.checkCredentials());
+    }
+
+    // login()
+
+
+    // loginSuccess()
+    @Test
+    public void testPresenterLoginSuccess() {
+        LoginPresenter presenter = new LoginPresenter(view);
+
+        presenter.loginSuccess();
+        verify(view).displayMessage("Logged in");
+        verify(view).startUserHomeActivity();
+    }
+
+    // loginFailed()
+    @Test
+    public void testPresenterLoginFailed1() {
+        LoginPresenter presenter = new LoginPresenter(view);
+        String errorMessage = "There is no user record corresponding to this identifier. The user may have been deleted.";
+
+        presenter.loginFailed(errorMessage);
+        verify(view).displayMessage("Error: " + errorMessage);
+    }
+    @Test
+    public void testPresenterLoginFailed2() {
+        LoginPresenter presenter = new LoginPresenter(view);
+        String errorMessage = "The password is invalid or the user does not have a password.";
+
+        presenter.loginFailed(errorMessage);
+        verify(view).displayMessage("Error: " + errorMessage);
+    }
+    @Test
+    public void testPresenterLoginFailed3() {
+        LoginPresenter presenter = new LoginPresenter(view);
+        String errorMessage = "A network error (such as timeout, interrupted connection or unreachable host) has occurred.";
+
+        presenter.loginFailed(errorMessage);
+        verify(view).displayMessage("Error: " + errorMessage);
+    }
+
 }

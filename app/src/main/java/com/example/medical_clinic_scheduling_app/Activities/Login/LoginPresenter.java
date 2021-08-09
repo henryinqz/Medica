@@ -38,7 +38,7 @@ public class LoginPresenter implements LoginListener {
         this.view.startUserHomeActivity();
     }
     public void loginFailed(String errorMessage) {
-        view.displayMessage("Error: " + errorMessage);
+        this.view.displayMessage("Error: " + errorMessage);
     }
 
 //    public void login() {
