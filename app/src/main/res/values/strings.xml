@@ -106,4 +106,12 @@
 
     <string name="book_appointment">Book Appointment</string>
     <string name="name">Name</string>
+
+    <!--  Profile  -->
+    <string name="empty">N/A</string>
+    <string name="profile_name">Name:</string>
+    <string name="profile_username">Username:</string>
+    <string name="profile_gender">Gender:</string>
+    <string name="profile_birthday">Birthday:</string>
+    <string name="profile_specializations">Specializations:</string>
 </resources>

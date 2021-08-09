@@ -45,9 +45,11 @@ public class ProfileViewActivity extends AppCompatActivity {
 
         hideLeaveClinicButtonVisibility(true); // Hide while getting if user is doctor or not
 
-        TextView profileName = findViewById(R.id.profileName);
-        TextView profileGender = findViewById(R.id.profileGender);
-        TextView profileBDorSpec = findViewById(R.id.profileBDorSpec);
+        TextView profileName = (TextView) findViewById(R.id.profileName);
+        TextView profileUsername = (TextView) findViewById(R.id.profileUsername);
+        TextView profileGender = (TextView) findViewById(R.id.profileGender);
+        TextView profileBdaySpecializations = (TextView) findViewById(R.id.profileBdaySpecializations);
+        TextView profileBdaySpecializationsTitle = (TextView) findViewById(R.id.profileBdaySpecializationsTitle);
 
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
@@ -58,31 +60,31 @@ public class ProfileViewActivity extends AppCompatActivity {
                         user = snapshot.getValue(Person.class);
                         if (user != null) {
                             profileName.setText(user.toString());
+                            profileUsername.setText(user.getUsername());
                             profileGender.setText(user.getGender());
                             if (user.getType().equals(Constants.PERSON_TYPE_PATIENT)){
                                 String pattern = "yyyy-MM-dd";
                                 SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
                                 String birthDate = dateFormat.format(
                                         snapshot.child(Constants.FIREBASE_PATH_USERS_DATE_OF_BIRTH).getValue(Date.class));
-                                profileBDorSpec.setText(birthDate);
+                                profileBdaySpecializations.setText(birthDate);
                             } else if (user.getType().equals(Constants.PERSON_TYPE_DOCTOR)){
+                                profileBdaySpecializationsTitle.setText(getResources().getString(R.string.profile_specializations));
+
                                 List<String> specializations = (List<String>) snapshot.child(Constants.FIREBASE_PATH_DOCTORS_SPECIALIZATIONS).getValue();
                                 StringBuilder specText = new StringBuilder();
                                 if (specializations != null) {
                                     for (String specialization : specializations) {
-                                        specText.append(specialization + "\n");
+                                        specText.append("- " + specialization + "\n");
                                     }
-                                    profileBDorSpec.setText(specText.toString());
+                                    profileBdaySpecializations.setText(specText.toString());
                                 }
-
-                                hideLeaveClinicButtonVisibility(false); // Unhide logout
+                                hideLeaveClinicButtonVisibility(false); // Unhide leave clinic for Doctor
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
     }
