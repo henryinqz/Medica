@@ -289,9 +289,11 @@ public class Appointment implements Comparable<Appointment> {
                                                     public void onDataChange(@NonNull DataSnapshot patientUpcomingApptIDsSnapshot) {
                                                         List<String> upcomingApptIDs = new ArrayList<>();
                                                         for (DataSnapshot patientUpcomingApptIDChild : patientUpcomingApptIDsSnapshot.getChildren()) {
-                                                            upcomingApptIDs.add(patientUpcomingApptIDChild.getValue(String.class));
+                                                            String patientUpcomingApptID = patientUpcomingApptIDChild.getValue(String.class);
+                                                            if (!upcomingApptIDs.contains(patientUpcomingApptID) && !patientUpcomingApptID.equals(apptID)) // Prevent duplicates, remove apptID from upcomingApptIDs
+                                                                upcomingApptIDs.add(patientUpcomingApptID);
                                                         }
-                                                        upcomingApptIDs.remove(apptID);
+//                                                        upcomingApptIDs.remove(apptID);
                                                         patientUpcomingApptIDsRef.setValue(upcomingApptIDs);
                                                     }
                                                     @Override
@@ -308,7 +310,9 @@ public class Appointment implements Comparable<Appointment> {
                                                     public void onDataChange(@NonNull DataSnapshot patientPrevApptIDsSnapshot) {
                                                         List<String> prevApptIDs = new ArrayList<>();
                                                         for (DataSnapshot patientPrevApptIDChild : patientPrevApptIDsSnapshot.getChildren()) {
-                                                            prevApptIDs.add(patientPrevApptIDChild.getValue(String.class));
+                                                            String patientPrevApptID = patientPrevApptIDChild.getValue(String.class);
+                                                            if (!prevApptIDs.contains(patientPrevApptID) && !patientPrevApptID.equals(apptID)) // Prevent duplicates
+                                                                prevApptIDs.add(patientPrevApptID);
                                                         }
                                                         prevApptIDs.add(apptID);
                                                         patientPrevApptIDsRef.setValue(prevApptIDs);
@@ -327,7 +331,9 @@ public class Appointment implements Comparable<Appointment> {
                                                     public void onDataChange(@NonNull DataSnapshot patientSeenDoctorIDsSnapshot) {
                                                         List<String> seenDoctorIDs = new ArrayList<>();
                                                         for (DataSnapshot patientSeenDoctorIDChild : patientSeenDoctorIDsSnapshot.getChildren()) {
-                                                            seenDoctorIDs.add(patientSeenDoctorIDChild.getValue(String.class));
+                                                            String patientSeenDoctorID = patientSeenDoctorIDChild.getValue(String.class);
+                                                            if (!seenDoctorIDs.contains(patientSeenDoctorID) && !patientSeenDoctorID.equals(doctorID)) // Prevent duplicates
+                                                                seenDoctorIDs.add(patientSeenDoctorID);
                                                         }
                                                         seenDoctorIDs.add(doctorID);
                                                         patientSeenDoctorIDsRef.setValue(seenDoctorIDs);
@@ -347,9 +353,11 @@ public class Appointment implements Comparable<Appointment> {
                                                     public void onDataChange(@NonNull DataSnapshot doctorUpcomingApptIDsSnapshot) {
                                                         List<String> upcomingApptIDs = new ArrayList<>();
                                                         for (DataSnapshot doctorUpcomingApptIDChild : doctorUpcomingApptIDsSnapshot.getChildren()) {
-                                                            upcomingApptIDs.add(doctorUpcomingApptIDChild.getValue(String.class));
+                                                            String doctorUpcomingApptID = doctorUpcomingApptIDChild.getValue(String.class);
+                                                            if (!upcomingApptIDs.contains(doctorUpcomingApptID) && !doctorUpcomingApptID.equals(apptID)) // Prevent duplicates, remove apptID from upcoming
+                                                            upcomingApptIDs.add(doctorUpcomingApptID);
                                                         }
-                                                        upcomingApptIDs.remove(apptID);
+//                                                        upcomingApptIDs.remove(apptID);
                                                         doctorUpcomingApptIDsRef.setValue(upcomingApptIDs);
                                                     }
                                                     @Override
@@ -366,7 +374,9 @@ public class Appointment implements Comparable<Appointment> {
                                                     public void onDataChange(@NonNull DataSnapshot doctorPrevApptIDsSnapshot) {
                                                         List<String> prevApptIDs = new ArrayList<>();
                                                         for (DataSnapshot doctorPrevApptIDChild : doctorPrevApptIDsSnapshot.getChildren()) {
-                                                            prevApptIDs.add(doctorPrevApptIDChild.getValue(String.class));
+                                                            String doctorPrevApptID = doctorPrevApptIDChild.getValue(String.class);
+                                                            if (!prevApptIDs.contains(doctorPrevApptID) && !doctorPrevApptID.equals(apptID)) // Prevent duplictaes
+                                                                prevApptIDs.add(doctorPrevApptID);
                                                         }
                                                         prevApptIDs.add(apptID);
                                                         doctorPrevApptIDsRef.setValue(prevApptIDs);
@@ -385,7 +395,9 @@ public class Appointment implements Comparable<Appointment> {
                                                     public void onDataChange(@NonNull DataSnapshot doctorSeenPatientIDsSnapshot) {
                                                         List<String> seenPatientIDs = new ArrayList<>();
                                                         for (DataSnapshot doctorSeenPatientIDChild : doctorSeenPatientIDsSnapshot.getChildren()) {
-                                                            seenPatientIDs.add(doctorSeenPatientIDChild.getValue(String.class));
+                                                            String doctorSeenPatientID = doctorSeenPatientIDChild.getValue(String.class);
+                                                            if (!seenPatientIDs.contains(doctorSeenPatientID) && !doctorSeenPatientID.equals(patientID)) // Prevent duplicates
+                                                                seenPatientIDs.add(doctorSeenPatientID);
                                                         }
                                                         seenPatientIDs.add(patientID);
                                                         doctorSeenDoctorIDsRef.setValue(seenPatientIDs);
