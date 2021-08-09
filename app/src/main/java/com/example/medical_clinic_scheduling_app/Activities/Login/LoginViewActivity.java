@@ -54,6 +54,7 @@ public class LoginViewActivity extends AppCompatActivity {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) { // Go to user home
             Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
             startActivity(intent);
+            finish();
         } else {
             displayMessage("Error: User is not logged in");
         }

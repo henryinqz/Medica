@@ -120,11 +120,12 @@ public class DoctorRegisterActivity extends AppCompatActivity {
 
                                         // Login (User is authenticated already (?))
                                         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        createAppointments(user);
+
                                         // Redirect to home page
                                         Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
-                                        intent.putExtra("userid", userID);
-                                        createAppointments(user);
                                         startActivity(intent);
+                                        finish();
                                     } else { // Failed to create user
                                         Toast.makeText(getApplicationContext(), "Failed to register doctor", Toast.LENGTH_LONG).show();
                                     }
