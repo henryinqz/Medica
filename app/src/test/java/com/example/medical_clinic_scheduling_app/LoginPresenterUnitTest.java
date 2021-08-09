@@ -15,15 +15,16 @@ import android.widget.TextView;
 import com.example.medical_clinic_scheduling_app.Activities.Login.LoginModel;
 import com.example.medical_clinic_scheduling_app.Activities.Login.LoginPresenter;
 import com.example.medical_clinic_scheduling_app.Activities.Login.LoginViewActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
+ * Local unit test, which will execute on the development machine (host).
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 
 @RunWith(MockitoJUnitRunner.class)
-public class ExampleUnitTest {
+public class LoginPresenterUnitTest {
     private final String EMPTY = "";
     private final String PASSWORD = "password";
     private final String USERNAME_DOCTOR = "doctor";
@@ -63,7 +64,18 @@ public class ExampleUnitTest {
     }
 
     // login()
+    @Test
+    public void testPresenterLogin() {
+        when(view.getUsername()).thenReturn(USERNAME_PATIENT);
+        when(view.getPassword()).thenReturn(PASSWORD);
+        String username = view.getUsername();
+        String password = view.getPassword();
+        LoginPresenter presenter = new LoginPresenter(view);
 
+        presenter.login();
+        verify(model).login(username, password);
+
+    }
 
     // loginSuccess()
     @Test
