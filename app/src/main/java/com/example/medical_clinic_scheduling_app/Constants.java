@@ -17,6 +17,8 @@ public class Constants {
     public static final String FIREBASE_PATH_USERS_APPTS_PREV = "prevAppointmentIDs";
     public static final String FIREBASE_PATH_USERS_DATE_OF_BIRTH = "dateOfBirth";
     public static final String FIREBASE_PATH_USERS_USERNAME = "username";
+    public static final String FIREBASE_PATH_USERS_SEEN_DOCTORS = "seenDoctorIDs";
+    public static final String FIREBASE_PATH_USERS_SEEN_PATIENTS = "seenPatientIDs";
 
     public static final String FIREBASE_PATH_DOCTORS_SPECIALIZATIONS = "specializations";
 
@@ -27,4 +29,5 @@ public class Constants {
     public static final String FIREBASE_PATH_APPOINTMENTS_BOOKED= "booked";
     public static final String FIREBASE_PATH_APPOINTMENTS_PASSED= "passed";
     public static final String FIREBASE_PATH_APPOINTMENT_ID = "appointmentID";
+
 }
