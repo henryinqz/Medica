@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -116,6 +117,24 @@ public class Appointment implements Comparable<Appointment> {
 
     }
 
+    public static void generateAvailableAppointmentsForOneDoctor(Doctor doctor, Date generateApptDate){
+        int day = DateUtility.getDay(generateApptDate);
+        int month = DateUtility.getMonth(generateApptDate);
+        int year = DateUtility.getYear(generateApptDate);
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DAY_OF_MONTH, day);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.HOUR_OF_DAY, 9);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        for (int j = 0; j < 5; j++) { //Generating the day's appts 9,11am,1,3,5pm
+            Appointment.generateAvailableAppointment(c.getTime(), doctor);
+            System.out.println(c.getTime().toString());
+            c.add(Calendar.HOUR_OF_DAY, 2);
+        }
+    }
+
     public static void generateAvailableAppointmentsAllDoctors(Date generateApptsDate) { // Generates one day of appointments for all doctors (9am, 11am, 1pm, 3pm)
         FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                 .addValueEventListener(new ValueEventListener() {
@@ -127,44 +146,7 @@ public class Appointment implements Comparable<Appointment> {
                             //If the user is a doctor, fetch then call generateAvailableAppointment for available time slots
                             if (type.equals(Constants.PERSON_TYPE_DOCTOR)){
                                 Doctor doctor = userChild.getValue(Doctor.class);
-
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                                int day = DateUtility.getDay(generateApptsDate);
-                                int month = DateUtility.getMonth(generateApptsDate);
-                                int year = DateUtility.getYear(generateApptsDate);
-
-                                // TODO: Check if appointment being generated will be a duplicate?
-                                String datestring = DateUtility.simpleDateFormater(day, month, year, 9, 0, 0);
-                                try { // New available appointment: 9am
-                                    Date shift1 = format.parse(datestring);
-                                    generateAvailableAppointment(shift1, doctor);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-
-                                datestring = DateUtility.simpleDateFormater(day, month, year, 11, 0, 0);
-                                try { // New available appointment: 11am
-                                    Date shift2 = format.parse(datestring);
-                                    generateAvailableAppointment(shift2, doctor);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-
-                                datestring = DateUtility.simpleDateFormater(day, month, year, 13, 0, 0);
-                                try { // New available appointment: 1pm
-                                    Date shift3 = format.parse(datestring);
-                                    generateAvailableAppointment(shift3, doctor);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-
-                                datestring = DateUtility.simpleDateFormater(day, month, year, 15, 0, 0);
-                                try { // New available appointment: 3pm
-                                    Date shift4 = format.parse(datestring);
-                                    generateAvailableAppointment(shift4, doctor);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
+                                generateAvailableAppointmentsForOneDoctor(doctor, generateApptsDate);
                             }
                         }
                     }
