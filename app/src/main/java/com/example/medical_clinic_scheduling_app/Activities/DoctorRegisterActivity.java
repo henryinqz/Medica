@@ -108,7 +108,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Doctor user = new Doctor(username, firstName, lastName, gender, specializations, userUid);
 
-                    Appointment.generateAvailableAppointment(new Date(System.currentTimeMillis() + 600000), user); // TODO: Broken (in method)
+                    //Appointment.generateAvailableAppointment(new Date(System.currentTimeMillis() + 600000), user); // TODO: Broken (in method)
 
                     FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                             .child(userUid)
@@ -130,6 +130,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+
                 } else { // Failed to create user
                     Toast.makeText(getApplicationContext(), "Failed to create doctor", Toast.LENGTH_LONG).show();
                 }
@@ -138,15 +139,8 @@ public class DoctorRegisterActivity extends AppCompatActivity {
     }
     private void createAppointments(Doctor user){
         Calendar c = Calendar.getInstance();
-        for (int i = 0; i < 2; i++) { //Generating 2 week's worth of appts.
-            c.set(Calendar.HOUR_OF_DAY, 9);
-            c.set(Calendar.MINUTE, 0);
-            c.set(Calendar.SECOND, 0);
-            for (int j = 0; j < 9; j++) { //Generating the day's appts 9-5
-                Appointment.generateAvailableAppointment(c.getTime(), user);
-                System.out.println(c.getTime().toString());
-                c.add(Calendar.HOUR_OF_DAY, 1);
-            }
+        for (int i = 0; i < 7; i++) { //Generating 1 week's worth of appts.
+            Appointment.generateAvailableAppointmentsForOneDoctor(user, c.getTime());
             c.add(Calendar.DAY_OF_MONTH, 1);
         }
     }

@@ -37,6 +37,7 @@ public class UserHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
         Appointment.expireAppointments();
+        // Appointment.updateAvailableAppointmentsForAllDoctors(); (need to add lastUpdated field to User=Doctor)
 
         // Get logged in user info
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();

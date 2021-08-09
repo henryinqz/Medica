@@ -27,6 +27,7 @@ import java.util.Objects;
 public class Appointment implements Comparable<Appointment> {
     private Date date;
     private String doctorID, patientID, appointmentID;
+    private static int DAY_IN_MILLISECONDS = 86400000;
 
     private Appointment() {
 
@@ -118,6 +119,7 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     public static void generateAvailableAppointmentsForOneDoctor(Doctor doctor, Date generateApptDate){
+        // Generates one day of appointments for all doctors (9am, 11am, 1pm, 3pm)
         int day = DateUtility.getDay(generateApptDate);
         int month = DateUtility.getMonth(generateApptDate);
         int year = DateUtility.getYear(generateApptDate);
@@ -130,23 +132,28 @@ public class Appointment implements Comparable<Appointment> {
         c.set(Calendar.SECOND, 0);
         for (int j = 0; j < 5; j++) { //Generating the day's appts 9,11am,1,3,5pm
             Appointment.generateAvailableAppointment(c.getTime(), doctor);
-            System.out.println(c.getTime().toString());
             c.add(Calendar.HOUR_OF_DAY, 2);
         }
     }
 
-    public static void generateAvailableAppointmentsAllDoctors(Date generateApptsDate) { // Generates one day of appointments for all doctors (9am, 11am, 1pm, 3pm)
+    public static void updateAvailableAppointmentsForAllDoctors() {
+        //Checks to see if the last updated (availability) of doctor date and current date
+        //to see if there is still 7 days worth of appointments!
         FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot usersSnapshot) {
                         for (DataSnapshot userChild : usersSnapshot.getChildren()) {
                             String type = userChild.child(Constants.FIREBASE_PATH_USERS_TYPE).getValue(String.class);
+                            Date lastUpdated = userChild.child(Constants.FIREBASE_PATH_USERS_LAST_AUTO_GENERATED_APPT_DATE).getValue(Date.class);
+                            Calendar sevenDaysAhead = Calendar.getInstance();//Since we automatically generated 7 weeks of appts when doctor register
+                            sevenDaysAhead.add(Calendar.DAY_OF_MONTH, 7);
 
                             //If the user is a doctor, fetch then call generateAvailableAppointment for available time slots
-                            if (type.equals(Constants.PERSON_TYPE_DOCTOR)){
+                            if (type.equals(Constants.PERSON_TYPE_DOCTOR)
+                            && Math.abs(lastUpdated.getTime() - sevenDaysAhead.getTimeInMillis()) >= DAY_IN_MILLISECONDS ){
                                 Doctor doctor = userChild.getValue(Doctor.class);
-                                generateAvailableAppointmentsForOneDoctor(doctor, generateApptsDate);
+                                generateAvailableAppointmentsForOneDoctor(doctor, sevenDaysAhead.getTime());
                             }
                         }
                     }
