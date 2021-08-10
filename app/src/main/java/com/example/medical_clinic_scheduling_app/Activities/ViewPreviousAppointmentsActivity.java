@@ -62,7 +62,7 @@ public class ViewPreviousAppointmentsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
                 if (isDoctor) { // Only goes to details if doctor
                     Intent intent = new Intent(getApplicationContext(), DoctorViewAppointmentDetailsActivity.class);
-                    intent.putExtra("Appointment", appointmentIDs.get(index)); // TODO: Change string name to appointmentID
+                    intent.putExtra("Appointment", appointmentIDs.get(index));
                     startActivity(intent);
                 }
             }

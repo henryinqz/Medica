@@ -128,6 +128,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                                         Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
                                         intent.putExtra("userid", userID);
                                         startActivity(intent);
+                                        finish();
                                     } else { // Failed to create user
                                         Toast.makeText(getApplicationContext(), "Failed to register doctor", Toast.LENGTH_LONG).show();
                                     }

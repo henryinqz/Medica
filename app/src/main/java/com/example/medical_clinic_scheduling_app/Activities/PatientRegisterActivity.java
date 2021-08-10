@@ -103,7 +103,6 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
         String gender = genderSpinner.getSelectedItem().toString();
 
         // Errors
-        // TODO: Gender checks (?)  (Shouldn't be errors but maybe check if the strings match something expected input?)
         if(firstName.isEmpty()) {
             firstNameEditText.setError("Empty first name");
             return;
@@ -148,6 +147,7 @@ public class PatientRegisterActivity extends AppCompatActivity implements DatePi
                                         Intent intent = new Intent(getApplicationContext(), UserHomeActivity.class);
                                         intent.putExtra("userid", userID);
                                         startActivity(intent);
+                                        finish();
                                     } else { // Failed to create user
                                         Toast.makeText(getApplicationContext(), "Failed to create patient", Toast.LENGTH_LONG).show();
                                     }
