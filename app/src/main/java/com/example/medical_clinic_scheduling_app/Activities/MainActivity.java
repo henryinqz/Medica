@@ -8,12 +8,14 @@ import android.view.View;
 
 import com.example.medical_clinic_scheduling_app.Activities.Login.LoginViewActivity;
 import com.example.medical_clinic_scheduling_app.R;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseDatabase.getInstance().getReference().removeValue();
     }
 
     public void onClick(View view) {

@@ -30,15 +30,17 @@ import java.util.Calendar;
 public class UserHomeActivity extends AppCompatActivity {
     private Person user;
     private final int HOUR_IN_MILLISECOND = 36000000;
-    private static Calendar lastUpdated = null;
+    private static boolean checked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
         Appointment.expireAppointments();
-        // Appointment.updateAvailableAppointmentsForAllDoctors(); (need to add lastUpdated field to User=Doctor)
-
+        if (checked==false) {
+            Appointment.updateAvailableAppointmentsForAllDoctors();
+            checked=true;
+        }
         // Get logged in user info
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
