@@ -36,11 +36,12 @@ public class UserHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
-        Appointment.expireAppointments();
         if (checked==false) {
             Appointment.updateAvailableAppointmentsForAllDoctors();
             checked=true;
         }
+        Appointment.expireAppointments();
+
         // Get logged in user info
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS)
