@@ -144,7 +144,6 @@ public class Appointment implements Comparable<Appointment> {
             @Override
             public void onDataChange(@NonNull DataSnapshot usersSnapshot) {
                 for (DataSnapshot userChild : usersSnapshot.getChildren()) {
-                    System.out.println(userChild.toString());
                     String type = userChild.child(Constants.FIREBASE_PATH_USERS_TYPE).getValue(String.class);
                     //If the user is a doctor, fetch then call generateAvailableAppointment for available time slots
                     if (type.equals(Constants.PERSON_TYPE_DOCTOR)){
