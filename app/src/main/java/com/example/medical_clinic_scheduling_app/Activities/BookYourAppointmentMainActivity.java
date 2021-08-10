@@ -126,8 +126,6 @@ public class BookYourAppointmentMainActivity extends AppCompatActivity {
     }
 
     public void onFilterStartButtonClicked (View view){
-        //TODO: filter database w/ selected options and return result to main page
-
         Intent intent = new Intent(this, AppointmentFilterOptionsActivity.class);
         startActivity(intent);
     }

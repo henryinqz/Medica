@@ -125,6 +125,7 @@ public class DoctorRegisterActivity extends AppCompatActivity {
                                         intent.putExtra("userid", userID);
                                         createAppointments(user);
                                         startActivity(intent);
+                                        finish();
                                     } else { // Failed to create user
                                         Toast.makeText(getApplicationContext(), "Failed to register doctor", Toast.LENGTH_LONG).show();
                                     }
