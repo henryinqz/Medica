@@ -13,19 +13,23 @@ public class LoginPresenter implements LoginListener {
         this.model = new LoginModel(this);
     }
 
-    public void checkCredentials() {
+    public boolean checkCredentials() {
         String username = this.view.getUsername();
         String password = this.view.getPassword();
-        if (username.isEmpty())
+        if (username.isEmpty()) {
             this.view.displayError("Username cannot be empty", (TextView) this.view.findViewById(R.id.editTextLoginUsername));
-        else if (password.isEmpty())
+            return false;
+        } else if (password.isEmpty()) {
             this.view.displayError("Password cannot be empty", (TextView) this.view.findViewById(R.id.editTextLoginPassword));
-        else
-            login(username, password);
+            return false;
+        }
 
+        return true;
     }
 
-    public void login(String username, String password) {
+    public void login() {
+        String username = this.view.getUsername();
+        String password = this.view.getPassword();
         this.model.login(username, password);
     }
 
@@ -34,7 +38,7 @@ public class LoginPresenter implements LoginListener {
         this.view.startUserHomeActivity();
     }
     public void loginFailed(String errorMessage) {
-        view.displayMessage("Error: " + errorMessage);
+        this.view.displayMessage("Error: " + errorMessage);
     }
 
 //    public void login() {
