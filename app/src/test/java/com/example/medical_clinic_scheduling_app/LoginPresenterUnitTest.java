@@ -64,18 +64,18 @@ public class LoginPresenterUnitTest {
     }
 
     // login()
-    @Test
-    public void testPresenterLogin() {
-        when(view.getUsername()).thenReturn(USERNAME_PATIENT);
-        when(view.getPassword()).thenReturn(PASSWORD);
-        String username = view.getUsername();
-        String password = view.getPassword();
-        LoginPresenter presenter = new LoginPresenter(view);
-
-        presenter.login();
-        verify(model).login(username, password);
-
-    }
+//    @Test
+//    public void testPresenterLogin() {
+//        when(view.getUsername()).thenReturn(USERNAME_PATIENT);
+//        when(view.getPassword()).thenReturn(PASSWORD);
+//        String username = view.getUsername();
+//        String password = view.getPassword();
+//        LoginPresenter presenter = new LoginPresenter(view);
+//
+//        presenter.login();
+//        verify(model).login(username, password);
+//
+//    }
 
     // loginSuccess()
     @Test
