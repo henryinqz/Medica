@@ -11,9 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="60dp"
-        android:text="Firstname: "
+        android:text="@string/first_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,9 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="60dp"
-        android:text="Lastname:"
+        android:text="@string/last_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRegisterDoctorFirstName" />
 
@@ -76,9 +74,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="60dp"
-        android:text="Specialist"
+        android:text="@string/register_specialization"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRegisterDoctorGender" />
 
@@ -132,7 +129,7 @@
         android:layout_height="75dp"
         android:layout_marginBottom="30dp"
         android:onClick="onClick"
-        android:text="Register"
+        android:text="@string/button_register"
         android:textSize="26sp"
         app:backgroundTint="#2EB9EC"
         app:cornerRadius="8dp"
@@ -148,10 +145,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:text="Select Specialist"
+        android:text="@string/register_specialization_select"
         app:layout_constraintBaseline_toBaselineOf="@+id/txtRegisterDoctorSpecialist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtRegisterDoctorSpecialist" />

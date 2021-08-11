@@ -27,7 +27,9 @@ public class LoginViewActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLoginSubmit: // Submit button
-                this.presenter.checkCredentials();
+                if (this.presenter.checkCredentials()) {
+                    this.presenter.model.login(getUsername(), getPassword());
+                }
                 break;
         }
     }

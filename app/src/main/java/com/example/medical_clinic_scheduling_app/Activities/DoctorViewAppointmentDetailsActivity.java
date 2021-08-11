@@ -105,13 +105,19 @@ public class DoctorViewAppointmentDetailsActivity extends AppCompatActivity {
                         });
                         if(patientID != null){
                             ref.child(Constants.FIREBASE_PATH_APPOINTMENTS).addValueEventListener(new ValueEventListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.O)
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     for (DataSnapshot child: snapshot.getChildren()){
                                         String currentAppointmentID = child.child(Constants.FIREBASE_PATH_APPOINTMENT_ID).getValue(String.class);
                                         String patientID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_PATIENT_ID).getValue(String.class);
                                         String doctorID = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DOCTOR_ID).getValue(String.class);
-                                        if(patientID.equals(thisPatientId)) {
+                                        Date date = child.child(Constants.FIREBASE_PATH_APPOINTMENTS_DATE).getValue(Date.class);
+
+                                        //Get Time of Now
+                                        LocalDateTime timeNow = LocalDateTime.now();
+                                        Date today = Date.from(timeNow.atZone(ZoneId.systemDefault()).toInstant());
+                                        if(patientID.equals(thisPatientId) && date.before(today)) {
                                             ref.child(Constants.FIREBASE_PATH_USERS).addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
