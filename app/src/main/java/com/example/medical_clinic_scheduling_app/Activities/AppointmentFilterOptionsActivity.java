@@ -46,7 +46,6 @@ public class AppointmentFilterOptionsActivity extends AppCompatActivity {
 
     }
     public void onFilterButtonClicked (View view){
-        //TODO: filter database w/ selected options and return result to MAIN APPOINTMENT page
         //Note: BookYourAppointmentMain is not the main appointment page.
         Intent intent = new Intent(this, BookYourAppointmentMainActivity.class);
         Spinner genderSpinner = (Spinner) findViewById(R.id.filterByGenderSpinner);

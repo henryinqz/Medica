@@ -95,6 +95,7 @@ public class ProfileViewActivity extends AppCompatActivity {
             case R.id.logoutButton:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
                 break;
             case R.id.leaveClinic:
                 if (this.user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) {
@@ -127,8 +128,7 @@ public class ProfileViewActivity extends AppCompatActivity {
 
     private void leaveClinic() { // Delete doctor from clinic
         if (this.user.getType().equals(Constants.PERSON_TYPE_DOCTOR)) {
-            // TODO: Show dialog to enter password & reauthenticate.
-
+            // TODO: Potentially show dialog to enter password & reauthenticate?
             String doctorID = this.user.getID();
             DatabaseReference doctorRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_PATH_USERS).child(this.user.getID());
             doctorRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -195,6 +195,7 @@ public class ProfileViewActivity extends AppCompatActivity {
 
                                     Toast.makeText(getApplicationContext(), "Successfully deleted account", Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    finish();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override

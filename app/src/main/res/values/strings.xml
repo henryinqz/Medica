@@ -89,10 +89,10 @@
 
     <!-- View Appointment Details -->
     <string name="appointment_details">Appointment Details</string>
-    <string name="appointment_time">Appointment Time</string>
-    <string name="appointment_id">Appointment ID</string>
-    <string name="doctor_name">Doctor Name</string>
-    <string name="patient_name">Patient Name</string>
+    <string name="appointment_time">Date/time:</string>
+    <string name="appointment_id">Appointment ID:</string>
+    <string name="doctor_name">Doctor Name:</string>
+    <string name="patient_name">Patient Name:</string>
     <string name="patient_details">Patient Details</string>
     <string name="patient_previous_doctors">Patient Previous Doctors</string>
 

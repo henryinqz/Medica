@@ -151,7 +151,7 @@ public class SelectAppointmentTimesActivity extends AppCompatActivity implements
 
     public void onClickedBookAppointmentButton(View view){
         if (this.selectedAppointment != null) {
-            String patientID = FirebaseAuth.getInstance().getCurrentUser().getUid(); // TODO: Pass from previous activities to prevent errors
+            String patientID = FirebaseAuth.getInstance().getCurrentUser().getUid();
             Appointment.bookAppointment(this.selectedAppointment, patientID);
 
             Toast.makeText(getApplicationContext(), "Booked appointment", Toast.LENGTH_SHORT).show();

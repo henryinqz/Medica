@@ -30,12 +30,16 @@ import java.util.Calendar;
 public class UserHomeActivity extends AppCompatActivity {
     private Person user;
     private final int HOUR_IN_MILLISECOND = 36000000;
-    private static Calendar lastUpdated = null;
+    private static boolean checked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
+        if (checked==false) {
+            Appointment.updateAvailableAppointmentsForAllDoctors();
+            checked=true;
+        }
         Appointment.expireAppointments();
 
         // Get logged in user info
