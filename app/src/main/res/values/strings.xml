@@ -45,6 +45,8 @@
         <item>Emergency Medicine</item>
         <item>Endocrinology and Metabolism</item>
     </string-array>
+    <string name="register_specialization">Specialization:</string>
+    <string name="register_specialization_select">Select Specialist</string>
 
     <!--  Patient Register Activity  -->
     <string name="first_name">First Name</string>
