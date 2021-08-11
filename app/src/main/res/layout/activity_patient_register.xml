@@ -160,12 +160,15 @@
 
     <Button
         android:id="@+id/btnRegisterPatientSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="28dp"
         android:onClick="onClick"
         android:text="@string/register_button"
-        app:backgroundTint="#FF0000"
+        android:textSize="26sp"
+        app:backgroundTint="#2EB9EC"
+        app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
