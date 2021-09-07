@@ -1,4 +1,5 @@
 # Medica
+<img src=app/src/main/ic_launcher-playstore.png align="right" width=20%>
 Android medical clinic app that allows doctors and patients to filter and schedule appointments (CSCB07 Project)
 
 ## Authors
