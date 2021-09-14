@@ -3,8 +3,6 @@
 <img src=app/src/main/res/drawable/mainicon.png align="right" width=20%>
 Android medical clinic app that allows doctors and patients to filter and schedule appointments (CSCB07 Project)
 
-### Note: You do not have permission to resubmit this project in any future course.
-
 ## Authors
 - Henry Wong
 - Eric Zhou
@@ -14,7 +12,8 @@ Android medical clinic app that allows doctors and patients to filter and schedu
 
 https://github.com/henryinqz/Medica
 
-### Note: 
+### Notes: 
+- ### You do not have permission to resubmit this project in any future course
 - Visit `Firebase` > `Project Settings` > `SDK Instructions` to manually insert the omitted `app/google-services.json` into your working directory
 
 ## Screenshots
